@@ -1,0 +1,29 @@
+
+<h3><a class="btn btn-secondary" href="/user"><i class="fa fa-plus"></i> Create New</a> User List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            {{!-- <th>Password</th> --}}
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>User Mobile</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.username}}</td>
+            {{!-- <td>{{this.hash}}</td> --}}
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.user_mobile}}</td>
+            <td>
+                <a href="/user/{{this._id}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/user/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

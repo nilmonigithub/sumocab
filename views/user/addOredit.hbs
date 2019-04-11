@@ -1,0 +1,47 @@
+
+<h3>{{viewTitle}}</h3>
+
+<form action="/user" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{user._id}}">
+
+    <div class="form-row">
+    <div class="form-group col-md-6">
+        <label>User Name</label>
+        <input type="text" class="form-control" name="username" value="{{user.username}}">
+        <div class="text-danger">
+            {{user.usernameError}}</div>
+    </div>
+
+    <div class="form-group col-md-6">
+    <label>Password</label>
+        <input type="text" class="form-control" name="hash" value="{{user.hash}}">
+        {{!-- <div class="text-danger">
+            {{employee.fullNameError}}</div> --}}
+    </div>
+</div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+        <label>First Name</label>
+        <input type="text" class="form-control" name="firstName"  value="{{user.firstName}}">
+        {{!-- <div class="text-danger">
+            {{employee.emailError}}</div> --}}
+    </div>
+    
+        <div class="form-group col-md-6 ">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="lastName"  value="{{user.lastName}}">
+        </div>
+  
+        <div class="form-group col-md-6 ">
+        <label>User Mobile</label>
+        <input type="text" class="form-control" name="user_mobile"  value="{{user.user_mobile}}">
+              <div class="text-danger">
+            {{user.user_mobileError}}</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/user/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>
