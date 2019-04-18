@@ -2,10 +2,14 @@ const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const Driver = mongoose.model('driver');
+const User = mongoose.model('user');
+var app         =   express();
 var fs=require('fs');
 var multer=require('multer');
 
+const bcrypt = require('bcryptjs');
 
+//router.post('/adddriver', add_driver);
 // var storage = multer.diskStorage({
 //     destination: 'public/uploads/',
 //     filename: function (req, file, cb) {
@@ -21,10 +25,12 @@ var storage = multer.diskStorage({
         var originalname = file.originalname;
         var extension = originalname.split(".");
         filename = Date.now() + '.' + extension[extension.length-1];
+		
         cb(null, filename);
       }
     });
-    
+ 
+ var upload = multer({ storage : storage}).single('user_image');   
 
 router.get('/',(req,res)=>{
     if(req.session && req.session.user){ 
@@ -53,7 +59,41 @@ router.get('/list',(req,res)=>{
 }
 });
 
-router.post('/', multer({storage: storage, dest: './public/uploads/'}).single('image'),(req,res)=>{
+function add_driver(req, res, next) {
+     return res.send(req.body);
+}
+
+
+
+router.post('/adddriver',function(req,res){
+	
+	//return req.body;
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+		//return res.send(req.body);
+       // res.end("File is uploaded"+req.file.filename);
+	   
+	 // var  uploaded_filename = '';
+	//  if(req.file.filename){
+	 var uploaded_filename = req.file.filename;
+	 req.body.user_image = uploaded_filename;
+	//  return res.send(req.body);
+	//  }
+	  //req.body.user_image = uploaded_filename;
+	 // var ne_req = req.body;
+		 if (req.body._id == '')
+        insertRecord(req, res);
+        else
+        updateRecord(req, res);
+		
+    });
+});
+
+router.post('/adddriver22', multer().none(),(req,res)=>{
+	
+ 
     if (req.body._id == '')
         insertRecord(req, res);
         else
@@ -62,16 +102,34 @@ router.post('/', multer({storage: storage, dest: './public/uploads/'}).single('i
 });
 
 function insertRecord(req, res) {
-    //return res.send(req.body);
+	
+	
+   // return res.send(req.body);
     // const salt = Bcrypt.genSaltSync(10);
     // const password = req.body.hash;
-
-    var driver = new Driver();
+	var userParam =req.body;
+	// return res.send(userParam.password);
+	
+	const user = new User(userParam);
+	user._id = Date.now();
+	if (userParam.password) {
+        user.hash = bcrypt.hashSync(userParam.password, 10);
+    }
+	user.lastName = '';
+	user.user_type = 'driver';
+	//user.user_image = '';
+//return res.send(user);
+    // save user
+    user.save();
+	
+	return res.send(user);
+res.redirect('list');
+   /* var driver = new Driver();
     
-        driver.name = req.body.name;
-        driver.mobile = req.body.mobile;  
+        driver.name = req.body.firstName;
+        driver.mobile = req.body.user_mobile;  
         driver.email = req.body.email;
-        driver.image = fs.readFileSync.filename;
+        driver.image = uploaded_filename;
        // return res.send(fs.readFileSync.filename);
         //driver.image.data = fs.readFileSync(imgPath);
         // driver.image.contentType = 'image/png';
@@ -100,9 +158,9 @@ function insertRecord(req, res) {
         // }
         if (err){console.log(err)}
     else {
-      res.redirect('driver/list');
+      res.redirect('list');
     }
-    });
+    });*/
 }
 
 function updateRecord(req, res) {
