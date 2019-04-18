@@ -61,10 +61,10 @@ app.set('view engine','hbs');
   
   // error handler
   // define as the last app.use callback
-  // app.use(function (err, req, res, next) {
-  //   res.status(err.status || 500);
-  //   res.send(err.message);
-  // });
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.send(err.message);
+  });
 
   app.use(bodyparser.urlencoded({extended : true}));
   app.use(cookieParser());
