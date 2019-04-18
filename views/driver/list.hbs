@@ -1,0 +1,44 @@
+{{> header }}
+<h3><a class="btn btn-secondary" href="/driver"><i class="fa fa-plus"></i> Create New</a> Driver List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Image</th>
+            {{!-- <th>dl_pic</th> --}}
+            <th>dl_no</th>
+            <th>dl_expiry</th>
+            <th>dob</th>
+            <th>doj</th>
+            <th>adhaar_card</th>
+            <th>permanent_address</th>
+            <th>present_address</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+             <td>{{this.name}}</td>
+             <td>{{this.mobile}}</td> 
+             <td>{{this.email}}</td>
+             <td>{{this.image}}</td>
+             <td>{{this.dl_no}}</td> 
+             <td>{{this.dl_expiry}}</td> 
+             <td>{{this.dob}}</td> 
+             <td>{{this.doj}}</td> 
+             <td>{{this.adhaar_card}}</td>
+              <td>{{this.permanent_address}}</td>
+               <td>{{this.present_address}}</td> 
+             <td></td> 
+            <td>
+                <a href="/driver/{{this._id}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/driver/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{> footer }}

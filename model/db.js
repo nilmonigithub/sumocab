@@ -6,3 +6,6 @@ mongoose.connect('mongodb://localhost:27017/sumocabapp', { useNewUrlParser: true
 });
 
 require('./user.model');
+require('./driver.model');
+require('./vehicle.model');
+require('./trip.model');

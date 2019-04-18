@@ -1,12 +1,21 @@
 const express = require('express');
+
 var router = express.Router();
 const mongoose = require('mongoose');
+const Bcrypt = require('bcryptjs');
+var SALT_WORK_FACTOR = 10;
 const User = mongoose.model('user');
 
 router.get('/',(req,res)=>{
+    console.log('jjjjjjjjjj');
+    if(req.session && req.session.user){  
+     
     res.render("user/addOredit",{
         viewTitle : "Insert User"
     });
+}else{
+    return res.redirect('/');
+}
 
 });
 
@@ -19,12 +28,19 @@ router.post('/',(req,res)=>{
 });
 
 function insertRecord(req, res) {
+    //return res.send(req.body);
+    // const salt = Bcrypt.genSaltSync(10);
+    // const password = req.body.hash;
+
     var user = new User();
-    user.username = req.body.username;
-    user.hash =  req.body.hash;
-    user.firstName = req.body.firstName;
-    user.lastName = req.body.lastName;
-    user.user_mobile = req.body.user_mobile;
+    
+        user.username = req.body.username;
+        //user.hash = Bcrypt.hashSync(password, salt)
+        user.hash = req.body.password;  
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
+        user.user_mobile = req.body.user_mobile;
+        //user.user_type= req.body.user_type;
 
     user.save((err, doc) => {
         if (!err)
@@ -63,7 +79,9 @@ function updateRecord(req, res) {
 
 
 router.get('/list',(req,res)=>{
-   
+    console.log('hhhhhh');
+    console.log(req.session);
+    if(req.session && req.session.user){ 
     User.find((err,docs)=>{
         if(!err){
             res.render("user/list",{
@@ -73,6 +91,9 @@ router.get('/list',(req,res)=>{
             console.log('Error in user list:'+err);
         }
     });
+}else{
+    return res.redirect('/');
+}
 });
 
 function handleValidationError(err, body) {

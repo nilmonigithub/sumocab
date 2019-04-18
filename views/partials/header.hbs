@@ -32,6 +32,7 @@
     <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
       <span class="navbar-toggler-icon leftmenutrigger"></span>
       <a class="navbar-brand" href="#">SUMOCAB</a>
+       
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -39,23 +40,25 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav animate side-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="/dashboard">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
+          {{!-- <li class="nav-item">
             <a class="nav-link" href="/user/list">User</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
-            <a class="nav-link" href="#">Driver</a>
+            <a class="nav-link" href="/driver/list">Driver</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/vehicle/list">Vehicle</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="/trip/list">Trip</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-md-auto d-md-flex">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
+          <li align="right"><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
           <li class="nav-item">
             <a class="nav-link" href="#"></a>
           </li>

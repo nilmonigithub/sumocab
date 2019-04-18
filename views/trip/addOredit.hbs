@@ -1,0 +1,134 @@
+{{> header }}
+<h3>{{viewTitle}}</h3>
+
+<form action="/trip" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{trip._id}}">
+
+
+    <div class="form-row">
+
+        <div class="form-group col-md-6">
+            <label>Customer Id</label>
+            <input type="text" class="form-control" name="customer_id" value="{{trip.customer_id}}">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>From Name</label>
+            <input type="text" class="form-control" name="from_name"  value="{{trip.from_name}}">
+        </div>
+
+    
+        <div class="form-group col-md-6 ">
+            <label>From City</label>
+            <input type="text" class="form-control" name="from_city"  value="{{trip.from_city}}">
+        </div>
+       
+
+        <div class="form-group col-md-6 ">
+            <label>From Latlong</label>
+            <input type="text" class="form-control" name="from_latlong"   value="{{trip.from_latlong}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>From Json</label>
+            <input type="text" class="form-control" name="from_json"  value="{{trip.from_json}}">
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label>To Name</label>
+            <input type="text" class="form-control" name="to_name"   value="{{trip.to_name}}">
+        </div>
+    
+        <div class="form-group col-md-6 ">
+            <label>To City</label>
+            <input type="text" class="form-control" name="to_city"   value="{{trip.to_city}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>To Latlong</label>
+            <input type="text" class="form-control" name="to_latlong"   value="{{trip.to_latlong}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>To Json</label>
+            <input type="text" class="form-control" name="to_json"   value="{{trip.to_json}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Trip Type</label>
+            <input type="text" class="form-control" name="trip_type"   value="{{trip.trip_type}}">
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label>Customer Pickup Time</label>
+            <input type="text" class="form-control" name="customer_pickup_time"   value="{{trip.customer_pickup_time}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Customer Drop Time</label>
+            <input type="text" class="form-control" name="customer_drop_time"   value="{{trip.customer_drop_time}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Actual Pickup Time</label>
+            <input type="text" class="form-control" name="actual_pickup_time"   value="{{trip.actual_pickup_time}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Actual Drop Time</label>
+            <input type="text" class="form-control" name="actual_drop_time"   value="{{trip.actual_drop_time}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Vehicle Type</label>
+            <input type="text" class="form-control" name="vehicle_type"   value="{{trip.vehicle_type}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Vehicle Id</label>
+            <input type="text" class="form-control" name="vehicle_id"   value="{{trip.vehicle_id}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Driver Id</label>
+            <input type="text" class="form-control" name="driver_id"   value="{{trip.driver_id}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Estimated Distance</label>
+            <input type="text" class="form-control" name="estimated_distance"   value="{{trip.estimated_distance}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Actual Distance</label>
+            <input type="text" class="form-control" name="actual_distance"   value="{{trip.actual_distance}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Estimated Time</label>
+            <input type="text" class="form-control" name="estimated_time"   value="{{trip.estimated_time}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Actual Time</label>
+            <input type="text" class="form-control" name="actual_time"   value="{{trip.actual_time}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Estimated Price</label>
+            <input type="text" class="form-control" name="estimated_price"   value="{{trip.estimated_price}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Actual Price</label>
+            <input type="text" class="form-control" name="actual_price"   value="{{trip.actual_price}}">
+        </div>
+
+  </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/trip/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>
+ 
+{{> footer }}
