@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
+<<<<<<< HEAD
 var bcrypt = require('bcryptjs');
 mongoose.connect('mongodb://localhost:27017/sumocabapp');
+=======
+var bcrypt = require('bcrypt');
+>>>>>>> 8803aa41036e65bb3e6c85f610a0589ed7bc2bcd
 var SALT_WORK_FACTOR = 10;
 var userSchema = new mongoose.Schema({
     _id         :   {
@@ -30,8 +34,11 @@ var userSchema = new mongoose.Schema({
     createdDate: { type: Date, default: Date.now }
 });
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8803aa41036e65bb3e6c85f610a0589ed7bc2bcd
  // Custom validation for mobile
  userSchema.path('user_mobile').validate((val) => {
     user_mobileRegex =/^([0|+[0-9]{1,5})?([7-9][0-9]{9})$/;
@@ -71,5 +78,28 @@ userSchema.pre('save', function(next) {
 //     next();
 // });
 
+
+//password bcrypt
+userSchema.pre('save', function(next) {
+    var user = this;
+
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('hash')) return next();
+
+    // generate a salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next(err);
+
+        // hash the password using our new salt
+        bcrypt.hash(user.hash, salt, function(err, hash) {
+      
+            if (err) return next(err);
+
+            // override the cleartext password with the hashed one
+            user.hash = hash;
+            next();
+        });
+    });
+});
 
 mongoose.model('user', userSchema);
