@@ -5,7 +5,6 @@ var SALT_WORK_FACTOR = 10;
 var userSchema = new mongoose.Schema({
     _id         :   {
         type        :   String,
-        require     :   true
     },
     username: { 
         type: String, 
@@ -24,18 +23,44 @@ var userSchema = new mongoose.Schema({
         type: String, 
         required: "This field is required" 
     },
-    // user_type:{
-    //     type:String,
-    // },
+     user_type:{
+         type:String,
+     },
+	  user_image:{
+         type:String,
+     },
+	 dl_no: { 
+        type: String
+    },
+    dl_expiry: { 
+        type: String 
+    },
+    dob: { 
+        type: String
+    },
+    doj: { 
+        type: String
+    },
+    adhaar_card: { 
+        type: String
+    },
+    permanent_address: { 
+        type: String 
+    },
+    present_address:{
+        type: String
+    },
+		 
+	 
     createdDate: { type: Date, default: Date.now }
 });
 
  // Custom validation for mobile
- userSchema.path('user_mobile').validate((val) => {
+/* userSchema.path('user_mobile').validate((val) => {
     user_mobileRegex =/^([0|+[0-9]{1,5})?([7-9][0-9]{9})$/;
     return user_mobileRegex.test(val);
 }, 'Invalid Mobile No.');
-
+*/
 //password bcrypt
 userSchema.pre('save', function(next) {
     var user = this;
