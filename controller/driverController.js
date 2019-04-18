@@ -31,6 +31,8 @@ var storage = multer.diskStorage({
     });
  
  var upload = multer({ storage : storage}).single('user_image');   
+ 
+
 
 router.get('/',(req,res)=>{
     if(req.session && req.session.user){ 
@@ -43,7 +45,26 @@ router.get('/',(req,res)=>{
 
 });
 
-router.get('/list',(req,res)=>{
+ 
+ 
+router.get('/list',function(req,res){
+
+var stream = User.find({user_type:'driver'}).stream();
+stream.on('data', function(doc) {
+    console.log(doc);
+	res.render("driver/list",{
+                list: doc
+            });
+});
+stream.on('error', function(err) {
+    console.log(err);
+});
+stream.on('end', function() {
+    console.log('All done!');
+});
+});
+
+router.get('/list22',(req,res)=>{
     if(req.session && req.session.user){
     Driver.find((err,docs)=>{
         if(!err){
