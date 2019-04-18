@@ -71,7 +71,7 @@ router.post('/login', function (req, res, next) {
 	User.findOne({username:req.body.username,user_type:"admin"},function(err,user){
 		if(user){
 	
-			if(user.password==req.body.hash){
+			if(user.hash==req.body.hash){
 				console.log("Done Login");
 				//req.session= data;
 				// req.sessions.user = data;
