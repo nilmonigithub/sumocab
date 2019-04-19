@@ -21,9 +21,9 @@
         {{#each list}}
         <tr>
              <td>{{this.name}}</td>
-             <td>{{this.mobile}}</td> 
+             <td>{{this.user_mobile}}</td> 
              <td>{{this.email}}</td>
-             <td>{{this.image}}</td>
+             <td>{{this.user_image}}</td>
              <td>{{this.dl_no}}</td> 
              <td>{{this.dl_expiry}}</td> 
              <td>{{this.dob}}</td> 
@@ -33,8 +33,8 @@
                <td>{{this.present_address}}</td> 
              <td></td> 
             <td>
-                <a href="/driver/{{this._id}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                <a href="/driver/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                <a href="/driver/editdriver/{{this.username}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/driver/delete/{{this.username}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
             </td>
         </tr>
         {{/each}}
