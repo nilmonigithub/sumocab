@@ -46,27 +46,61 @@ router.get('/',(req,res)=>{
 });
 
  
+
  
-router.get('/list',function(req,res){
-
-var stream = User.find({user_type:'driver'}).stream();
-stream.on('data', function(doc) {
-    console.log(doc);
-	res.render("driver/list",{
-                list: doc
+ router.get('/editdriver/:id', (req, res) => {
+	//res.write(req.params.id);
+	//console.log(req.params.id);
+	
+	User.findOne({username:req.params.id},(err,docs)=>{
+		console.log(docs);
+        if(!err){
+            res.render("driver/addOredit",{
+                driver: docs,
+				viewTitle: "Update Driver"
             });
+        }else{
+            console.log('Error in user list:'+err);
+        }
+    });
+	
+	/*User.findById(req.params.id)
+	.then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "Note not found with id1 " + req.params.id
+            });            
+        }
+		console.log(user);
+       // res.send(note);
+	   console.log(req.params.id);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id2 " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving note with id3 " + req.params.id
+        });
+    });
+    */
 });
-stream.on('error', function(err) {
-    console.log(err);
-});
-stream.on('end', function() {
-    console.log('All done!');
-});
-});
+ 
+ /*router.get('/list22', function(req, res) {
+        User.find({user_type:'driver'}, function(err, users) {
+           //res.render('/driver/list', {list: users});
+		   console.log(users);
+		     res.render("driver/list",{
+                list: users
+            });
+        });
+    });*/
+ 
 
-router.get('/list22',(req,res)=>{
+router.get('/list',(req,res)=>{
     if(req.session && req.session.user){
-    Driver.find((err,docs)=>{
+    User.find({user_type:'driver'},(err,docs)=>{
         if(!err){
             res.render("driver/list",{
                 list: docs
@@ -88,7 +122,7 @@ function add_driver(req, res, next) {
 
 router.post('/adddriver',function(req,res){
 	
-	//return req.body;
+	
     upload(req,res,function(err) {
         if(err) {
             return res.end("Error uploading file.");
@@ -97,11 +131,11 @@ router.post('/adddriver',function(req,res){
        // res.end("File is uploaded"+req.file.filename);
 	   
 	 // var  uploaded_filename = '';
-	//  if(req.file.filename){
+	  if(req.file){
 	 var uploaded_filename = req.file.filename;
 	 req.body.user_image = uploaded_filename;
-	//  return res.send(req.body);
-	//  }
+	 // return res.send(req.body.user_image);
+	  }
 	  //req.body.user_image = uploaded_filename;
 	 // var ne_req = req.body;
 		 if (req.body._id == '')
@@ -114,7 +148,7 @@ router.post('/adddriver',function(req,res){
 
 router.post('/adddriver22', multer().none(),(req,res)=>{
 	
- 
+ console.log(req.body._id);
     if (req.body._id == '')
         insertRecord(req, res);
         else
@@ -143,7 +177,7 @@ function insertRecord(req, res) {
     // save user
     user.save();
 	
-	return res.send(user);
+	//return res.send(user);
 res.redirect('list');
    /* var driver = new Driver();
     
@@ -185,8 +219,8 @@ res.redirect('list');
 }
 
 function updateRecord(req, res) {
-    Driver.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('driver/list'); }
+    User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
+        if (!err) { res.redirect('list'); }
         else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
@@ -231,13 +265,28 @@ function updateRecord(req, res) {
 //     });
 // });
 
+
+/*router.get('/delete/:id', (req, res) => {
+	res.write(req.params.id);
+	console.log(req.params.id);
+	User.findOneAndDelete(
+   { "username" : req.params.id }
+)
+	 res.redirect('/driver/list');
+    
+});*/
+
 router.get('/delete/:id', (req, res) => {
-    Driver.findByIdAndRemove(req.params.id, (err, doc) => {
+	
+	User.findOneAndRemove({_id : new mongoose.mongo.ObjectID(req.params.id)}, function (err,offer){
+    res.redirect('/driver/list');
+  });
+    /*User.findOneAndDelete(req.params.id, (err, doc) => {
         if (!err) {
             res.redirect('/driver/list');
         }
         else { console.log('Error in user delete :' + err); }
-    });
+    });*/
 });
 
 
