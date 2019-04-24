@@ -1,0 +1,145 @@
+<%- include ../partials/header.html %>
+<h3> <%= viewTitle %> </h3>
+
+<form action="/trip" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" >
+
+
+    <div class="form-row">
+
+        <div class="form-group col-md-4">
+            <label>Customer Id</label>
+            <input type="text" class="form-control" name="customer_id" value="<%= trip ? trip.customer_id : '' %>">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>From Name</label>
+            <input type="text" class="form-control" name="from_name" value="<%= trip ? trip.from_name : '' %>">
+        </div>
+
+    
+        <div class="form-group col-md-4 ">
+            <label>From City</label>
+            <input type="text" class="form-control" name="from_city"  value="<%= trip ? trip.from_city : '' %>">
+        </div>
+       
+
+        <div class="form-group col-md-4 ">
+            <label>From Latlong</label>
+            <input type="text" class="form-control" name="from_latlong"   value="<%= trip ? trip.from_latlong : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>From Json</label>
+            <input type="text" class="form-control" name="from_json"  value="<%= trip ? trip.from_json : '' %>">
+        </div>
+
+        <div class="form-group col-md-4 ">
+            <label>To Name</label>
+            <input type="text" class="form-control" name="to_name"   value="<%= trip ? trip.to_name : '' %>">
+        </div>
+    
+        <div class="form-group col-md-4 ">
+            <label>To City</label>
+            <input type="text" class="form-control" name="to_city"   value="<%= trip ? trip.to_city : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>To Latlong</label>
+            <input type="text" class="form-control" name="to_latlong"   value="<%= trip ? trip.to_latlong : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>To Json</label>
+            <input type="text" class="form-control" name="to_json"   value="<%= trip ? trip.to_json : '' %>">
+        </div>
+
+
+         <div class="form-group col-md-4 ">
+            <label>Trip Type</label>          
+         <select name="trip_type"  class="form-control"> 
+
+                <option value="" selected disabled>--Select Type--</option>
+                <option value="One" <% if(trip.trip_type=='One'){%> selected="selected" <%}  %> >One</option>
+                <option value="Round" <% if(trip.trip_type=='Round'){%> selected="selected" <%}  %> >Round</option>
+    
+          </select>                 
+        </div>
+
+        
+        <div class="form-group col-md-4 ">
+            <label>Customer Pickup Time</label>
+            <input type="text" class="form-control" name="customer_pickup_time"   value="<%= trip ? trip.customer_pickup_time : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Customer Drop Time</label>
+            <input type="text" class="form-control" name="customer_drop_time"   value="<%= trip ? trip.customer_drop_time : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Actual Pickup Time</label>
+            <input type="text" class="form-control" name="actual_pickup_time"   value="<%= trip ? trip.actual_pickup_time : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Actual Drop Time</label>
+            <input type="text" class="form-control" name="actual_drop_time"    value="<%= trip ? trip.actual_drop_time : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Vehicle Type</label>
+            <input type="text" class="form-control" name="vehicle_type"    value="<%= trip ? trip.vehicle_type : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Vehicle Id</label>
+            <input type="text" class="form-control" name="vehicle_id"   value="<%= trip ? trip.vehicle_id : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Driver Id</label>
+            <input type="text" class="form-control" name="driver_id"   value="<%= trip ? trip.driver_id : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Estimated Distance</label>
+            <input type="text" class="form-control" name="estimated_distance"   value="<%= trip ? trip.estimated_distance : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Actual Distance</label>
+            <input type="text" class="form-control" name="actual_distance"   value="<%= trip ? trip.actual_distance : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Estimated Time</label>
+            <input type="text" class="form-control" name="estimated_time"   value="<%= trip ? trip.estimated_time : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Actual Time</label>
+            <input type="text" class="form-control" name="actual_time"   value="<%= trip ? trip.actual_time : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Estimated Price</label>
+            <input type="text" class="form-control" name="estimated_price"  value="<%= trip ? trip.estimated_price : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+            <label>Actual Price</label>
+            <input type="text" class="form-control" name="actual_price"  value="<%= trip ? trip.actual_price : '' %>">
+        </div>
+
+  </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/trip/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>
+
+
+ 
+
+

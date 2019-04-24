@@ -1,0 +1,48 @@
+<%- include ../partials/header.html %>
+<h3><a class="btn btn-secondary" href="/owner/add"><i class="fa fa-plus"></i> Create New</a> Owner List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SL NO</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Image</th>            
+            <th>Date of Birth</th>
+            <th>Date of Joining</th>
+            <th>adhaar_card</th>
+            <th>permanent_address</th>
+            <th>present_address</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+
+       <% var i=1;
+        list.forEach(function(val) { %>
+
+        <tr>
+             <td> <%= i %></td>
+             <td><%= val.fullName %></td>
+             <td><%= val.user_mobile %></td> 
+             <td><%= val.email %></td>
+             <td><%= val.user_image %></td>
+            
+    
+            <td><%= val.dob %></td> 
+            <td><%= val.doj %></td>
+            <td><%= val.adhaar_card %></td>
+            <td><%= val.permanent_address %></td>
+            <td><%= val.present_address %></td> 
+         
+             <td></td> 
+            <td>
+                <a href="/owner/editowner/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/owner/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+       <% i++; }) %>
+    </tbody>
+</table>
+
+<%- include ../partials/footer.html %>

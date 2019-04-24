@@ -1,0 +1,123 @@
+<%- include ../partials/header.html %>
+<h3> <% viewTitle %> </h3>
+
+<form action="/driver/adddriver" method="POST" enctype="multipart/form-data" autocomplete="off">
+    <input type="hidden" name="_id" >
+
+    <div class="form-row">
+    <div class="form-group col-md-4">
+        <label>Full Name</label>
+        <input type="text" class="form-control" name="fullName" value="<%= driver ? driver.fullName : '' %>">
+        
+    </div>
+
+    <div class="form-group col-md-4 ">
+        <label>Mobile</label>
+        <input type="text" class="form-control" name="user_mobile"  value="<%= driver ? driver.user_mobile : '' %>">
+         
+        </div>
+
+        <div class="form-group col-md-4 ">
+        <label>Email</label>
+        <input type="text" class="form-control" name="email"  value="<%= driver ? driver.email : '' %>">
+       
+        </div>
+
+         <div class="form-group col-md-4 ">
+        <label>Image</label>
+        <input type="file" class="form-control" name="user_image"  value="<%= driver ? driver.user_image : '' %>" >
+        </div>
+
+        <div class="form-group col-md-4 ">
+        <label>Driver No</label>
+        <input type="text" class="form-control" name="dl_no"  value="<%= driver ? driver.dl_no : '' %>">
+      
+        </div>
+
+        <div class="form-group col-md-4 ">
+        <label>Driver Expiry Date</label>
+        <input type="date" class="form-control" name="dl_expiry" value="<%= driver ? driver.dl_expiry : '' %>">
+        </div>
+
+        <div class="form-group col-md-4 ">
+        <label>Date of Birth</label>
+        <input type="date" class="form-control" name="dob"  value="<%= driver ? driver.dob : '' %>">
+        </div>
+
+        <div class="form-group col-md-4 ">
+        <label>Date of Joining</label>
+        <input type="date" class="form-control" name="doj" value="<%= driver ? driver.doj : '' %>">
+        </div>
+
+         <div class="form-group col-md-4 ">
+        <label>Adhaar Card</label>
+        <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= driver ? driver.adhaar_card : '' %>">
+         
+        </div>
+
+            <div class="form-group col-md-4 ">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username"  value="<%= driver ? driver.username : '' %>">
+          
+        </div>
+
+         <div class="form-group col-md-4 ">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password"  value="">
+        </div>
+
+         <div class="form-group col-md-4 ">
+        <label>Permanent Address</label>
+         <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control col-md-7 col-xs-7" ><%= driver ? driver.permanent_address : '' %></textarea>
+        </div>
+
+        <div class="form-group col-md-4 ">
+        <label>Present Address</label>
+        <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control col-md-7 col-xs-7" ><%= driver ? driver.present_address : '' %></textarea>
+         <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"<p> Present Address is same as Permanent Address </p>
+        </div>
+
+
+    
+
+</div>
+  
+  
+        
+  
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/driver/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    function AadharValidate() {
+        var aadhar = document.getElementById("adhaar_card").value;
+        var adharcardTwelveDigit = /^\d{12}$/;
+        var adharSixteenDigit = /^\d{16}$/;
+        if (aadhar != '') {
+            if (aadhar.match(adharcardTwelveDigit)) {
+                return true;
+            }
+            else if (aadhar.match(adharSixteenDigit)) {
+                return true;
+            }
+            else {
+                alert("Enter valid Aadhar Number");
+                return false;
+            }
+        }
+    }
+</script>
+
+<script>
+function filladdress(f) {
+  if(f.checkadd.checked == true) {
+    f.present_address.value = f.permanent_address.value;
+   
+  }
+}
+</script>

@@ -1,0 +1,41 @@
+<%- include ../partials/header.html %>
+<h3><a class="btn btn-secondary" href="/vehicle"><i class="fa fa-plus"></i> Create New</a> Vehicle List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SL NO</th>
+            <th>Company Name</th>
+            <th>Model Name</th>
+            <th>Model No</th>
+            <th>Color</th>
+            <th>Registration No</th>
+            <th>Registration Date</th>
+            
+            <th>Owner Id</th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            <% var i=1;
+            list.forEach(function(val) { %>
+        <tr>
+            <td> <%=  i %></td>
+            <td><%= val.company %></td>
+            <td><%= val.model_name %></td> 
+            <td><%= val.model_no %></td>
+            <td><%= val.color %></td>
+            <td><%= val.registration_no %></td>
+            <td><%= val.registration_date %></td>
+            <td><%= val.owner_id %></td>
+            <td>
+                <a href="/vehicle/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/vehicle/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        <% i++; }) %>
+    </tbody>
+</table>
+
+
+<%- include ../partials/footer.html %>

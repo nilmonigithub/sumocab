@@ -1,0 +1,62 @@
+<%- include ../partials/header.html %>
+<h3> <%= viewTitle %> </h3>
+
+<form action="/vehicle" method="POST" autocomplete="off">
+    <input type="hidden" name="_id">
+
+
+    <div class="form-row">
+
+        <div class="form-group col-md-6">
+            <label>Company Name</label>
+            <input type="text" class="form-control" name="company" value="<%= vehicle ? vehicle.company : '' %>">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Model Name</label>
+            <input type="text" class="form-control" name="model_name"  value="<%= vehicle ? vehicle.model_name : '' %>">
+             <!-- <div class="text-danger">
+            {{vehicle.model_nameError}}</div> -->
+        </div>
+
+    
+        <div class="form-group col-md-6 ">
+            <label>Model No</label>
+            <input type="text" class="form-control" name="model_no"  value="<%= vehicle ? vehicle.model_no : '' %>">
+             <!-- <div class="text-danger">
+            {{vehicle.model_noError}}</div> -->
+        </div>
+       
+
+        <div class="form-group col-md-6 ">
+            <label>Registration No</label>
+            <input type="text" class="form-control" name="registration_no"   value="<%= vehicle ? vehicle.registration_no : '' %>">
+              <!-- <div class="text-danger">
+            {{vehicle.registration_noError}}</div> -->
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Registration Date</label>
+            <input type="date" class="form-control" name="registration_date"  value="<%= vehicle ? vehicle.registration_date : '' %>">
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label>Color</label>
+            <input type="text" class="form-control" name="color"   value="<%= vehicle ? vehicle.color : '' %>">
+        </div>
+
+       
+
+        <div class="form-group col-md-6 ">
+            <label>Owner Id</label>
+            <input type="text" class="form-control" name="owner_id"   value="<%= vehicle ? vehicle.owner_id : '' %>">
+        </div>
+
+  </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/vehicle/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>
+ 
+<%- include ../partials/footer.html %>

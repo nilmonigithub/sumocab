@@ -1,0 +1,51 @@
+{{> header }}
+<h3>{{viewTitle}}</h3>
+
+<form action="/vehicle_document" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{vehicle_document._id}}">
+
+
+    <div class="form-row">
+
+        <div class="form-group col-md-6">
+            <label>Vehicle Id</label>
+            <input type="text" class="form-control" name="vehicle_id" value="{{vehicle_document.vehicle_id}}">
+        </div>
+
+         <div class="form-group col-md-4 ">
+        <label>Image</label>
+        <input type="file" class="form-control" name="image"  value="{{vehicle_document.image}}" >
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label>Registration Type</label>
+            <input type="text" class="form-control" name="registration_type"   value="{{vehicle_document.registration_type}}">              
+        </div>
+       
+
+        <div class="form-group col-md-6 ">
+            <label>Registration No</label>
+            <input type="text" class="form-control" name="registration_no"   value="{{vehicle_document.registration_no}}">
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Registration Date</label>
+            <input type="date" class="form-control" name="registration_date"  value="{{vehicle_document.registration_date}}">
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label>Expiry Date</label>
+            <input type="date" class="form-control" name="expiry_date"   value="{{vehicle_document.expiry_date}}">
+        </div>
+
+       
+
+
+  </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/vehicle_document/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>
+ 
+{{> footer }}

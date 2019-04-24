@@ -1,0 +1,41 @@
+<%- include ../partials/header.html %>
+<h3><a class="btn btn-secondary" href="/trip"><i class="fa fa-plus"></i> Create New</a> Trip List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+             <th>SL NO</th>
+            <th>From Name</th>
+            <th>From City</th>
+            <th>From Latlong</th>
+            <th>From Json</th>
+            <th>To Name</th>
+			<th>To City</th>
+			<th>To Latlong</th>
+            <th>To Json</th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      <% var i=1;
+        list.forEach(function(val) { %>
+        <tr>
+             <td> <%= i %></td>
+            <td><%= val.from_name %></td>
+            <td><%= val.from_city %></td> 
+            <td><%= val.from_latlong %></td>
+            <td><%= val.from_json %></td>
+            <td><%= val.to_name %></td>
+            <td><%= val.to_city %></td>
+            <td><%= val.to_latlong %></td> 
+			<td><%= val.to_json %></td> 
+            <td>
+                <a href="/trip/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/trip/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+       <% i++; }) %>
+    </tbody>
+</table>
+
+<%- include ../partials/footer.html %>

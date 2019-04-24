@@ -1,0 +1,53 @@
+<%- include ../partials/header.html %>
+
+<h3><a class="btn btn-secondary" href="/driver/add"><i class="fa fa-plus"></i> Create New</a> Driver List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SL NO</th>
+            <th>Full Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Image</th>
+            <!-- <th>dl_pic</th> -->
+            <th>dl_no</th>
+            <th>dl_expiry</th>
+            <th>dob</th>
+            <th>doj</th>
+            <th>adhaar_card</th>
+            <th>permanent_address</th>
+            <th>present_address</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            <% var i=1;
+            list.forEach(function(val) { %>
+        <tr>
+            <td> <%= i %></td>
+             <td><%= val.fullName %></td>
+             <td><%= val.user_mobile %></td> 
+             <td><%= val.email %></td>
+             <!-- <td><%= val.user_image %></td> -->
+             <td> <img <% if(val.user_image && val.user_image!=''){%>src="<%= baseurl %>/public/uploads/<%= val.user_image %>" <%} else{%> src="<%= baseurl %>myimages/no_photo.jpg"<%}%> height="50px" alt="">
+             </td>
+             <td><%= val.dl_no %></td> 
+             <td><%= val.dl_expiry %></td> 
+             <td><%= val.dob %></td> 
+             <td><%= val.doj %></td> 
+             <td><%= val.adhaar_card %></td>
+             <td><%= val.permanent_address %></td>
+             <td><%= val.present_address %></td> 
+            
+
+            <td>
+                <a href="/driver/editdriver/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/driver/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+           
+        </tr>
+        <% i++; }) %>
+    </tbody>
+</table>
+
+<%- include ../partials/footer.html %>
