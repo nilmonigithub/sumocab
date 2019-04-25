@@ -10,3 +10,4 @@ require('./driver.model');
 require('./vehicle.model');
 require('./trip.model');
 require('./vehicle_document.model');
+require('./coupon_discount.model');

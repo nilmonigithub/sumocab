@@ -1,0 +1,54 @@
+<%- include ../partials/header.html %>
+<h3> <%= viewTitle %> </h3>
+
+<form action="/coupon_discount" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="<%= couponDis._id %>">
+
+
+    <div class="form-row">
+
+        <div class="form-group col-md-6">
+            <label>Coupon Name</label>
+            <input type="text" class="form-control" name="coupon_name" value="<%= couponDis ? couponDis.coupon_name : '' %>">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Coupon Code</label>
+            <input type="text" class="form-control" name="coupon_code"  value="<%= couponDis ? couponDis.coupon_code : '' %>">
+            
+        </div>
+
+    
+        <div class="form-group col-md-6 ">
+            <label>Coupon Amount</label>
+            <input type="text" class="form-control" name="coupon_amount"  value="<%= couponDis ? couponDis.coupon_amount : '' %>">
+            
+        </div>
+       
+
+        <div class="form-group col-md-6 ">
+            <label>Coupon Start Date</label>
+            <input type="date" class="form-control" name="coupon_start_date"   value="<%= couponDis ? couponDis.coupon_start_date : '' %>">
+              
+        </div>
+
+         <div class="form-group col-md-6 ">
+            <label>Coupon End Date</label>
+            <input type="date" class="form-control" name="coupon_end_date"  value="<%= couponDis ? couponDis.coupon_end_date : '' %>">
+        </div>
+
+        <div class="form-group col-md-6 ">
+            <label>Coupon Status</label>
+            <input type="text" class="form-control" name="coupon_status"   value="<%= couponDis ? couponDis.coupon_status : '' %>">
+        </div>
+
+       
+
+  </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/coupon_discount/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>
+ 
+<%- include ../partials/footer.html %>

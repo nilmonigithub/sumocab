@@ -1,0 +1,41 @@
+<%- include ../partials/header.html %>
+<h3><a class="btn btn-secondary" href="/coupon_discount"><i class="fa fa-plus"></i> Create New</a> Vehicle List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SL NO</th>
+            <th>Coupon Name</th>
+            <th>Coupon Code</th>
+            <th>Coupon Amount</th>
+            <th>Coupon Start Date</th>
+            <th>Coupon End Date</th>
+            <th>Coupon Status</th>
+            
+            
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            <% var i=1;
+            list.forEach(function(val) { %>
+        <tr>
+            <td> <%=  i %></td>
+            <td><%= val.coupon_name %></td>
+            <td><%= val.coupon_code %></td> 
+            <td><%= val.coupon_amount %></td>
+            <td><%= val.coupon_start_date %></td>
+            <td><%= val.coupon_end_date %></td>
+            <td><%= val.coupon_status %></td>
+            
+            <td>
+                <a href="/coupon_discount/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/coupon_discount/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        <% i++; }) %>
+    </tbody>
+</table>
+
+
+<%- include ../partials/footer.html %>

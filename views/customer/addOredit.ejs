@@ -9,7 +9,7 @@
         <input type="text" class="form-control" name="fullName" value="<%= customer ? customer.fullName : '' %>">        
     </div>
 
-    <div class="form-group col-md-4 ">
+        <div class="form-group col-md-4 ">
         <label>Mobile</label>
         <input type="text" class="form-control" name="user_mobile"  value="<%= customer ? customer.user_mobile : '' %>">         
         </div>
@@ -19,7 +19,7 @@
         <input type="text" class="form-control" name="email" value="<%= customer ? customer.email : '' %>">
         </div>
 
-         <div class="form-group col-md-4 ">
+        <div class="form-group col-md-4 ">
         <label>Image</label>
         <input type="file" class="form-control" name="user_image"  value="<%= customer ? customer.user_image : '' %>">
         </div>
@@ -33,16 +33,15 @@
 
         <div class="form-group col-md-4 ">
         <label>Date of Joining</label>
-        <input type="date" class="form-control" name="doj"    value="<%= customer ? customer.user_image : '' %>">
+        <input type="date" class="form-control" name="doj"    value="<%= customer ? customer.doj : '' %>">
         </div>
 
         <div class="form-group col-md-4 ">
-            <label>City</label>
-            <input type="text" class="form-control" name="city"   value="<%= customer ? customer.doj : '' %>">
-            
-            </div>
+        <label>City</label>
+        <input type="text" class="form-control" name="city"   value="<%= customer ? customer.city : '' %>">
+        </div>
 
-                 <div class="form-group col-md-4 ">
+        <div class="form-group col-md-4 ">
         <label>Username</label>
         <input type="text" class="form-control" name="username"   value="<%= customer ? customer.username : '' %>">
         
@@ -53,15 +52,8 @@
         <input type="password" class="form-control" name="password"  value="">
         </div>
 
-
-    
-
 </div>
   
-  
-        
-  
-
     <div class="form-group">
         <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
         <a class="btn btn-secondary" href="/customer/list"><i class="fa fa-list-alt"></i> View All</a>
@@ -69,31 +61,3 @@
 </form>
 
 
-<script type="text/javascript">
-    function AadharValidate() {
-        var aadhar = document.getElementById("adhaar_card").value;
-        var adharcardTwelveDigit = /^\d{12}$/;
-        var adharSixteenDigit = /^\d{16}$/;
-        if (aadhar != '') {
-            if (aadhar.match(adharcardTwelveDigit)) {
-                return true;
-            }
-            else if (aadhar.match(adharSixteenDigit)) {
-                return true;
-            }
-            else {
-                alert("Enter valid Aadhar Number");
-                return false;
-            }
-        }
-    }
-</script>
-
-<script>
-function filladdress(f) {
-  if(f.checkadd.checked == true) {
-    f.present_address.value = f.permanent_address.value;
-   
-  }
-}
-</script>
