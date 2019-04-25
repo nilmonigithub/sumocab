@@ -9,7 +9,8 @@ router.get('/',(req,res)=>{
     if(req.session && req.session.user){  
      
     res.render("vehicle_document/addOredit",{
-        viewTitle : "Insert Vehicle"
+        viewTitle : "Insert Vehicle Document",
+        vehicledoc:''
     });
 }else{
     return res.redirect('/');
@@ -48,7 +49,7 @@ function insertRecord(req, res) {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("vehicle_document/addOredit", {
-                    viewTitle: "Insert vehicle",
+                    viewTitle: "Insert vehicle Document",
                     vehicle: req.body
                 });
             }
@@ -65,7 +66,7 @@ function updateRecord(req, res) {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("vehicle_document/addOredit", {
-                    viewTitle: 'Update Vehicle',
+                    viewTitle: 'Update Vehicle Document',
                     vehicle: req.body
                 });
             }
@@ -117,8 +118,8 @@ router.get('/:id', (req, res) => {
     VehicleDoc.findById(req.params.id, (err, doc) => {
         if (!err) {
             res.render("vehicle_document/addOredit", {
-                viewTitle: "Update User",
-                vehicle: doc
+                viewTitle: "Update Vehicle Document",
+                vehicledoc: doc
             });
         }
     });
