@@ -1,12 +1,8 @@
 const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-
 const User = mongoose.model('user');
-var app         =   express();
-var fs=require('fs');
 var multer=require('multer');
-
 const bcrypt = require('bcryptjs');
 
 //router.post('/adddriver', add_driver);

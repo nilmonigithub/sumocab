@@ -1,8 +1,8 @@
 <%- include ../partials/header.html %>
 <h3> <%= viewTitle %> </h3>
 
-<form action="/vehicle_document" method="POST" autocomplete="off">
-    <input type="hidden" name="_id" >
+<form action="/vehicle_document/addvehicledoc" method="POST" autocomplete="off">
+    <input type="hidden" name="_id"  value="<%= vehicledoc._id %>" >
 
 
     <div class="form-row">

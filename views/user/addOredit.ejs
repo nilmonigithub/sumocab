@@ -2,7 +2,7 @@
 <h3> <%= viewTitle %> </h3>
 
 <form action="/user" method="POST" autocomplete="off">
-    <input type="hidden" name="_id" >
+    <input type="hidden" name="_id" value="<%= user._id %>" >
 
     <div class="form-row">
     <div class="form-group col-md-4">

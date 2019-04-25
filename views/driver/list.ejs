@@ -29,8 +29,7 @@
              <td><%= val.user_mobile %></td> 
              <td><%= val.email %></td>
              <!-- <td><%= val.user_image %></td> -->
-             <td> <img <% if(val.user_image && val.user_image!=''){%>src="<%= baseurl %>/public/uploads/<%= val.user_image %>" <%} else{%> src="<%= baseurl %>myimages/no_photo.jpg"<%}%> height="50px" alt="">
-             </td>
+             <td><img src="<%= baseurl %>/uploads/<%= val.user_image %>"  width="64" height="64"></td>
              <td><%= val.dl_no %></td> 
              <td><%= val.dl_expiry %></td> 
              <td><%= val.dob %></td> 

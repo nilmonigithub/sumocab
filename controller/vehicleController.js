@@ -3,18 +3,21 @@ const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const Vehicle = mongoose.model('vehicle');
+const User = mongoose.model('user');
 
 router.get('/',(req,res)=>{
     console.log('jjjjjjjjjj');
     if(req.session && req.session.user){  
-     
-    res.render("vehicle/addOredit",{
-        viewTitle : "Insert Vehicle",
-        vehicle:''
-    });
-}else{
-    return res.redirect('/');
-}
+        User.find({user_type:'owner'},(err,docs)=>{
+            res.render("vehicle/addOredit",{
+                viewTitle : "Insert Vehicle",
+                owner_list: docs,
+                vehicle:''
+            });
+        });
+    }else{
+        return res.redirect('/');
+    }
 
 });
 
@@ -83,15 +86,20 @@ router.get('/list',(req,res)=>{
     console.log('hhhhhh');
     console.log(req.session);
     if(req.session && req.session.user){ 
+        
     Vehicle.find((err,docs)=>{
+        User.find({user_type:'owner'},(err,docs1)=>{
         if(!err){
             res.render("vehicle/list",{
-                list: docs
+                list: docs,
+                owner_list: docs1
             });
+       
         }else{
             console.log('Error in user list:'+err);
         }
     });
+});
 }else{
     return res.redirect('/');
 }
@@ -117,12 +125,15 @@ function handleValidationError(err, body) {
 
 router.get('/:id', (req, res) => {
     Vehicle.findById(req.params.id, (err, doc) => {
-        if (!err) {
-            res.render("vehicle/addOredit", {
-                viewTitle: "Update User",
-                vehicle: doc
-            });
-        }
+        User.find({user_type:'owner'},(err,docs)=>{
+            if (!err) {
+                res.render("vehicle/addOredit", {
+                    viewTitle: "Update User",
+                    owner_list: docs,
+                    vehicle: doc
+                });
+            }
+        });
     });
 });
 

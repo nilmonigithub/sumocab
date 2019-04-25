@@ -27,7 +27,10 @@
             <td><%= val.color %></td>
             <td><%= val.registration_no %></td>
             <td><%= val.registration_date %></td>
-            <td><%= val.owner_id %></td>
+            <td><% owner_list.forEach(function(own) {
+                if(own._id==val.owner_id){ %>
+                <%= own.fullName %>
+                <% } }); %></td>
             <td>
                 <a href="/vehicle/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                 <a href="/vehicle/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
