@@ -11,3 +11,4 @@ require('./vehicle.model');
 require('./trip.model');
 require('./vehicle_document.model');
 require('./coupon_discount.model');
+require('./payment.model');

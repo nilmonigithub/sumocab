@@ -1,0 +1,117 @@
+<%- include ../partials/header.html %>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="driveradd">
+<div class="container"  >
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="well well-sm">
+
+        
+            <form action="/payment/addpayment" method="POST"  autocomplete="off">
+                <input type="hidden" name="_id" value="<%= payment._id %>" >
+
+            
+                <div   class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label>Trip Id</label>
+                                <input type="text" class="form-control" name="trip_id" value="<%= payment ? payment.trip_id : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label>Payment Amount</label>
+                                <input type="text" class="form-control" name="payment_amount"  value="<%= payment ? payment.payment_amount : '' %>">
+                        </div>
+                    </div>
+                        
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                                <label>Coupon Code Id</label>
+                                <input type="text" class="form-control" name="coupon_code_id"  value="<%= payment ? payment.coupon_code_id : '' %>">                       
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group ">
+                                    <label>Discount Amount</label>
+                                    <input type="text" class="form-control" name="discount_amount"  value="<%= payment ? payment.discount_amount : '' %>" >                    
+                            </div>
+                        </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                                <label>Total Payment</label>
+                                <input type="text" class="form-control" name="total_payment"  value="<%= payment ? payment.total_payment : '' %>">
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-6 ">
+                            <div class="form-group  ">
+                            <label>Payment Mode</label>          
+                        <select name="payment_mode"  class="form-control"> 
+                
+                            <option value="" selected disabled>--Select Type--</option>
+                            <option value="Cash" <% if(payment.payment_mode=='Cash'){%> selected="selected" <%}  %> >Cash</option>
+                            <option value="Online" <% if(payment.payment_mode=='Online'){%> selected="selected" <%}  %> >Online</option>
+                    
+                        </select>    
+                        </div>             
+                    </div>
+
+                        
+                    <div class="col-md-6">
+                            <div class="form-group  ">
+                                    <label>Payment Getway</label>
+                                    <input type="text" class="form-control" name="payment_getway"  value="<%= payment ? payment.payment_getway : '' %>">                   
+                            </div>
+                        </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group  ">
+                                    <label>Transaction Id</label>
+                                    <input type="text" class="form-control" name="transaction_id"  value="<%= payment ? payment.transaction_id : '' %>">
+                   
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                                <div class="form-group  ">
+                                        <label>Payment Date</label>
+                                        <input type="date" class="form-control" name="payment_date"  value="<%= payment ? payment.payment_date : '' %>">
+                       
+                                </div>
+                            </div>
+                   
+                        
+                    
+                
+             
+                    <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
+                            <a class="btn btn-secondary" href="/payment/list"><i class="fa fa-list-alt"></i> View All</a>
+                        </div>
+                    </div>
+                </form>
+                </div>
+           
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+    </div>
+   
+    
+
+
+   
+
+    <%- include ../partials/footer.html %>

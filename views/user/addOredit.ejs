@@ -7,7 +7,7 @@
 
 <div style="float:right;" class="container"  >
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 ">
             <div class="well well-sm">
 
         <form  action="/user" method="POST" autocomplete="off">
@@ -15,35 +15,35 @@
 
             
                 <div   class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group">
                         <label>User Name</label>
                         <input type="text" class="form-control" name="username" value="<%= user ? user.username : '' %>">
                         </div>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group">
                         <label>Password</label>
                         <input type="password" onblur="validatePassword();" class="form-control" id="password" name="password" value="<%= user ? user.hash : '' %>">
                         </div>
                     </div>
                         
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group ">
                         <label>Full Name</label>
                         <input type="text" class="form-control" name="fullName"   value="<%= user ? user.fullName : '' %>">                        
                         </div>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group  ">
                         <label>Type</label>
                         <input type="text" class="form-control" name="user_type"   value="<%= user ? user.user_type : '' %>">
                         </div>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group  ">
                         <label>User Mobile</label>
                         <input type="text" class="form-control" name="user_mobile" maxlength="10"    value="<%= user ? user.user_mobile : '' %>">                            
