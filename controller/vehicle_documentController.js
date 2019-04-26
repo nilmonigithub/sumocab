@@ -2,6 +2,7 @@ const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const VehicleDoc = mongoose.model('vehicle_document');
+const Vehicle = mongoose.model('vehicle');
 var multer=require('multer');
 const bcrypt = require('bcryptjs');
 
@@ -27,13 +28,17 @@ var storage = multer.diskStorage({
 
 router.get('/add',(req,res)=>{
     if(req.session && req.session.user){ 
-    res.render("vehicle_document/addOredit",{
-        viewTitle : "Insert Vehicle Document",
-         vehicledoc :''
-    });
-}else{
-    return res.redirect('/');
+        Vehicle.find((err,docs)=>{
+            res.render("vehicle_document/addOredit",{
+                viewTitle : "Insert Vehicle Document",
+                vehicledoc :'',
+                vehicle: docs
+            });
+        });
+    }else{
+     return res.redirect('/');
 }
+    
 
 });
 
@@ -41,12 +46,15 @@ router.get('/add',(req,res)=>{
 
 router.get('/editvehicledoc/:id', (req, res) => {
     VehicleDoc.findById(req.params.id, (err, doc) => {
-        if (!err) {
-            res.render("vehicle_document/addOredit", {
-                viewTitle: "Update Vehicle Document",
-                vehicledoc: doc
-            });
-        }
+            Vehicle.find((err,docs)=>{
+            if (!err) {
+                res.render("vehicle_document/addOredit", {
+                    viewTitle: "Update Vehicle Document",
+                    vehicledoc: doc,
+                    vehicle: docs
+                });
+            }
+        });
     });
 });
 
@@ -56,18 +64,21 @@ router.get('/list',(req,res)=>{
     console.log('eeeeeeeeeeeeeeeee');
     console.log(req.app.locals.baseurl);
     if(req.session && req.session.user){
-        VehicleDoc.find((err,docs)=>{
-        if(!err){
-            res.render("vehicle_document/list",{
-                list: docs,
+        VehicleDoc.find((err,doc)=>{
+            Vehicle.find((err,docs)=>{
+                if(!err){
+                    res.render("vehicle_document/list",{
+                        list: doc,
+                        vehicle: docs
+                    });
+                }else{
+                    console.log('Error in user list:'+err);
+                }
             });
-        }else{
-            console.log('Error in user list:'+err);
-        }
-    });
-}else{
-    return res.redirect('/');
-}
+        });
+    }else{
+        return res.redirect('/');
+    }
 });
 
 function add_driver(req, res, next) {

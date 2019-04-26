@@ -19,7 +19,12 @@
         list.forEach(function(val) { %>
         <tr>
             <td> <%= i %></td>
-            <td><%= val.vehicle_id %></td>
+            
+            <td><% vehicle.forEach(function(veh) {
+                if(veh._id==val.vehicle_id){ %>
+                <%= veh.model_name %>
+                <% } }); %></td>
+
             <td><%= val.image %></td> 
             <!-- <td> <img <% if(val.image && val.image!=''){%>src="<%= baseurl %>/public/uploads/<%= val.user_image %>" <%} else{%> src="<%= baseurl %>myimages/no_photo.jpg"<%}%> height="50px" alt="">
             </td> -->
