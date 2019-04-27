@@ -5,13 +5,14 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<div style="float:right;" class="container"  >
+<div  class="container"  >
     <div class="row">
-        <div class="col-md-8 ">
+        <div class="col-md-8 col-md-offset-2">
             <div class="well well-sm">
 
         <form  action="/user" method="POST" autocomplete="off">
             <input type="hidden" name="_id" value="<%= user._id %>" >
+            <b><%= viewTitle %></b><br><hr>
 
             
                 <div   class="row">

@@ -1,54 +1,115 @@
 <%- include ../partials/header.html %>
-<h3> <%= viewTitle %> </h3>
-
-<form action="/coupon_discount" method="POST" autocomplete="off">
-    <input type="hidden" name="_id" value="<%= couponDis._id %>">
 
 
-    <div class="form-row">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="driveradd">
+<div class="container"  >
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="well well-sm">
 
-        <div class="form-group col-md-6">
-            <label>Coupon Name</label>
-            <input type="text" class="form-control" name="coupon_name" value="<%= couponDis ? couponDis.coupon_name : '' %>">
-        </div>
-
-        <div class="form-group col-md-6">
-            <label>Coupon Code</label>
-            <input type="text" class="form-control" name="coupon_code"  value="<%= couponDis ? couponDis.coupon_code : '' %>">
+        
+                    <form action="/coupon_discount" method="POST" autocomplete="off">
+                        <input type="hidden" name="_id" value="<%= couponDis._id %>">
+                        <b><%= viewTitle %></b><br><hr>
             
+                <div   class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label>Coupon Name</label>
+                                <input type="text" class="form-control" name="coupon_name" value="<%= couponDis ? couponDis.coupon_name : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label>Coupon Code</label>
+                                <input type="text" class="form-control" name="coupon_code"  value="<%= couponDis ? couponDis.coupon_code : '' %>">
+                        </div>
+                    </div>
+                        
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                                <label>Coupon Amount</label>
+                                <input type="text" class="form-control" name="coupon_amount"  value="<%= couponDis ? couponDis.coupon_amount : '' %>">                       
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group ">
+                                    <label>Coupon Start Date</label>
+                                    <input type="date" class="form-control" name="coupon_start_date"   value="<%= couponDis ? couponDis.coupon_start_date : '' %>">                    
+                            </div>
+                        </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                                <label>Coupon End Date</label>
+                                <input type="date" class="form-control" name="coupon_end_date"  value="<%= couponDis ? couponDis.coupon_end_date : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                                <label>Coupon Status</label>
+                                <input type="text" class="form-control" name="coupon_status"   value="<%= couponDis ? couponDis.coupon_status : '' %>">                        
+                        </div>
+                    </div>
+
+                    
+                   
+                    
+                
+             
+                    <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
+                            <a class="btn btn-secondary" href="/coupon_discount/list"><i class="fa fa-list-alt"></i> View All</a>
+                        </div>
+                    </div>
+                </form>
+                </div>
+           
+            </div>
         </div>
-
-    
-        <div class="form-group col-md-6 ">
-            <label>Coupon Amount</label>
-            <input type="text" class="form-control" name="coupon_amount"  value="<%= couponDis ? couponDis.coupon_amount : '' %>">
-            
-        </div>
-       
-
-        <div class="form-group col-md-6 ">
-            <label>Coupon Start Date</label>
-            <input type="date" class="form-control" name="coupon_start_date"   value="<%= couponDis ? couponDis.coupon_start_date : '' %>">
-              
-        </div>
-
-         <div class="form-group col-md-6 ">
-            <label>Coupon End Date</label>
-            <input type="date" class="form-control" name="coupon_end_date"  value="<%= couponDis ? couponDis.coupon_end_date : '' %>">
-        </div>
-
-        <div class="form-group col-md-6 ">
-            <label>Coupon Status</label>
-            <input type="text" class="form-control" name="coupon_status"   value="<%= couponDis ? couponDis.coupon_status : '' %>">
-        </div>
-
-       
-
-  </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
-        <a class="btn btn-secondary" href="/coupon_discount/list"><i class="fa fa-list-alt"></i> View All</a>
+        <div class="clearfix"></div>
     </div>
-</form>
- 
-<%- include ../partials/footer.html %>
+    <div class="clearfix"></div>
+    </div>
+   
+    
+
+
+    <script type="text/javascript">
+        function AadharValidate() {
+            var aadhar = document.getElementById("adhaar_card").value;
+            var adharcardTwelveDigit = /^\d{12}$/;
+            var adharSixteenDigit = /^\d{16}$/;
+            if (aadhar != '') {
+                if (aadhar.match(adharcardTwelveDigit)) {
+                    return true;
+                }
+                else if (aadhar.match(adharSixteenDigit)) {
+                    return true;
+                }
+                else {
+                    alert("Enter valid Aadhar Number");
+                    return false;
+                }
+            }
+        }
+    </script>
+    
+    <script>
+    function filladdress(f) {
+      if(f.checkadd.checked == true) {
+        f.present_address.value = f.permanent_address.value;
+       
+      }
+    }
+    </script>
+    
+
+    <%- include ../partials/footer.html %>

@@ -1,56 +1,100 @@
 <%- include ../partials/header.html %>
-<h3> <%= viewTitle %> </h3>
 
-<form action="/vehicle_document/addvehicledoc" method="POST" autocomplete="off">
-    <input type="hidden" name="_id"  value="<%= vehicledoc._id %>" >
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div  class="container"  >
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="well well-sm">
+
+        <form  action="/vehicle_document/addvehicledoc" method="POST" autocomplete="off">
+            <input type="hidden" name="_id" value="<%= vehicledoc._id %>" >
+            <b><%= viewTitle %></b><br><hr>
+
+            
+                <div   class="row">
+                        <div class="col-md-6">
+                             <div class="form-group">
+                           
+                            <label>Vehicle Id</label>
+                            <!-- <input type="text" class="form-control" name="vehicle_id" value="<%= vehicledoc ? vehicledoc.vehicle_id : '' %>"> -->
+                            <select name="vehicle_id" class="form-control" >
+                                <option value="" selected disabled>-- Select --</option>
+                                <% vehicle.forEach(function(veh){%>
+                                <option <% if(vehicledoc.vehicle_id==veh._id){ %>selected="selected" <% }%> value="<%=veh._id%>"><%=veh.model_name%></option>
+                                <% })%>
+                            </select>
+                        </div>
+                    </div>
+                    
 
 
-    <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label>Image</label>
+                                <input type="file" class="form-control" name="image"  value="<%= vehicledoc ? vehicledoc.image : '' %>">
+                        </div>
+                    </div>
+                        
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                                <label>Registration Type</label>
+                                <input type="text" class="form-control" name="registration_type"   value="<%= vehicledoc ? vehicledoc.registration_type : '' %>">                          
+                        </div>
+                    </div>
 
-        <div class="form-group col-md-4">
-            <label>Vehicle Id</label>
-            <!-- <input type="text" class="form-control" name="vehicle_id" value="<%= vehicledoc ? vehicledoc.vehicle_id : '' %>"> -->
-            <select name="vehicle_id" class="form-control" >
-                <option value="" selected disabled>-- Select --</option>
-                <% vehicle.forEach(function(veh){%>
-                <option <% if(vehicledoc.vehicle_id==veh._id){ %>selected="selected" <% }%> value="<%=veh._id%>"><%=veh.model_name%></option>
-                <% })%>
-            </select>
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                                <label>Registration No</label>
+                                <input type="text" class="form-control" name="registration_no"   value="<%= vehicledoc ? vehicledoc.registration_no : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                                <label>Registration Date</label>
+                                <input type="date" class="form-control" name="registration_date"  value="<%= vehicledoc ? vehicledoc.registration_date : '' %>">                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group  ">
+                                    <label>Expiry Date</label>
+                                    <input type="date" class="form-control" name="expiry_date"   value="<%= vehicledoc ? vehicledoc.expiry_date : '' %>">                            
+                            </div>
+                        </div>
+                    
+                    
+                
+             
+                    <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
+                            <a class="btn btn-secondary" href="/vehicle_document/list"><i class="fa fa-list-alt"></i> View All</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
         </div>
-
-         <div class="form-group col-md-4 ">
-        <label>Image</label>
-        <input type="file" class="form-control" name="image"  value="<%= vehicledoc ? vehicledoc.image : '' %>">
-        </div>
-
-        <div class="form-group col-md-4 ">
-            <label>Registration Type</label>
-            <input type="text" class="form-control" name="registration_type"   value="<%= vehicledoc ? vehicledoc.registration_type : '' %>">              
-        </div>
-       
-
-        <div class="form-group col-md-4 ">
-            <label>Registration No</label>
-            <input type="text" class="form-control" name="registration_no"   value="<%= vehicledoc ? vehicledoc.registration_no : '' %>">
-        </div>
-
-         <div class="form-group col-md-4 ">
-            <label>Registration Date</label>
-            <input type="date" class="form-control" name="registration_date"  value="<%= vehicledoc ? vehicledoc.registration_date : '' %>">
-        </div>
-
-        <div class="form-group col-md-4 ">
-            <label>Expiry Date</label>
-            <input type="date" class="form-control" name="expiry_date"   value="<%= vehicledoc ? vehicledoc.expiry_date : '' %>">
-        </div>
-
-       
-
-
-  </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
-        <a class="btn btn-secondary" href="/vehicle_document/list"><i class="fa fa-list-alt"></i> View All</a>
+        
     </div>
-</form>
- 
+
+    <%- include ../partials/footer.html %>
+
+<script type="text/javascript">
+    function validatePassword()
+    {
+    var a = document.getElementById("password").value;
+    //alert(a.length);
+    if ((a.length < 6) || (a.length > 10))
+    {
+    alert("Your Password must be 6 to 10 Character");
+    return false;
+    }else{
+      return true;
+    }
+  }
+    </script>

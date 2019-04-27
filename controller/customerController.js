@@ -34,7 +34,7 @@ var storage = multer.diskStorage({
 router.get('/add',(req,res)=>{
     if(req.session && req.session.user){ 
     res.render("customer/addOredit",{
-        viewTitle : "Insert Driver",
+        viewTitle : "Insert Customer",
         customer:''
     });
 }else{
@@ -102,12 +102,12 @@ router.post('/addcustomer',function(req,res){
 	  if(req.file){
 	 var uploaded_filename = req.file.filename;
 	 req.body.user_image = uploaded_filename;
-	 
+      }
 		 if (req.body._id == '')
         insertRecord(req, res);
         else
         updateRecord(req, res);
-      }
+     
 		
     });
 });

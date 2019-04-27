@@ -1,88 +1,131 @@
 <%- include ../partials/header.html %>
-<h3> <%= viewTitle %> </h3>
 
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<form action="/owner/addowner" method="POST" enctype="multipart/form-data" autocomplete="off">
-    <input type="hidden" name="_id" value="<%= owner._id %>" >
+<div  class="container"  >
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 ">
+            <div class="well well-sm">
 
-    <div class="form-row">
-    <div class="form-group col-md-4">
-        <label>Name</label>
-        <input type="text" class="form-control" name="fullName" value="<%= owner ? owner.fullName : '' %>">
+        <form  action="/owner/addowner" method="POST" autocomplete="off">
+            <input type="hidden" name="_id" value="<%= owner._id %>" >
+            <b><%= viewTitle %></b><br><hr>
+
+            
+                <div   class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name="fullName" value="<%= owner ? owner.fullName : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label>Mobile</label>
+                                <input type="text" class="form-control" name="user_mobile"  value="<%= owner ? owner.user_mobile : '' %>">
+                                 
+                        </div>
+                    </div>
+                        
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                                <label>Email</label>
+                                <input type="text" class="form-control" name="email"  value="<%= owner ? owner.email : '' %>">                        
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                                <label>Image</label>
+                                <input type="file" class="form-control" name="user_image"  value="<%= owner ? owner.user_image : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                                <label>Date of Birth</label>
+                                <input type="date" class="form-control" name="dob"  value="<%= owner ? owner.dob : '' %>">                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group  ">
+                                    <label>Date of Joining</label>
+                                    <input type="date" class="form-control" name="doj"   value="<%= owner ? owner.doj : '' %>">                           
+                            </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group  ">
+                                    <label>Adhaar Card</label>
+                                    <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= owner ? owner.adhaar_card : '' %>">                           
+                            </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group  ">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" name="username"  value="<%= owner ? owner.username : '' %>">
+                            </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="form-group  ">
+                                    <label>Password</label>
+                                     <input type="password" class="form-control" name="password"  value="">
+                            </div>
+                    </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                            <label>Permanent Address</label>
+                             <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control col-md-7 col-xs-7" ><%= owner ? owner.permanent_address : '' %></textarea>
+                    </div>
+                </div>
+                    
+                <div class="col-md-6">
+                    <div class="form-group">
+                            <label>Present Address</label>
+                            <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control col-md-7 col-xs-7" ><%= owner ? owner.present_address : '' %></textarea>
+                            <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"<p> Present Address is same as Permanent Address </p>
+                    </div>
+                </div>
+                    
+                    
+                
+             
+                    <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
+                            <a class="btn btn-secondary" href="/owner/list"><i class="fa fa-list-alt"></i> View All</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
         
     </div>
 
-    <div class="form-group col-md-4 ">
-        <label>Mobile</label>
-        <input type="text" class="form-control" name="user_mobile"  value="<%= owner ? owner.user_mobile : '' %>">
-         
-        </div>
+    <%- include ../partials/footer.html %>
 
-        <div class="form-group col-md-4 ">
-        <label>Email</label>
-        <input type="text" class="form-control" name="email"  value="<%= owner ? owner.email : '' %>">
-        
-        </div>
-
-         <div class="form-group col-md-4 ">
-        <label>Image</label>
-        <input type="file" class="form-control" name="user_image"  value="<%= owner ? owner.user_image : '' %>">
-        </div>
-
-      
-
-        <div class="form-group col-md-4 ">
-        <label>Date of Birth</label>
-        <input type="date" class="form-control" name="dob"  value="<%= owner ? owner.dob : '' %>">
-        </div>
-
-        <div class="form-group col-md-4 ">
-        <label>Date of Joining</label>
-        <input type="date" class="form-control" name="doj"   value="<%= owner ? owner.doj : '' %>">
-        </div>
-
-         <div class="form-group col-md-4 ">
-        <label>Adhaar Card</label>
-        <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= owner ? owner.adhaar_card : '' %>">
-         
-        </div>
-
-                 <div class="form-group col-md-4 ">
-        <label>Username</label>
-        <input type="text" class="form-control" name="username"  value="<%= owner ? owner.username : '' %>">
-        
-        </div>
-
-         <div class="form-group col-md-4 ">
-        <label>Password</label>
-        <input type="password" class="form-control" name="password"  value="">
-        </div>
-
-        <div class="form-group col-md-4 ">
-        <label>Permanent Address</label>
-         <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control col-md-7 col-xs-7" ><%= owner ? owner.permanent_address : '' %></textarea>
-        </div>
-
-        <div class="form-group col-md-4 ">
-        <label>Present Address</label>
-        <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control col-md-7 col-xs-7" ><%= owner ? owner.present_address : '' %></textarea>
-         <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"<p> Present Address is same as Permanent Address </p>
-        </div>
-
-
-    
-
-</div>
-  
-  
-        
-  
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
-        <a class="btn btn-secondary" href="/owner/list"><i class="fa fa-list-alt"></i> View All</a>
-    </div>
-</form>
+<script type="text/javascript">
+    function validatePassword()
+    {
+    var a = document.getElementById("password").value;
+    //alert(a.length);
+    if ((a.length < 6) || (a.length > 10))
+    {
+    alert("Your Password must be 6 to 10 Character");
+    return false;
+    }else{
+      return true;
+    }
+  }
+    </script>
 
 
 <script type="text/javascript">
