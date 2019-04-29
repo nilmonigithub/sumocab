@@ -22,7 +22,7 @@
                   </div>
                   <div class="col col-xs-6 text-right">
                   
-                    <button><a class="btn btn-sm btn-primary btn-create"  href="/owner/add"></i> Create New</a></button>   
+                    <button><a class="btn btn-sm btn-primary btn-create"  href="/vehicle_type/add"></i> Create New</a></button>   
                   </div>
                 </div>
               </div>
@@ -32,46 +32,35 @@
                     <tr>
                         <th>SL NO</th>
                         <th>Name</th>
-                        <th>Mobile</th>
-                        <th>Email</th>
-                        <th>Image</th>            
-                        <th>Date of Birth</th>
-                        <th>Date of Joining</th>
-                        <th>adhaar_card</th>
-                        <th>permanent_address</th>
-                        <th>present_address</th>
-                        <th>Action</th>
-                        
+                        <th>Minimum Fare</th>
+                        <th>Minimum Distance</th>
+                        <th>Minimum Time</th>
+                        <th>Icon</th>
+                        <th></th>
                     </tr>
                   </thead>
                   <tbody>
-
                     <% var i=1;
-                     list.forEach(function(val) { %>
-             
-                     <tr>
-                          <td> <%= i %></td>
-                          <td><%= val.fullName %></td>
-                          <td><%= val.user_mobile %></td> 
-                          <td><%= val.email %></td>
-                          <!-- <td><img src="<%= baseurl %>/uploads/<%= val.user_image %>"  width="64" height="64"></td> -->
-                          <td> <img <% if(val.user_image && val.user_image!=''){%>src="<%= baseurl %>/uploads/<%= val.user_image %>" <%} else{%> src="<%= baseurl %>/images/no_image.jpg"<%}%> height="50px" alt="">
-                          </td>
-                         
-                 
-                         <td><%= val.dob %></td> 
-                         <td><%= val.doj %></td>
-                         <td><%= val.adhaar_card %></td>
-                         <td><%= val.permanent_address %></td>
-                         <td><%= val.present_address %></td> 
-                      
-                         <td>
-                             <a href="/owner/editowner/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                             <a href="/owner/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-                         </td>
-                     </tr>
-                    <% i++; }) %>
-                 </tbody>
+                    list.forEach(function(val) { %>
+                <tr>
+                    <td> <%= i %></td>
+                     <td><%= val.name %></td>
+                     <td><%= val.min_fare %></td> 
+                     <td><%= val.min_distance %></td>
+                     <td><%= val.min_time %></td>
+                     <!-- <td><%= val.user_image %></td> -->
+                     <td> <img <% if(val.icon && val.icon!=''){%>src="<%= baseurl %>/uploads/<%= val.icon %>" <%} else{%> src="<%= baseurl %>/images/no_image.jpg"<%}%> height="50px" alt="">
+                     </td>
+                    
+        
+                    <td>
+                        <a href="/vehicle_type/editvehicle_type/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                        <a href="/vehicle_type/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                    </td>
+                   
+                </tr>
+                <% i++; }) %>
+            </tbody>
              </table>
             
               </div>

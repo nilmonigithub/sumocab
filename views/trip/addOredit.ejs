@@ -19,7 +19,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                                 <label>Customer Id</label>
-                                <input type="text" class="form-control" name="customer_id" value="<%= trip ? trip.customer_id : '' %>">
+                                <!-- <input type="text" class="form-control" name="customer_id" value="<%= trip ? trip.customer_id : '' %>"> -->
+                                <select name="customer_id" class="form-control">
+                                        <option value="" selected disabled>-- Select --</option>
+                                        <% customer_list.forEach(function(clist){%>
+                                        <option <% if(trip.customer_id==clist._id){ %>selected="selected" <% }%> value="<%=clist._id%>"><%=clist.username%></option>
+                                        <% })%>
+                                </select>
                         </div>
                     </div>
 
@@ -125,14 +131,26 @@
                     <div class="col-md-6">
                             <div class="form-group  ">
                                     <label>Vehicle Id</label>
-                                    <input type="text" class="form-control" name="vehicle_id"   value="<%= trip ? trip.vehicle_id : '' %>">                      
+                                    <!-- <input type="text" class="form-control" name="vehicle_id"   value="<%= trip ? trip.vehicle_id : '' %>">                       -->
+                                    <select name="vehicle_id" class="form-control">
+                                        <option value="" selected disabled>-- Select --</option>
+                                        <% vehicle_list.forEach(function(vlist){%>
+                                        <option <% if(trip.vehicle_id==vlist._id){ %>selected="selected" <% }%> value="<%=vlist._id%>"><%=vlist.model_name%></option>
+                                        <% })%>
+                                   </select>
                             </div>
                     </div>
 
                     <div class="col-md-6">
                             <div class="form-group  ">
                                     <label>Driver Id</label>
-                                    <input type="text" class="form-control" name="driver_id"   value="<%= trip ? trip.driver_id : '' %>">                     
+                                    <!-- <input type="text" class="form-control" name="driver_id"   value="<%= trip ? trip.driver_id : '' %>">                      -->
+                                    <select name="driver_id" class="form-control">
+                                        <option value="" selected disabled>-- Select --</option>
+                                        <% driver_list.forEach(function(dlist){%>
+                                        <option <% if(trip.driver_id==dlist._id){ %>selected="selected" <% }%> value="<%=dlist._id%>"><%=dlist.username%></option>
+                                        <% })%>
+                                   </select>
                             </div>
                     </div>
 

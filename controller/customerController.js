@@ -129,7 +129,7 @@ function insertRecord(req, res) {
         user.fullName = req.body.fullName;
         user.user_mobile = req.body.user_mobile;  
         user.email = req.body.email;
-        user.user_image  =   req.file.filename;
+        user.user_image  =   req.body.user_image;
         user.user_type = 'customer';     
         user.dob= req.body.dob;
         user.doj= req.body.doj;

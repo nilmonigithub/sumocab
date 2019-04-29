@@ -1,0 +1,123 @@
+<%- include ../partials/header.html %>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div  class="container"  >
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 ">
+            <div class="well well-sm">
+
+            <form action="/vehicle_type/addvehicle_type" novalidate method="POST" enctype="multipart/form-data" autocomplete="off">
+                <input type="hidden" name="_id" value="<%= vehicle_type ? vehicle_type._id : '' %>">
+                <b><%= viewTitle %></b><br><hr>
+
+            
+                <div   class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="name" value="<%= vehicle_type ? vehicle_type.name : '' %>" required="required">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label>Description</label>
+                                <textarea rows="6" cols="6" type="text" id="description" name="description"   class="form-control col-md-12 col-xs-12" ><%= vehicle_type ? vehicle_type.description : '' %></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Minimum Fare</label>
+                            <input type="text" class="form-control" name="min_fare"  value="<%= vehicle_type ? vehicle_type.min_fare : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Minimum Distance</label>
+                            <input type="text" class="form-control" name="min_distance"  value="<%= vehicle_type ? vehicle_type.min_distance : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                            <label>Icon</label>
+                            <input type="file" class="form-control" name="icon" id="icon" value="<%= vehicle_type ? vehicle_type.icon : '' %>" onchange="PreviewImage();">
+                        </div>
+                    
+                        <div class=" col-md-4">
+                            <img id="imagePreview" <% if(vehicle_type){ if(vehicle_type.icon==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= vehicle_type.icon %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 150px; height: 150px;" />
+                        </div>  
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Minimum Time</label>
+                            <input type="text" class="form-control" name="min_time"  value="<%= vehicle_type ? vehicle_type.min_time : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Fare Per Hour</label>
+                            <input type="text" class="form-control" name="fare_per_hr" value="<%= vehicle_type ? vehicle_type.fare_per_hr : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Fare Per Km</label>
+                            <input type="text" class="form-control" name="fare_per_km"  value="<%= vehicle_type ? vehicle_type.fare_per_km : '' %>">
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
+                        <a class="btn btn-secondary" href="/vehicle_type/list"><i class="fa fa-list-alt"></i> View All</a>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function PreviewImage() {
+  
+      var fileInput = document.getElementById('icon');
+        var filePath = fileInput.value;
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+        if(!allowedExtensions.exec(filePath)){
+            alert('Please upload file having extensions .jpeg/.jpg/.png  only.');
+            fileInput.value = '';
+            return false;
+        }else{
+            //Image preview
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+  
+  
+    var oFReader = new FileReader(); oFReader.readAsDataURL(document.getElementById("icon").files[0]);
+    oFReader.onload = function (oFREvent) {
+    document.getElementById("imagePreview").src = oFREvent.target.result;
+    };
+  };
+
+  </script>
+
+
+

@@ -31,6 +31,7 @@ const ownerController = require('./controller/ownerController');
 const vehicle_documentController = require('./controller/vehicle_documentController');
 const coupon_discountController = require('./controller/coupon_discountController');
 const paymentController = require('./controller/paymentController');
+const vehicle_typeController = require('./controller/vehicle_typeController');
 var index = require('./controller/index');
 
 
@@ -137,3 +138,4 @@ app.use('/owner',ownerController);
 app.use('/vehicle_document',vehicle_documentController);
 app.use('/coupon_discount',coupon_discountController);
 app.use('/payment',paymentController);
+app.use('/vehicle_type',vehicle_typeController);
