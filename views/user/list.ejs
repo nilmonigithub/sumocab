@@ -4,6 +4,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <!------ Include the above in your HEAD tag ---------->
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -40,7 +41,7 @@
                         </tr>
                   </thead>
                   <tbody>
-                        <% var i=1;
+                        <% for (var i = 0; i < list.length; i++)
                         list.forEach(function(val) { %>
                         <tr>
                             <td> <%= i %></td>
@@ -59,26 +60,38 @@
             
               </div>
               <div class="panel-footer">
-                <div class="row">
-                  <div class="col col-xs-4">Page 1 of 5
-                  </div>
-                  <div class="col col-xs-8">
-                    <ul class="pagination hidden-xs pull-right">
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
+                  
+                  <% if (pages > 0) { %>
+                    <ul class="pagination text-center">
+                        <% if (current == 1) { %>
+                            <li class="disabled"><a>First</a></li>
+                        <% } else { %>
+                            <li><a href="/user/1">First</a></li>
+                        <% } %>
+                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                        <% if (i !== 1) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                            <% if (i == current) { %>
+                                <li class="active"><a><%= i %></a></li>
+                            <% } else { %>
+                                <li><a href="/user/<%= i %>"><%= i %></a></li>
+                            <% } %>
+                            <% if (i == Number(current) + 4 && i < pages) { %>
+                                <li class="disabled"><a>...</a></li>
+                            <% } %>
+                        <% } %>
+                        <% if (current == pages) { %>
+                            <li class="disabled"><a>Last</a></li>
+                        <% } else { %>
+                            <li><a href="/user/<%= pages %>">Last</a></li>
+                        <% } %>
                     </ul>
-                    <ul class="pagination visible-xs pull-right">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
-                  </div>
-                </div>
+                <% } %>
               </div>
             </div>
-
+           
 </div></div></div>
 
 <%- include ../partials/footer.html %>

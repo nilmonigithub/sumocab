@@ -13,7 +13,7 @@
         
             <form action="/driver/adddriver" method="POST" enctype="multipart/form-data" autocomplete="off">
                 <input type="hidden" name="_id" value="<%= driver._id %>" >
-                <b><%= viewTitle %></b><br><hr>
+                <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
 
             
                 <div   class="row">
@@ -38,12 +38,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                            <div class="form-group ">
-                                    <label>Image</label>
-                                    <input type="file" class="form-control" name="user_image"  value="<%= driver ? driver.user_image : '' %>" >                    
-                            </div>
-                        </div>
+                   
 
                     <div class="col-md-6">
                         <div class="form-group  ">
@@ -93,21 +88,34 @@
                     <div class="col-md-6">
                             <div class="form-group">
                                     <label>Permanent Address</label>
-                                    <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control col-md-7 col-xs-7" ><%= driver ? driver.permanent_address : '' %></textarea>
+                                    <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control " ><%= driver ? driver.permanent_address : '' %></textarea>
                             </div>
                         </div>
 
                     <div class="col-md-6">
                             <div class="form-group  ">
-                                    <label>Present Address</label>
-                                    <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"<p> Same as Permanent Address </p>
-                                    <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control col-md-7 col-xs-7" ><%= driver ? driver.present_address : '' %></textarea>
-                                    </div>
+                                <label>Present Address</label><br>
+                                <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control"  ><%= driver ? driver.present_address : '' %></textarea>
+                                <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"<p> Same as Permanent Address </p>
+                            </div>
                                    
                         </div>
-                        
-                    
-                
+
+                    <div class="col-md-12">
+                            <div class="form-group ">
+                                <div class="animate_form">
+                                    <div class="imageupload">                
+                                        <div  class="file-tab">
+                                        <label>Image</label>
+                                        <input type="file" class="form-control" id="user_image" name="user_image" accept="image/*" onchange="loadFile()"  value="<%= driver ? driver.user_image : '' %>" >                    
+                                        <img id="output"<% if(driver){ if(driver.user_image==null)
+                                            {%> src="<%= baseurl %>myimages/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= driver.user_image %>"<% } }else{ %> src=""<% } %> style=" max-width: 100px; max-height: 100px; border:solid"/>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>                        
+                                    
              
                     <div class="col-md-12">
                             <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
@@ -155,6 +163,31 @@
       }
     }
     </script>
+    <script>
+      function loadFile()  {
+        var fileInput = document.getElementById('user_image');
+        var filePath = fileInput.value;
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+      if(!allowedExtensions.exec(filePath)){
+          alert('Please upload file having extensions .jpeg/.jpg/.png  only.');
+          fileInput.value = '';
+          return false;
+      }else{
+          //Image preview
+          if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();             
+              reader.onload = function(){
+                var output = document.getElementById('output');
+                output.src = reader.result;
+              };
+              reader.readAsDataURL(event.target.files[0]);
+            
+            };
+      }
+      }
+          </script>
+
+        
     
 
     <%- include ../partials/footer.html %>

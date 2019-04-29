@@ -12,14 +12,17 @@
 
         <form  action="/user" method="POST" autocomplete="off">
             <input type="hidden" name="_id" value="<%= user._id %>" >
-            <b><%= viewTitle %></b><br><hr>
-
+            <a style="float:right; margin-top: 20px;" class="btn btn-secondary" href="/user/list"><i class="fa fa-list-alt"></i> View All</a>
+            <h2 style="display: inline-block;"><b><%= viewTitle %></h2> <hr  style="color:cornflowerblue; border:solid" >
+               
             
                 <div   class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                         <label>User Name</label>
-                        <input type="text" class="form-control" name="username" value="<%= user ? user.username : '' %>">
+                        
+                        <input type="text" class="form-control" name="username"  value="<%= user ? user.username : '' %>">
+                      
                         </div>
                     </div>
 
@@ -56,7 +59,6 @@
              
                     <div class="col-md-12">
                             <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
-                            <a class="btn btn-secondary" href="/user/list"><i class="fa fa-list-alt"></i> View All</a>
                         </div>
                     </div>
                 </div>
@@ -67,6 +69,7 @@
     </div>
 
     <%- include ../partials/footer.html %>
+   
 
 <script type="text/javascript">
     function validatePassword()

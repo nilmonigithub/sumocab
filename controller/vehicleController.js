@@ -128,7 +128,7 @@ router.get('/:id', (req, res) => {
         User.find({user_type:'owner'},(err,docs)=>{
             if (!err) {
                 res.render("vehicle/addOredit", {
-                    viewTitle: "Update User",
+                    viewTitle: "Update Vehicle",
                     owner_list: docs,
                     vehicle: doc
                 });

@@ -150,6 +150,7 @@ function insertRecord(req, res) {
         user.user_mobile = req.body.user_mobile;  
         user.email = req.body.email;  
         user.user_image= req.file.filename;
+      
         user.user_type = 'driver';     
         user.dl_no = req.body.dl_no;
         user.dl_expiry= req.body.dl_expiry;
