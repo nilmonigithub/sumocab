@@ -3,19 +3,32 @@ const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const Trip = mongoose.model('trip');
+const User = mongoose.model('user');
+const Vehicle = mongoose.model('vehicle');
 
 router.get('/',(req,res)=>{
     console.log('jjjjjjjjjj');
     if(req.session && req.session.user){  
-     
-    res.render("trip/addOredit",{
-        viewTitle : "Insert Trip",
-        trip:''
 
-    });
-}else{
-    return res.redirect('/');
-}
+        User.find({user_type:'driver'},(err,docs)=>{
+            User.find({user_type:'customer'},(err1,docs1)=>{
+                Vehicle.find((err2,docs2)=>{
+     
+                    res.render("trip/addOredit",{
+                        trip: '',
+                        driver_list: docs,
+                        customer_list: docs1,
+                        vehicle_list: docs2,
+                        viewTitle : "Insert Trip"
+
+                    });
+
+                });    
+            });    
+        });
+    }else{
+        return res.redirect('/');
+    }
 
 });
 
@@ -136,12 +149,21 @@ function handleValidationError(err, body) {
 
 router.get('/:id', (req, res) => {
     Trip.findById(req.params.id, (err, doc) => {
-        if (!err) {
-            res.render("trip/addOredit", {
-                viewTitle: "Update Trip",
-                trip: doc
+        User.find({user_type:'driver'},(err1,docs1)=>{
+            User.find({user_type:'customer'},(err2,docs2)=>{
+                Vehicle.find((err3,docs3)=>{
+                    if (!err) {
+                        res.render("trip/addOredit", {
+                            viewTitle: "Update Trip",
+                            trip: docs,
+                            driver_list: docs1,
+                            customer_list: docs2,
+                            vehicle_list: docs3,
+                        });
+                    }
+                });
             });
-        }
+        });
     });
 });
 
