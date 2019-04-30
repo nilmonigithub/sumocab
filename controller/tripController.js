@@ -112,17 +112,26 @@ function updateRecord(req, res) {
 
 
 router.get('/list',(req,res)=>{
-    console.log('hhhhhh');
-    console.log(req.session);
+    //console.log('hhhhhh');
+    //console.log(req.session);
     if(req.session && req.session.user){ 
     Trip.find((err,docs)=>{
-        if(!err){
-            res.render("trip/list",{
-                list: docs
+        User.find({user_type:'driver'},(err1,docs1)=>{
+            User.find({user_type:'customer'},(err2,docs2)=>{
+                Vehicle.find((err3,docs3)=>{
+                    if(!err){
+                        res.render("trip/list",{
+                            list: docs,
+                            driver_list: docs1,
+                            customer_list: docs2,
+                            vehicle_list: docs3
+                        });
+                    }else{
+                        console.log('Error in user list:'+err);
+                    }
+                });
             });
-        }else{
-            console.log('Error in user list:'+err);
-        }
+        });    
     });
 }else{
     return res.redirect('/');
@@ -148,7 +157,7 @@ function handleValidationError(err, body) {
 }
 
 router.get('/:id', (req, res) => {
-    Trip.findById(req.params.id, (err, doc) => {
+    Trip.findById(req.params.id, (err, docs) => {
         User.find({user_type:'driver'},(err1,docs1)=>{
             User.find({user_type:'customer'},(err2,docs2)=>{
                 Vehicle.find((err3,docs3)=>{

@@ -87,15 +87,15 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                            <label>Permanent Address</label>
-                             <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control col-md-7 col-xs-7" ><%= owner ? owner.permanent_address : '' %></textarea>
+                        <label>Permanent Address</label>
+                            <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control" ><%= owner ? owner.permanent_address : '' %></textarea>
                     </div>
                 </div>
                     
                 <div class="col-md-6">
                     <div class="form-group">
-                            <label>Present Address</label>
-                            <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control col-md-7 col-xs-7" ><%= owner ? owner.present_address : '' %></textarea>
+                        <label>Present Address</label>
+                            <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control" ><%= owner ? owner.present_address : '' %></textarea>
                             <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"<p> Present Address is same as Permanent Address </p>
                     </div>
                 </div>

@@ -52,9 +52,9 @@
                                 <%= veh.model_name %>
                                 <% } }); %></td>
                 
-                            <td><%= val.image %></td> 
-                            <!-- <td> <img <% if(val.image && val.image!=''){%>src="<%= baseurl %>/public/uploads/<%= val.user_image %>" <%} else{%> src="<%= baseurl %>myimages/no_photo.jpg"<%}%> height="50px" alt="">
-                            </td> -->
+                            <!-- <td><%= val.image %></td>  -->
+                            <td> <img <% if(val.image && val.image!=''){%>src="<%= baseurl %>/uploads/<%= val.image %>" <%} else{%> src="<%= baseurl %>/images/no_image.jpg"<%}%> height="50px" alt="">
+                            </td>
                             <td><%= val.registration_type %></td>
                             <td><%= val.registration_no %></td>
                             <td><%= val.registration_date %></td>
