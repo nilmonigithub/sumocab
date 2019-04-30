@@ -52,9 +52,8 @@
                                 <%= veh.model_name %>
                                 <% } }); %></td>
                 
-                            <td><%= val.image %></td> 
-                            <!-- <td> <img <% if(val.image && val.image!=''){%>src="<%= baseurl %>/public/uploads/<%= val.user_image %>" <%} else{%> src="<%= baseurl %>myimages/no_photo.jpg"<%}%> height="50px" alt="">
-                            </td> -->
+                                <td> <img <% if(val.image && val.image!=''){%>src="<%= baseurl %>/uploads/<%= val.image %>" <%} else{%> src="<%= baseurl %>/images/no_image.jpg"<%}%> height="50px" alt="">
+                                </td>
                             <td><%= val.registration_type %></td>
                             <td><%= val.registration_no %></td>
                             <td><%= val.registration_date %></td>
@@ -69,25 +68,7 @@
              </table>
             
               </div>
-              <div class="panel-footer">
-                <div class="row">
-                  <div class="col col-xs-4">Page 1 of 5
-                  </div>
-                  <div class="col col-xs-8">
-                    <ul class="pagination hidden-xs pull-right">
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                    </ul>
-                    <ul class="pagination visible-xs pull-right">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
 </div></div></div>

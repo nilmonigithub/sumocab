@@ -3,6 +3,8 @@ const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const Payment = mongoose.model('payment');
+const CouponDis = mongoose.model('coupon_discount');
+const Trip = mongoose.model('trip');
 
 
 
@@ -10,20 +12,24 @@ router.get('/list',(req,res)=>{
     console.log('hhhhhh');
     console.log(req.session);
     if(req.session && req.session.user){ 
-        
-       Payment.find((err,docs)=>{
-       
-        if(!err){
-            res.render("payment/list",{
-                list: docs,
-               
+            
+        CouponDis.find((err,doc)=>{
+            Trip.find((err,doc2)=>{        
+                Payment.find((err,docs)=>{
+                
+                    if(!err){
+                        res.render("payment/list",{
+                            list: docs,
+                            cuponList:doc,
+                            tripList:doc2
+                        });
+                
+                    }else{
+                        console.log('Error in user list:'+err);
+                    }
+                });
             });
-       
-        }else{
-            console.log('Error in user list:'+err);
-        }
-    });
-
+        });
 }else{
     return res.redirect('/');
 }
@@ -32,9 +38,15 @@ router.get('/list',(req,res)=>{
 
 router.get('/add',(req,res)=>{
     if(req.session && req.session.user){ 
-    res.render("payment/addOredit",{
-        viewTitle : "Insert Payment",
-        payment :''
+    CouponDis.find((err,docs)=>{
+        Trip.find((err, docs1) => {
+            res.render("payment/addOredit",{
+                viewTitle : "Insert Payment",
+                payment :'',
+                cupon:docs,
+                trip:docs1
+            })
+        });
     });
 }else{
     return res.redirect('/');
@@ -43,13 +55,19 @@ router.get('/add',(req,res)=>{
 });
 
 router.get('/editpayment/:id', (req, res) => {
-    Payment.findById(req.params.id, (err, doc) => {
-        if (!err) {
-            res.render("payment/addOredit", {
-                viewTitle: "Update Payment",
-                payment: doc
+    CouponDis.find((err, docs) => {
+        Trip.find((err, docs1) => {
+            Payment.findById(req.params.id, (err, doc) => {
+                if (!err) {
+                    res.render("payment/addOredit", {
+                        viewTitle: "Update Payment",
+                        payment: doc,
+                        cupon:docs,
+                        trip:docs1
+                    });
+                }
             });
-        }
+        });
     });
 });
 
@@ -100,5 +118,13 @@ function updateRecord(req, res) {
     });
 }
 
+router.get('/delete/:id', (req, res) => {
+    Payment.findByIdAndRemove(req.params.id, (err, doc) => {
+        if (!err) {
+            res.redirect('/Payment/list');
+        }
+        else { console.log('Error in Payment delete :' + err); }
+    });
+});
 
 module.exports = router;

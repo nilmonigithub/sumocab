@@ -54,11 +54,8 @@
                           <td><%= val.fullName %></td>
                           <td><%= val.user_mobile %></td> 
                           <td><%= val.email %></td>
-                          <!-- <td><img src="<%= baseurl %>/uploads/<%= val.user_image %>"  width="64" height="64"></td> -->
                           <td> <img <% if(val.user_image && val.user_image!=''){%>src="<%= baseurl %>/uploads/<%= val.user_image %>" <%} else{%> src="<%= baseurl %>/images/no_image.jpg"<%}%> height="50px" alt="">
                           </td>
-                         
-                 
                          <td><%= val.dob %></td> 
                          <td><%= val.doj %></td>
                          <td><%= val.adhaar_card %></td>

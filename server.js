@@ -16,7 +16,12 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 var app = express();
-
+var mongoosePaginate = require('mongoose-paginate');
+ 
+mongoosePaginate.paginate.options = { 
+    lean:  true,
+    limit: 20
+};
 
 
 
