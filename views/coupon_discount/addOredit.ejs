@@ -22,63 +22,68 @@
                         <div class="form-group">
                                 <label>Coupon Name</label>
                                 <input type="text" class="form-control" name="coupon_name" value="<%= couponDis ? couponDis.coupon_name : '' %>">
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Coupon Code</label>
-                                <input type="text" class="form-control" name="coupon_code"  value="<%= couponDis ? couponDis.coupon_code : '' %>">
-                        </div>
-                    </div>
-                        
-                    <div class="col-md-6">
-                        <div class="form-group ">
-                                <label>Coupon Amount</label>
-                                <input type="text" class="form-control" name="coupon_amount"  value="<%= couponDis ? couponDis.coupon_amount : '' %>">                       
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                            <div class="form-group ">
-                                    <label>Coupon Start Date</label>
-                                    <input type="date" class="form-control" name="coupon_start_date"   value="<%= couponDis ? couponDis.coupon_start_date : '' %>">                    
                             </div>
                         </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Coupon Code</label>
+                                <input type="text" class="form-control" name="coupon_code"  value="<%= couponDis ? couponDis.coupon_code : '' %>">
+                            </div>
+                        </div>
+                            
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <label>Coupon Amount</label>
+                                <input type="text" class="form-control" name="coupon_amount"  value="<%= couponDis ? couponDis.coupon_amount : '' %>">                       
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Coupon Start Date</label>
+                                    <input type="text" class="form-control" name="coupon_start_date" id="coupon_start_date"   value="<%= couponDis ? couponDis.coupon_start_date : '' %>">                    
+                                </div>
+                            </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group  ">
                                 <label>Coupon End Date</label>
-                                <input type="date" class="form-control" name="coupon_end_date"  value="<%= couponDis ? couponDis.coupon_end_date : '' %>">
+                                <input type="text" class="form-control" name="coupon_end_date" id="coupon_end_date" value="<%= couponDis ? couponDis.coupon_end_date : '' %>">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="col-md-6">
+                            <div class="form-group  ">
                                 <label>Coupon Status</label>
-                                <input type="text" class="form-control" name="coupon_status"   value="<%= couponDis ? couponDis.coupon_status : '' %>">                        
+                                <!-- <input type="text" class="form-control" name="coupon_status"   value="<%= couponDis ? couponDis.coupon_status : '' %>"> -->
+                                <select name="coupon_status"  class="form-control"> 
+                                    <!-- <option value="" selected disabled>--Select Type--</option> -->
+                                    <option value="Active" <% if(couponDis.coupon_status=='Active'){%> selected="selected" <%}  %> >Active</option>
+                                    <option value="Inactive" <% if(couponDis.coupon_status=='Inactive'){%> selected="selected" <%}  %> >Inactive</option>
+                                </select> 
+                            </div>
                         </div>
-                    </div>
 
+                        
                     
-                   
+                        
                     
                 
-             
-                    <div class="col-md-12">
+                        <div class="col-md-12">
                             <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
                             
                         </div>
                     </div>
                 </form>
-                </div>
-           
             </div>
+           
         </div>
-        <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
-    </div>
+</div>
+<div class="clearfix"></div>
+</div>
    
     
 
@@ -113,4 +118,28 @@
     </script>
     
 
-    <%- include ../partials/footer.html %>
+<%- include ../partials/footer.html %>
+<%- include ../jqueryDatePicker/jquerydatepicker.html %>
+<script>
+$("#coupon_start_date","#coupon_end_date").keydown(function(event) {
+    //alert(1)
+    if(event.keyCode != 8){
+        event.preventDefault();
+    }
+});
+var dateToday = new Date();
+var dates = $("#coupon_start_date, #coupon_end_date").datepicker({
+    // defaultDate: "+1d",
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'yy-mm-dd',
+    minDate: dateToday,
+    onSelect: function(selectedDate) {    
+        console.log(this)
+        var option = this.id.indexOf("coupon_start_date") != -1 ? "minDate" : "maxDate",
+        instance = $(this).data("datepicker"),
+        date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+        dates.not(this).datepicker("option", option, date);
+    }
+});
+</script>

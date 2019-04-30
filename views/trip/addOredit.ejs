@@ -5,6 +5,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
+<div class="driveradd">
 <div class="container"  >
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -59,37 +60,37 @@
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>To Name</label>
-                                    <input type="text" class="form-control" name="to_name"   value="<%= trip ? trip.to_name : '' %>">                          
-                            </div>
+                        <div class="form-group  ">
+                                <label>To Name</label>
+                                <input type="text" class="form-control" name="to_name"   value="<%= trip ? trip.to_name : '' %>">                          
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>To City</label>
-                                    <input type="text" class="form-control" name="to_city"   value="<%= trip ? trip.to_city : '' %>">                        
-                            </div>
+                        <div class="form-group  ">
+                                <label>To City</label>
+                                <input type="text" class="form-control" name="to_city"   value="<%= trip ? trip.to_city : '' %>">                        
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>To Latlong</label>
-                                    <input type="text" class="form-control" name="to_latlong"   value="<%= trip ? trip.to_latlong : '' %>">                        
-                            </div>
+                        <div class="form-group  ">
+                                <label>To Latlong</label>
+                                <input type="text" class="form-control" name="to_latlong"   value="<%= trip ? trip.to_latlong : '' %>">                        
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>To Json</label>
-                                    <input type="text" class="form-control" name="to_json"   value="<%= trip ? trip.to_json : '' %>">                        
-                            </div>
+                        <div class="form-group  ">
+                                <label>To Json</label>
+                                <input type="text" class="form-control" name="to_json"   value="<%= trip ? trip.to_json : '' %>">                        
+                        </div>
                     </div>
 
                     <div class=" col-md-6 ">
                         <div class="form-group">
                             <label>Trip Type</label>          
-                         <select name="trip_type"  class="form-control"> 
+                            <select name="trip_type"  class="form-control"> 
                 
                                 <option value="" selected disabled>--Select Type--</option>
                                 <option value="One" <% if(trip.trip_type=='One'){%> selected="selected" <%}  %> >One</option>
@@ -97,36 +98,36 @@
                     
                           </select>   
                         </div>              
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                                <label>Customer Pickup Time</label>
+                                <input type="time" class="form-control" name="customer_pickup_time"   value="<%= trip ? trip.customer_pickup_time : '' %>">                        
                         </div>
-
-                    <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Customer Pickup Time</label>
-                                    <input type="text" class="form-control" name="customer_pickup_time"   value="<%= trip ? trip.customer_pickup_time : '' %>">                        
-                            </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Customer Drop Time</label>
-                                    <input type="text" class="form-control" name="customer_drop_time"   value="<%= trip ? trip.customer_drop_time : '' %>">                        
-                            </div>
+                        <div class="form-group  ">
+                                <label>Customer Drop Time</label>
+                                <input type="time" class="form-control" name="customer_drop_time"   value="<%= trip ? trip.customer_drop_time : '' %>">                        
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Actual Pickup Time</label>
-                                    <input type="text" class="form-control" name="actual_pickup_time"   value="<%= trip ? trip.actual_pickup_time : '' %>">                        
-                            </div>
+                        <div class="form-group  ">
+                                <label>Actual Pickup Time</label>
+                                <input type="time" class="form-control" name="actual_pickup_time"   value="<%= trip ? trip.actual_pickup_time : '' %>">                        
+                        </div>
                     </div>
 
                   
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Actual Drop Time</label>
-                                    <input type="text" class="form-control" name="actual_drop_time"    value="<%= trip ? trip.actual_drop_time : '' %>">                      
-                            </div>
+                        <div class="form-group  ">
+                                <label>Actual Drop Time</label>
+                                <input type="time" class="form-control" name="actual_drop_time"    value="<%= trip ? trip.actual_drop_time : '' %>">                      
+                        </div>
                     </div>
 
                     <div class="col-md-6">
@@ -156,46 +157,46 @@
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Estimated Distance</label>
-                                    <input type="text" class="form-control" name="estimated_distance"   value="<%= trip ? trip.estimated_distance : '' %>">                    
-                            </div>
+                        <div class="form-group  ">
+                                <label>Estimated Distance</label>
+                                <input type="text" class="form-control" name="estimated_distance"   value="<%= trip ? trip.estimated_distance : '' %>">                    
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Actual Distance</label>
-                                    <input type="text" class="form-control" name="actual_distance"   value="<%= trip ? trip.actual_distance : '' %>">                   
-                            </div>
+                        <div class="form-group  ">
+                                <label>Actual Distance</label>
+                                <input type="text" class="form-control" name="actual_distance"   value="<%= trip ? trip.actual_distance : '' %>">                   
+                        </div>
                     </div>
 
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Estimated Time</label>
-                                    <input type="text" class="form-control" name="estimated_time"   value="<%= trip ? trip.estimated_time : '' %>">                   
-                            </div>
+                        <div class="form-group  ">
+                                <label>Estimated Time</label>
+                                <input type="time" class="form-control" name="estimated_time"   value="<%= trip ? trip.estimated_time : '' %>">                   
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Actual Time</label>
-                                    <input type="text" class="form-control" name="actual_time"   value="<%= trip ? trip.actual_time : '' %>">                  
-                            </div>
+                        <div class="form-group  ">
+                                <label>Actual Time</label>
+                                <input type="time" class="form-control" name="actual_time"   value="<%= trip ? trip.actual_time : '' %>">                  
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Estimated Price</label>
-                                    <input type="text" class="form-control" name="estimated_price"  value="<%= trip ? trip.estimated_price : '' %>">                  
-                            </div>
+                        <div class="form-group  ">
+                                <label>Estimated Price</label>
+                                <input type="text" class="form-control" name="estimated_price"  value="<%= trip ? trip.estimated_price : '' %>">                  
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Actual Price</label>
-                                    <input type="text" class="form-control" name="actual_price"  value="<%= trip ? trip.actual_price : '' %>">                  
-                            </div>
+                        <div class="form-group  ">
+                                <label>Actual Price</label>
+                                <input type="text" class="form-control" name="actual_price"  value="<%= trip ? trip.actual_price : '' %>">                  
+                        </div>
                     </div>
                     
                     
@@ -206,12 +207,14 @@
                             
                         </div>
                     </div>
-                </div>
                 </form>
+                </div>
             </div>
+            <div class="clearfix"></div>
         </div>
-        
+        <div class="clearfix"></div>
     </div>
+</div>
 
     <%- include ../partials/footer.html %>
 

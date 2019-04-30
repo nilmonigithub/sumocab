@@ -46,12 +46,21 @@
                           list.forEach(function(val) { %>
                           <tr>
                                <td> <%= i %></td>
-                              <td><%= val.customer_id %></td>
+                              <td><% customer_list.forEach(function(customer) {
+                                if(customer._id==val.customer_id){ %>
+                                <%= customer.username %>
+                                <% } }); %></td>
                               <td><%= val.trip_type %></td> 
                               <td><%= val.customer_pickup_time %></td>
                               <td><%= val.customer_drop_time %></td>
-                              <td><%= val.vehicle_id %></td>
-                              <td><%= val.driver_id %></td>
+                              <td><% vehicle_list.forEach(function(vehicle) {
+                                if(vehicle._id==val.vehicle_id){ %>
+                                <%= vehicle.model_name %>
+                                <% } }); %></td>
+                              <td><% driver_list.forEach(function(driver) {
+                                if(driver._id==val.driver_id){ %>
+                                <%= driver.username %>
+                                <% } }); %></td>
                               <td><%= val.actual_price %></td> 
                              
                               <td>
