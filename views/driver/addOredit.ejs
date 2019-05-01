@@ -8,7 +8,7 @@
             <div class="well well-sm">
 
         
-            <form action="/driver/adddriver" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <form action="/driver/adddriver" method="POST" novalidate enctype="multipart/form-data" autocomplete="off">
                 <input type="hidden" name="_id" value="<%= driver._id %>" >
                 <a style="float:right; margin-top: 20px;" class="btn btn-secondary" href="/driver/list"><i class="fa fa-list-alt"></i> View All</a>
                 <h2 style="display: inline-block;"><b><%= viewTitle %></h2> <hr  style="color:cornflowerblue; border:solid" >
@@ -16,24 +16,35 @@
             
                 <div   class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Full Name</label>
-                                <input type="text" class="form-control" name="fullName" value="<%= driver ? driver.fullName : '' %>">
+                        <div class="form-group field">
+                            <label>Full Name*</label>
+                            <input type="text" class="form-control" name="fullName" value="<%= driver ? driver.fullName : '' %>" required="required">
                         </div>
                     </div>
 
                     <div class="col-md-6">
+<<<<<<< HEAD
+                        <div class="form-group field">
+                            <label>Mobile*</label>
+                            <input type="text" class="form-control" name="user_mobile"  value="<%= driver ? driver.user_mobile : '' %>" required="required">
+=======
                         <div class="form-group">
                                 <label>Mobile</label>
                                 <input type="text" class="form-control" name="user_mobile" id="user_mobile" required="required"   value="<%= driver ? driver.user_mobile : '' %>"
                                 maxlength="10" minlength="10" pattern="^[6-9]\d{9}$" onkeypress="return blockChar(event)">
+>>>>>>> e5649f94f6dd8161445a42fb3f83109988e8a852
                         </div>
                     </div>
                         
                     <div class="col-md-6">
                         <div class="form-group ">
+<<<<<<< HEAD
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="email"  value="<%= driver ? driver.email : '' %>">                       
+=======
                                 <label>Email</label>
                                 <input type="text" class="form-control" name="email" onkeyup="this.value=this.value.replace(/[ ]/g,'');"  required="required"  value="<%= driver ? driver.email : '' %>">                       
+>>>>>>> e5649f94f6dd8161445a42fb3f83109988e8a852
                         </div>
                     </div>
 
@@ -41,53 +52,58 @@
 
                     <div class="col-md-6">
                         <div class="form-group  ">
-                                <label>Driver No</label>
-                                <input type="text" class="form-control" name="dl_no"  value="<%= driver ? driver.dl_no : '' %>">
+                            <label>Driver No</label>
+                            <input type="text" class="form-control" name="dl_no"  value="<%= driver ? driver.dl_no : '' %>">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group  ">
-                                <label>Driver Expiry Date</label>
-                                <input type="date" class="form-control" name="dl_expiry" value="<%= driver ? driver.dl_expiry : '' %>">                         
+                            <label>Driver Expiry Date</label>
+                            <input type="date" class="form-control" name="dl_expiry" value="<%= driver ? driver.dl_expiry : '' %>">                         
                         </div>
                     </div>
 
                     
                     <div class="col-md-6">
                             <div class="form-group  ">
-                                    <label>Date of Birth</label>
-                                    <input type="date" class="form-control" name="dob"  value="<%= driver ? driver.dob : '' %>">                      
+                                <label>Date of Birth</label>
+                                <input type="date" class="form-control" name="dob"  value="<%= driver ? driver.dob : '' %>">                      
                             </div>
                         </div>
 
                     <div class="col-md-6">
                             <div class="form-group  ">
-                                    <label>Date of Joining</label>
-                                    <input type="date" class="form-control" name="doj" value="<%= driver ? driver.doj : '' %>">                    
+                                <label>Date of Joining</label>
+                                <input type="date" class="form-control" name="doj" value="<%= driver ? driver.doj : '' %>">                    
                             </div>
                         </div>
 
                         
                     <div class="col-md-6">
                             <div class="form-group  ">
+<<<<<<< HEAD
+                                <label>Adhaar Card</label>
+                                <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= driver ? driver.adhaar_card : '' %>">                   
+=======
                                     <label>Adhaar Card</label>
                                     <input type="text" class="form-control"  required="required" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= driver ? driver.adhaar_card : '' %>">                   
+>>>>>>> e5649f94f6dd8161445a42fb3f83109988e8a852
                             </div>
                         </div>
 
                     <div class="col-md-6">
                             <div class="form-group  ">
-                                    <label>Username</label>
-                                    <input type="text" class="form-control" name="username"  value="<%= driver ? driver.username : '' %>">
+                                <label>Username</label>
+                                <input type="text" class="form-control" name="username"  value="<%= driver ? driver.username : '' %>">
                    
                             </div>
                         </div>
 
                     <div class="col-md-6">
                             <div class="form-group">
-                                    <label>Permanent Address</label>
-                                    <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control " ><%= driver ? driver.permanent_address : '' %></textarea>
+                                <label>Permanent Address</label>
+                                <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control " ><%= driver ? driver.permanent_address : '' %></textarea>
                             </div>
                         </div>
 
@@ -131,7 +147,8 @@
     <div class="clearfix"></div>
     </div>
    
-    
+    <%- include ../partials/footer.html %>
+    <%- include ../formvalidator/formvalidator.html %>
 
 
     <script type="text/javascript">
@@ -196,4 +213,4 @@
         
     
 
-    <%- include ../partials/footer.html %>
+    

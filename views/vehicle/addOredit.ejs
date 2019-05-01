@@ -2,12 +2,13 @@
 
 
 
+<div class="driveradd">
 <div  class="container"  >
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="well well-sm">
 
-        <form  action="/vehicle" method="POST" autocomplete="off">
+        <form  action="/vehicle" novalidate method="POST" autocomplete="off">
             <input type="hidden" name="_id" value="<%= vehicle._id %>" >
             <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/vehicle/list"><i class="fa fa-list-alt"></i> View All</a>
             <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
@@ -15,16 +16,16 @@
             
                 <div   class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Company Name</label>
-                                <input type="text" class="form-control" name="company" value="<%= vehicle ? vehicle.company : '' %>">
+                        <div class="form-group field">
+                            <label>Company Name*</label>
+                            <input type="text" class="form-control" name="company" value="<%= vehicle ? vehicle.company : '' %>" required="required">
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Model Name</label>
-                            <input type="text" class="form-control" name="model_name"  value="<%= vehicle ? vehicle.model_name : '' %>">
+                        <div class="form-group field">
+                            <label>Model Name*</label>
+                            <input type="text" class="form-control" name="model_name"  value="<%= vehicle ? vehicle.model_name : '' %>" required="required">
                         </div>
                     </div>
                         
@@ -83,8 +84,9 @@
         </div>
         
     </div>
-
+</div>
     <%- include ../partials/footer.html %>
+    <%- include ../formvalidator/formvalidator.html %>
 
 <script type="text/javascript">
     function validatePassword()

@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="well well-sm">
 
-        <form  action="/vehicle_document/addvehicledoc" enctype="multipart/form-data" method="POST" autocomplete="off">
+        <form  action="/vehicle_document/addvehicledoc" enctype="multipart/form-data" novalidate method="POST" autocomplete="off">
             <input type="hidden" name="_id" value="<%= vehicledoc._id %>" >
             <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/vehicle_document/list"><i class="fa fa-list-alt"></i> View All</a>
             <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
@@ -14,11 +14,11 @@
             
                 <div   class="row">
                         <div class="col-md-6">
-                             <div class="form-group">
+                             <div class="form-group field">
                            
-                            <label>Vehicle Id</label>
+                            <label>Vehicle Id*</label>
                             <!-- <input type="text" class="form-control" name="vehicle_id" value="<%= vehicledoc ? vehicledoc.vehicle_id : '' %>"> -->
-                            <select name="vehicle_id" class="form-control" >
+                            <select name="vehicle_id" class="form-control" required="required">
                                 <option value="" selected disabled>-- Select --</option>
                                 <% vehicle.forEach(function(veh){%>
                                 <option <% if(vehicledoc.vehicle_id==veh._id){ %>selected="selected" <% }%> value="<%=veh._id%>"><%=veh.model_name%></option>
@@ -29,7 +29,15 @@
                     
 
 
- 
+                    <div class="col-md-6">
+                        <div class="form-group field">
+                            <label>Image*</label>
+                            <input type="file" class="form-control" name="image" id="image" value="<%= vehicledoc ? vehicledoc.image : '' %>" onchange="PreviewImage();" <% if(vehicledoc && vehicledoc.image && vehicledoc.image!=''){  }else {%> required="required"<% }%>>
+                        </div>
+                        <div class=" col-md-4">
+                            <img id="imagePreview" <% if(vehicledoc){ if(vehicledoc.image==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= vehicledoc.image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 150px; height: 150px;" />
+                        </div>
+                    </div>
                         
                     <div class="col-md-6">
                         <div class="form-group ">
@@ -59,7 +67,7 @@
                             </div>
                         </div>
                     
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                             <div class="form-group ">              
                                         <div  class="file-tab">
                                         <label>Image</label>
@@ -69,7 +77,7 @@
                                     
                                         </div>
                                 </div>
-                    </div>
+                    </div> -->
                 
                 
              
@@ -87,6 +95,7 @@
     </div>
 
     <%- include ../partials/footer.html %>
+    <%- include ../formvalidator/formvalidator.html %>
 
 <script type="text/javascript">
     function validatePassword()

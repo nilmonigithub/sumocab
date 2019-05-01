@@ -9,22 +9,22 @@
 
             <form action="/vehicle_type/addvehicle_type" novalidate method="POST" enctype="multipart/form-data" autocomplete="off">
                 <input type="hidden" name="_id" value="<%= vehicle_type ? vehicle_type._id : '' %>">
-                <a style="float:right; margin-top: 20px;" class="btn btn-secondary" href="/vehicle_type/list"><i class="fa fa-list-alt"></i> View All</a>
+                <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/vehicle_type/list"><i class="fa fa-list-alt"></i> View All</a>
                 <h2 style="display: inline-block;"><b><%= viewTitle %></h2> <hr  style="color:cornflowerblue; border:solid" >
 
             
                 <div   class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Name</label>
+                        <div class="form-group field">
+                            <label>Name<span>*</span></label>
                             <input type="text" class="form-control" name="name" value="<%= vehicle_type ? vehicle_type.name : '' %>" required="required">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                                <label>Description</label>
-                                <textarea rows="6" cols="6" type="text" id="description" name="description"   class="form-control col-md-12 col-xs-12" ><%= vehicle_type ? vehicle_type.description : '' %></textarea>
+                            <label>Description</label>
+                            <textarea rows="6" cols="6" type="text" id="description" name="description"   class="form-control col-md-12 col-xs-12" ><%= vehicle_type ? vehicle_type.description : '' %></textarea>
                         </div>
                     </div>
 
@@ -80,13 +80,21 @@
                         
                     </div>
                 </div>
-            </div>
+            
             </form>
+        </div>
         </div>
     </div>
 </div>
+
 </div>
+
+
 <%- include ../partials/footer.html %>
+<%- include ../formvalidator/formvalidator.html %>
+
+
+
 
 <script type="text/javascript">
     function PreviewImage() {
