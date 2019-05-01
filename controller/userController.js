@@ -82,37 +82,21 @@ function updateRecord(req, res) {
 
 
 
-router.get('/list',(req,res)=>{
+router.get('/list',(req,res,next)=>{
     // console.log('hhhhhh');
     // console.log(req.session);
     if(req.session && req.session.user){
-        console.log("dddddddddddddd") 
-        
-    //     var currPage = req.param.page ;
-    //    console.log(currPage);
-    //     var limit = req.query.limit ? req.query.limit : 10;
-    //     var offset = currPage!=0 ? (currPage * limit) - limit : 0;
-
-    //console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
-    // var pagina = req.param.page;
-    // console.log(req.param.page);
-
-    User
-    .find((err,doc)=>{
-        if(!err){
-            res.render("user/list",{
-                list: doc
-            });
-        }else{
-            console.log('Error in user list:'+err);
-        }
-    })
-    var currPage =  req.query.page ? req.query.page : 1;
-    console.log(currPage);
-    User.paginate({}, {page: 5, limit: 5}).then(function(result) {
-        console.log(result);
-    
-    });
+        console.log("dddddddddddddd")     
+        User.find((err,doc)=>{
+            if(!err){
+                res.render("user/list",{
+                    list: doc
+                });
+            }else{
+                console.log('Error in user list:'+err);
+            }
+        })
+   
 }else{
     return res.redirect('/');
 }
