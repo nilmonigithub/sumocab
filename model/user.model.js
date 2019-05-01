@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var mongoosePaginate = require('mongoose-paginate');
 var bcrypt = require('bcryptjs');
 var SALT_WORK_FACTOR = 10;
 
@@ -88,5 +89,5 @@ userSchema.pre('save', function(next) {
 
 
 
-
+userSchema.plugin(mongoosePaginate);
 mongoose.model('user', userSchema);

@@ -162,7 +162,7 @@ router.get('/editcustomer/:id', (req, res) => {
     User.findById(req.params.id, (err, doc) => {
         if (!err) {
             res.render("customer/addOredit", {
-                viewTitle: "Update User",
+                viewTitle: "Update Customer",
                 customer: doc
             });
         }

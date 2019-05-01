@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Bcrypt = require('bcryptjs');
 var SALT_WORK_FACTOR = 10;
 const User = mongoose.model('user');
+var mongoosePaginate = require('mongoose-paginate');
 
 router.get('/',(req,res)=>{
     console.log('jjjjjjjjjj');
@@ -81,19 +82,21 @@ function updateRecord(req, res) {
 
 
 
-router.get('/list',(req,res)=>{
-    console.log('hhhhhh');
-    console.log(req.session);
-    if(req.session && req.session.user){ 
-    User.find((err,docs)=>{
-        if(!err){
-            res.render("user/list",{
-                list: docs
-            });
-        }else{
-            console.log('Error in user list:'+err);
-        }
-    });
+router.get('/list',(req,res,next)=>{
+    // console.log('hhhhhh');
+    // console.log(req.session);
+    if(req.session && req.session.user){
+        console.log("dddddddddddddd")     
+        User.find((err,doc)=>{
+            if(!err){
+                res.render("user/list",{
+                    list: doc
+                });
+            }else{
+                console.log('Error in user list:'+err);
+            }
+        })
+   
 }else{
     return res.redirect('/');
 }
@@ -128,25 +131,16 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.get('/:page', function(req, res, next) {
-    var perPage = 9
-    var page = req.params.page || 1
-
-    User
-        .find({})
-        .skip((perPage * page) - perPage)
-        .limit(perPage)
-        .exec(function(err, users) {
-            User.count().exec(function(err, count) {
-                if (err) return next(err)
-                res.render('/list', {
-                    users: users,
-                    current: page,
-                    pages: Math.ceil(count / perPage)
-                })
-            })
-        })
-})
+// router.get('/page/:page', (req, res) => {
+//     // var pagina = req.params.page;
+//     User.paginate({}, {page: 5, limit: 5}).then((docs) => {
+//     //console.log(docs)
+//     //res.render('list.ejs', docs)
+//     return res.send(docs);
+//    }, (e) => {
+//    res.status(404)
+//     });
+//    });
 
 
 router.get('/delete/:id', (req, res) => {

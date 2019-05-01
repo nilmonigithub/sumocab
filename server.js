@@ -16,7 +16,12 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 var app = express();
-
+var mongoosePaginate = require('mongoose-paginate');
+ 
+mongoosePaginate.paginate.options = { 
+    lean:  true,
+    limit: 20
+};
 
 
 
@@ -28,6 +33,7 @@ const vehicleController = require('./controller/vehicleController');
 const tripController = require('./controller/tripController');
 const customerController = require('./controller/customerController');
 const ownerController = require('./controller/ownerController');
+
 const vehicle_documentController = require('./controller/vehicle_documentController');
 const coupon_discountController = require('./controller/coupon_discountController');
 const paymentController = require('./controller/paymentController');
@@ -134,7 +140,8 @@ app.use('/driver',driverController);
 app.use('/vehicle',vehicleController);
 app.use('/trip',tripController);
 app.use('/customer',customerController);
-app.use('/owner',ownerController);
+app.use('/owner',ownerController)
+
 app.use('/vehicle_document',vehicle_documentController);
 app.use('/coupon_discount',coupon_discountController);
 app.use('/payment',paymentController);

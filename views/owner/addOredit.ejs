@@ -13,6 +13,7 @@
 
         <form  action="/owner/addowner" method="POST" enctype="multipart/form-data" autocomplete="off">
             <input type="hidden" name="_id" value="<%= owner._id %>" >
+            <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/owner/list"><i class="fa fa-list-alt"></i> View All</a>
             <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
 
             
@@ -106,7 +107,7 @@
              
                     <div class="col-md-12">
                             <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
-                            <a class="btn btn-secondary" href="/owner/list"><i class="fa fa-list-alt"></i> View All</a>
+                            
                         </div>
                     </div>
                 </div>

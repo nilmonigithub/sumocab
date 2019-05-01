@@ -10,8 +10,13 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="well well-sm">
 
+<<<<<<< HEAD
         <form  action="/vehicle_document/addvehicledoc" novalidate method="POST" enctype="multipart/form-data" autocomplete="off">
+=======
+        <form  action="/vehicle_document/addvehicledoc" enctype="multipart/form-data" method="POST" autocomplete="off">
+>>>>>>> e5649f94f6dd8161445a42fb3f83109988e8a852
             <input type="hidden" name="_id" value="<%= vehicledoc._id %>" >
+            <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/vehicle_document/list"><i class="fa fa-list-alt"></i> View All</a>
             <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
 
             
@@ -32,6 +37,7 @@
                     
 
 
+<<<<<<< HEAD
                     <div class="col-md-6">
                         <div class="form-group field">
                             <label>Image*</label>
@@ -41,6 +47,9 @@
                             <img id="imagePreview" <% if(vehicledoc){ if(vehicledoc.image==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= vehicledoc.image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 150px; height: 150px;" />
                         </div>
                     </div>
+=======
+ 
+>>>>>>> e5649f94f6dd8161445a42fb3f83109988e8a852
                         
                     <div class="col-md-6">
                         <div class="form-group ">
@@ -70,12 +79,24 @@
                             </div>
                         </div>
                     
-                    
+                    <div class="col-md-12">
+                            <div class="form-group ">              
+                                        <div  class="file-tab">
+                                        <label>Image</label>
+                                        <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="loadFile()"  required="required" value="<%= vehicledoc ? vehicledoc.image : '' %>" >                    
+                                        <img id="output"<% if(vehicledoc){ if(vehicledoc.image==null)
+                                            {%> src="<%= baseurl %>/myimages/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= vehicledoc.image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg" <% } %> style=" max-width: 100px; max-height: 100px;/>
+                                    
+                                        </div>
+                                </div>
+                    </div>
+                
                 
              
                     <div class="col-md-12">
+                        
                             <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
-                            <a class="btn btn-secondary" href="/vehicle_document/list"><i class="fa fa-list-alt"></i> View All</a>
+                          
                         </div>
                     </div>
                 </div>
@@ -103,12 +124,11 @@
   }
     </script>
 
-<script type="text/javascript">
-    function PreviewImage() {
-  
-      var fileInput = document.getElementById('image');
-        var filePath = fileInput.value;
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+<script>
+        function loadFile()  {
+          var fileInput = document.getElementById('image');
+          var filePath = fileInput.value;
+          var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
         if(!allowedExtensions.exec(filePath)){
             alert('Please upload file having extensions .jpeg/.jpg/.png  only.');
             fileInput.value = '';
@@ -116,19 +136,14 @@
         }else{
             //Image preview
             if (fileInput.files && fileInput.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
+              var reader = new FileReader();             
+                reader.onload = function(){
+                  var output = document.getElementById('output');
+                  output.src = reader.result;
                 };
-                reader.readAsDataURL(fileInput.files[0]);
-            }
+                reader.readAsDataURL(event.target.files[0]);
+              
+              };
         }
-  
-  
-    var oFReader = new FileReader(); oFReader.readAsDataURL(document.getElementById("image").files[0]);
-    oFReader.onload = function (oFREvent) {
-    document.getElementById("imagePreview").src = oFREvent.target.result;
-    };
-  };
-
-</script>
+        }
+            </script>

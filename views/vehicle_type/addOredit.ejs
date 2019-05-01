@@ -13,8 +13,13 @@
 
             <form action="/vehicle_type/addvehicle_type" novalidate method="POST" enctype="multipart/form-data" autocomplete="off">
                 <input type="hidden" name="_id" value="<%= vehicle_type ? vehicle_type._id : '' %>">
+<<<<<<< HEAD
                 <!-- <b><%= viewTitle %></b><br><hr> -->
                 <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
+=======
+                <a style="float:right; margin-top: 20px;" class="btn btn-secondary" href="/vehicle_type/list"><i class="fa fa-list-alt"></i> View All</a>
+                <h2 style="display: inline-block;"><b><%= viewTitle %></h2> <hr  style="color:cornflowerblue; border:solid" >
+>>>>>>> e5649f94f6dd8161445a42fb3f83109988e8a852
 
             
                 <div   class="row">
@@ -53,7 +58,7 @@
                         </div>
                     
                         <div class=" col-md-4">
-                            <img id="imagePreview" <% if(vehicle_type){ if(vehicle_type.icon==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= vehicle_type.icon %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 150px; height: 150px;" />
+                            <img id="imagePreview" <% if(vehicle_type){ if(vehicle_type.icon==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= vehicle_type.icon %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 100px; height: 100px;" />
                         </div>  
                     </div>
 
@@ -81,7 +86,7 @@
                     
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-database"></i> Submit</button>
-                        <a class="btn btn-secondary" href="/vehicle_type/list"><i class="fa fa-list-alt"></i> View All</a>
+                        
                     </div>
                 </div>
             </div>
@@ -89,9 +94,14 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 </div>
 <%- include ../partials/footer.html %>
 <%- include ../formvalidator/formvalidator.html %>
+=======
+
+<%- include ../partials/footer.html %>
+>>>>>>> e5649f94f6dd8161445a42fb3f83109988e8a852
 
 <script type="text/javascript">
     function PreviewImage() {
