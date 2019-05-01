@@ -11,17 +11,17 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="well well-sm">
 
-        <form  action="/trip" method="POST" autocomplete="off">
+        <form  action="/trip" method="POST" novalidate autocomplete="off">
             <input type="hidden" name="_id" value="<%= trip._id %>">
             <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
 
             
                 <div   class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Customer Id</label>
+                        <div class="form-group field">
+                                <label>Customer Id*</label>
                                 <!-- <input type="text" class="form-control" name="customer_id" value="<%= trip ? trip.customer_id : '' %>"> -->
-                                <select name="customer_id" class="form-control">
+                                <select name="customer_id" class="form-control" required="required">
                                         <option value="" selected disabled>-- Select --</option>
                                         <% customer_list.forEach(function(clist){%>
                                         <option <% if(trip.customer_id==clist._id){ %>selected="selected" <% }%> value="<%=clist._id%>"><%=clist.username%></option>
@@ -31,9 +31,9 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>From Name</label>
-                                <input type="text" class="form-control" name="from_name" value="<%= trip ? trip.from_name : '' %>">
+                        <div class="form-group field">
+                                <label>From Name*</label>
+                                <input type="text" class="form-control" name="from_name" value="<%= trip ? trip.from_name : '' %>" required="required">
                         </div>
                     </div>
                         
@@ -216,4 +216,5 @@
 </div>
 
     <%- include ../partials/footer.html %>
+    <%- include ../formvalidator/formvalidator.html %>
 
