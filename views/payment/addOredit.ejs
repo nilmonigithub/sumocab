@@ -1,9 +1,5 @@
 <%- include ../partials/header.html %>
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
 <div class="driveradd">
 <div class="container"  >
@@ -14,7 +10,7 @@
         
             <form action="/payment/addpayment" method="POST"  autocomplete="off">
                 <input type="hidden" name="_id" value="<%= payment._id %>" >
-                <a style="float:right; margin-top: 20px;" class="btn btn-secondary" href="/payment/list"><i class="fa fa-list-alt"></i> View All</a>
+                <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/payment/list"><i class="fa fa-list-alt"></i> View All</a>
                 <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
 
             

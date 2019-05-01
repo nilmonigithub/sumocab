@@ -14,7 +14,10 @@
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     
-  
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
    
 </head>
 <body style="color:black">
@@ -74,13 +77,27 @@
                 <a class="nav-link" href="/payment/list">Payment Getway</a>
               </li>
         </ul>
-        <ul  class="navbar-nav ml-md-auto d-md-flex" style="float:right;" >
+        <!-- <ul  class="navbar-nav ml-md-auto d-md-flex" style="float:right;" >
           
            <li class="dropdown" >
               <a href="#"  data-toggle="dropdown"><img src="<%= baseurl %>/images/RAS.png" height="30px" alt="user">
               <a href="/logout"><span  class="fa fa-sign-out" style="font-size:16px"></span> Logout</a>             
           </li>
-        </ul>
+        </ul> -->
+        
+        <ul  class="navbar-nav ml-md-auto d-md-flex" style="float:right;">        
+            <div class="dropdown" >
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  <img src="<%= baseurl %>/images/RAS.png" height="30px" alt="user">
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="/logout"><span  class="fa fa-sign-out" style="font-size:10px"></span>Logout</a>
+                
+              </div>
+            </div>
+          </ul> 
+
+
       </div>
     </nav>
   
