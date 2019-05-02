@@ -25,14 +25,15 @@
                     <tr>
                         <th>SL NO</th>
                         <th>Name</th>
+                        <th>User Name</th>
                         <th>Mobile</th>
                         <th>Email</th>
                         <th>Image</th>            
-                        <th>Date of Birth</th>
+                        <!-- <th>Date of Birth</th>
                         <th>Date of Joining</th>
                         <th>adhaar_card</th>
                         <th>permanent_address</th>
-                        <th>present_address</th>
+                        <th>present_address</th> -->
                         <th>Action</th>
                         
                     </tr>
@@ -45,15 +46,16 @@
                      <tr>
                           <td> <%= i %></td>
                           <td><%= val.fullName %></td>
+                          <td><%= val.username %></td>
                           <td><%= val.user_mobile %></td> 
                           <td><%= val.email %></td>
                           <td> <img <% if(val.user_image && val.user_image!=''){%>src="<%= baseurl %>/uploads/<%= val.user_image %>" <%} else{%> src="<%= baseurl %>/images/no_image.jpg"<%}%> height="50px" alt="">
                           </td>
-                         <td><%= val.dob %></td> 
+                         <!-- <td><%= val.dob %></td> 
                          <td><%= val.doj %></td>
                          <td><%= val.adhaar_card %></td>
                          <td><%= val.permanent_address %></td>
-                         <td><%= val.present_address %></td> 
+                         <td><%= val.present_address %></td>  -->
                       
                          <td>
                              <a href="/owner/editowner/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
@@ -75,72 +77,5 @@
     $(document).ready(function(){
         $('#myTable').dataTable();
     });
-    </script>
+</script>
 
-<style>
-  .pannerl-sec
- { border-bottom: 1px solid #ddd;} 
-
-.panel-table .panel-body{
-  padding:0;
-}
-
-.table-list {width: 95%;
-    margin: auto; }
-
-
-.panel-table .panel-body{
-  padding:0;
-}
-
-.panel-table .panel-body .table-bordered{
-  border-style: none;
-  margin:0;
-}
-
-.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
-    text-align:center;
-    width: 100px;
-}
-
-.panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
-.panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
-  border-right: 0px;
-}
-
-.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
-.panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
-  border-left: 0px;
-}
-
-.panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td{
-  border-bottom: 0px;
-}
-
-.panel-table .panel-body .table-bordered > thead > tr:first-of-type > th{
-  border-top: 1px solid #111111;
-}
-
-.panel-table .panel-footer .pagination{
-  margin:0; 
-}
-
-/*
-used to vertically center elements, may need modification if you're not using default sizes.
-*/
-.panel-table .panel-footer .col{
- line-height: 34px;
- height: 34px;
-}
-
-.panel-table .panel-heading .col h3{
- line-height: 30px;
- height: 30px;
-}
-
-.panel-table .panel-body .table-bordered > tbody > tr > td{
-  line-height: 34px;
-}
-
-
-    </style>

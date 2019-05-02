@@ -8,7 +8,7 @@
             <div class="well well-sm">
 
         
-            <form action="/payment/addpayment" method="POST"  autocomplete="off">
+            <form action="/payment/addpayment" method="POST" autocomplete="off">
                 <input type="hidden" name="_id" value="<%= payment._id %>" >
                 <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/payment/list"><i class="fa fa-list-alt"></i> View All</a>
                 <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
@@ -17,9 +17,9 @@
                 <div   class="row">
                     
                     <div class="col-md-6 ">
-                            <div class="form-group ">
+                            <div class="form-group">
                             <label>Trip Id</label>
-                            <select name="trip_id" class="form-control" >
+                            <select name="trip_id" class="form-control">
                                 <option value="" selected disabled>-- Select --</option>
                                 <% trip.forEach(function(trp){%>
                                 <option <% if(payment.trip_id==trp._id){ %>selected="selected" <% }%> value="<%=trp._id%>"><%=trp.to_name%></option>

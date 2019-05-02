@@ -54,62 +54,57 @@
 
                     
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                <label>Date of Birth</label>
-                                <input type="date" class="form-control" name="dob"  value="<%= driver ? driver.dob : '' %>">                      
-                            </div>
+                        <div class="form-group  ">
+                            <label>Date of Birth</label>
+                            <input type="date" class="form-control" name="dob"  value="<%= driver ? driver.dob : '' %>">                      
                         </div>
+                    </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                <label>Date of Joining</label>
-                                <input type="date" class="form-control" name="doj" value="<%= driver ? driver.doj : '' %>">                    
-                            </div>
+                        <div class="form-group  ">
+                            <label>Date of Joining</label>
+                            <input type="date" class="form-control" name="doj" value="<%= driver ? driver.doj : '' %>">                    
                         </div>
+                    </div>
 
                         
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                <label>Adhaar Card</label>
-                                <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= driver ? driver.adhaar_card : '' %>">                   
-                            </div>
+                        <div class="form-group  ">
+                            <label>Adhaar Card</label>
+                            <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= driver ? driver.adhaar_card : '' %>">                   
                         </div>
+                    </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                <label>Username</label>
-                                <input type="text" class="form-control" name="username"  value="<%= driver ? driver.username : '' %>">
-                   
-                            </div>
+                        <div class="form-group  ">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name="username"  value="<%= driver ? driver.username : '' %>">
+                
                         </div>
+                    </div>
 
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Permanent Address</label>
-                                <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control " ><%= driver ? driver.permanent_address : '' %></textarea>
-                            </div>
+                        <div class="form-group">
+                            <label>Permanent Address</label>
+                            <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control " ><%= driver ? driver.permanent_address : '' %></textarea>
                         </div>
+                    </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                <label>Present Address</label>
-                               
-                                <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control"  ><%= driver ? driver.present_address : '' %></textarea>
-                                <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"><p><h6>Same as Permanent Address</h6></p>
-                            </div>
-                                   
-                        </div>
+                        <div class="form-group  ">
+                            <label>Present Address</label>
+                            <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control"  ><%= driver ? driver.present_address : '' %></textarea>
+                            <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"><p><h6>Same as Permanent Address</h6></p>
+                        </div>  
+                    </div>
 
-                    <div class="col-md-12">
-                            <div class="form-group ">              
-                                        <div  class="file-tab">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control" id="user_image" name="user_image" accept="image/*" onchange="loadFile()"  required="required" value="<%= driver ? driver.user_image : '' %>" >                    
-                                        <img id="output"<% if(driver){ if(driver.user_image==null)
-                                            {%> src="<%= baseurl %>/myimages/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= driver.user_image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg" <% } %> style=" max-width: 100px; max-height: 100px;/>
-                                    
-                                        </div>
-                                </div>
+                    <div class="col-md-6">
+                        <div class="form-group field"> 
+                            <label>Image*</label>
+                            <input type="file" class="form-control" id="user_image" name="user_image" accept="image/*" onchange="loadFile()" value="<%= driver ? driver.user_image : '' %>" <% if(driver && driver.user_image && driver.user_image!=''){  }else {%> required="required"<% }%> >
+                        </div>
+                        <img id="output"<% if(driver){ if(driver.user_image==null)
+                            {%> src="<%= baseurl %>/myimages/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= driver.user_image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg" <% } %> style=" max-width: 100px; max-height: 100px;/>
                     </div>                        
                                     
                    

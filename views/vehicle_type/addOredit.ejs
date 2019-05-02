@@ -22,30 +22,30 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group field">
                             <label>Description</label>
                             <textarea rows="6" cols="6" type="text" id="description" name="description"   class="form-control col-md-12 col-xs-12" ><%= vehicle_type ? vehicle_type.description : '' %></textarea>
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Minimum Fare</label>
-                            <input type="text" class="form-control" name="min_fare"  value="<%= vehicle_type ? vehicle_type.min_fare : '' %>">
+                        <div class="form-group field">
+                            <label>Minimum Fare*</label>
+                            <input type="text" class="form-control" name="min_fare"  value="<%= vehicle_type ? vehicle_type.min_fare : '' %>" required="required" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Minimum Distance</label>
-                            <input type="text" class="form-control" name="min_distance"  value="<%= vehicle_type ? vehicle_type.min_distance : '' %>">
+                        <div class="form-group field">
+                            <label>Minimum Distance*</label>
+                            <input type="text" class="form-control" name="min_distance" required="required" value="<%= vehicle_type ? vehicle_type.min_distance : '' %>">
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
-                            <label>Icon</label>
-                            <input type="file" class="form-control" name="icon" id="icon" value="<%= vehicle_type ? vehicle_type.icon : '' %>" onchange="PreviewImage();">
+                        <div class="form-group field">
+                            <label>Icon*</label>
+                            <input type="file" class="form-control" name="icon" id="icon" value="<%= vehicle_type ? vehicle_type.icon : '' %>" onchange="PreviewImage();" <% if(vehicle_type && vehicle_type.icon && vehicle_type.icon!=''){  }else {%> required="required"<% }%>>
                         </div>
                     
                         <div class=" col-md-4">
@@ -63,14 +63,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Fare Per Hour</label>
-                            <input type="text" class="form-control" name="fare_per_hr" value="<%= vehicle_type ? vehicle_type.fare_per_hr : '' %>">
+                            <input type="text" class="form-control" name="fare_per_hr" value="<%= vehicle_type ? vehicle_type.fare_per_hr : '' %>" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Fare Per Km</label>
-                            <input type="text" class="form-control" name="fare_per_km"  value="<%= vehicle_type ? vehicle_type.fare_per_km : '' %>">
+                            <input type="text" class="form-control" name="fare_per_km"  value="<%= vehicle_type ? vehicle_type.fare_per_km : '' %>" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                         </div>
                     </div>
                     
@@ -125,6 +125,7 @@
   };
 
   </script>
+
 
 
 

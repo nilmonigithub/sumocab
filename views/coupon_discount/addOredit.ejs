@@ -8,30 +8,30 @@
             <div class="well well-sm">
 
         
-                    <form action="/coupon_discount" method="POST" autocomplete="off">
+                    <form action="/coupon_discount" method="POST" novalidate autocomplete="off">
                         <input type="hidden" name="_id" value="<%= couponDis._id %>">
                         <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/coupon_discount/list"><i class="fa fa-list-alt"></i> View All</a>
                         <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
             
                 <div   class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Coupon Name</label>
-                                <input type="text" class="form-control" name="coupon_name" value="<%= couponDis ? couponDis.coupon_name : '' %>">
+                        <div class="form-group field">
+                                <label>Coupon Name*</label>
+                                <input type="text" class="form-control" name="coupon_name" value="<%= couponDis ? couponDis.coupon_name : '' %>" required="required">
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Coupon Code</label>
-                                <input type="text" class="form-control" name="coupon_code"  value="<%= couponDis ? couponDis.coupon_code : '' %>">
+                            <div class="form-group field">
+                                <label>Coupon Code*</label>
+                                <input type="text" class="form-control" name="coupon_code"  value="<%= couponDis ? couponDis.coupon_code : '' %>" required="required">
                             </div>
                         </div>
                             
                         <div class="col-md-6">
-                            <div class="form-group ">
-                                <label>Coupon Amount</label>
-                                <input type="text" class="form-control" name="coupon_amount"  value="<%= couponDis ? couponDis.coupon_amount : '' %>">                       
+                            <div class="form-group field">
+                                <label>Coupon Amount*</label>
+                                <input type="text" class="form-control" name="coupon_amount"  value="<%= couponDis ? couponDis.coupon_amount : '' %>" required="required" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">                       
                             </div>
                         </div>
 
@@ -116,6 +116,7 @@
 
 <%- include ../partials/footer.html %>
 <%- include ../jqueryDatePicker/jquerydatepicker.html %>
+<%- include ../formvalidator/formvalidator.html %>
 <script>
 $("#coupon_start_date","#coupon_end_date").keydown(function(event) {
     //alert(1)
