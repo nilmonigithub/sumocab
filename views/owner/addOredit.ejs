@@ -7,7 +7,7 @@
         <div class="col-md-8 col-md-offset-2 ">
             <div class="well well-sm">
 
-        <form  action="/owner/addowner" method="POST" enctype="multipart/form-data" autocomplete="off">
+        <form  action="/owner/addowner" method="POST" novalidate enctype="multipart/form-data" autocomplete="off">
             <input type="hidden" name="_id" value="<%= owner._id %>" >
             <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/owner/list"><i class="fa fa-list-alt"></i> View All</a>
             <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
@@ -15,31 +15,38 @@
             
                 <div   class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" name="fullName" value="<%= owner ? owner.fullName : '' %>">
+                        <div class="form-group field">
+                            <label>Name*</label>
+                            <input type="text" class="form-control" name="fullName" value="<%= owner ? owner.fullName : '' %>" required="required">
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Mobile</label>
-                                <input type="text" class="form-control" name="user_mobile"  value="<%= owner ? owner.user_mobile : '' %>">
+                        <div class="form-group field">
+                            <label>Username*</label>
+                            <input type="text" class="form-control" name="username" required="required" value="<%= owner ? owner.username : '' %>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group field">
+                            <label>Mobile*</label>
+                            <input type="text" class="form-control" name="user_mobile"  value="<%= owner ? owner.user_mobile : '' %>" required="required" data-validate-length-range="10,10" maxlength="10" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                                  
                         </div>
                     </div>
                         
                     <div class="col-md-6">
-                        <div class="form-group ">
-                                <label>Email</label>
-                                <input type="text" class="form-control" name="email"  value="<%= owner ? owner.email : '' %>">                        
+                        <div class="form-group field">
+                            <label>Email*</label>
+                            <input type="text" class="form-control" name="email"  value="<%= owner ? owner.email : '' %>" required="required" onkeyup="this.value=this.value.replace(/[ ]/g,'');">                        
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
-                                <label>Image</label>
-                                <input type="file" class="form-control" name="user_image" id="user_image" value="<%= owner ? owner.user_image : '' %>" onchange="PreviewImage();">
+                        <div class="form-group field ">
+                            <label>Image*</label>
+                            <input type="file" class="form-control" name="user_image" id="user_image" value="<%= owner ? owner.user_image : '' %>" onchange="PreviewImage();" <% if(owner && owner.user_image && owner.user_image!=''){  }else {%> required="required"<% }%>>
                         </div>
                     
                         <div class=" col-md-4">
@@ -50,53 +57,49 @@
 
                     <div class="col-md-6">
                         <div class="form-group  ">
-                                <label>Date of Birth</label>
-                                <input type="date" class="form-control" name="dob"  value="<%= owner ? owner.dob : '' %>">                            
+                            <label>Date of Birth</label>
+                            <input type="date" class="form-control" name="dob"  value="<%= owner ? owner.dob : '' %>">                            
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Date of Joining</label>
-                                    <input type="date" class="form-control" name="doj"   value="<%= owner ? owner.doj : '' %>">                           
-                            </div>
+                        <div class="form-group  ">
+                            <label>Date of Joining</label>
+                            <input type="date" class="form-control" name="doj"   value="<%= owner ? owner.doj : '' %>">                           
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Adhaar Card</label>
-                                    <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= owner ? owner.adhaar_card : '' %>">                           
-                            </div>
+                        <div class="form-group  ">
+                            <label>Adhaar Card</label>
+                            <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= owner ? owner.adhaar_card : '' %>">                           
+                        </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Username</label>
-                                    <input type="text" class="form-control" name="username"  value="<%= owner ? owner.username : '' %>">
-                            </div>
+                        <div class="form-group  ">
+                            <label>Password</label>
+                                <input type="password" class="form-control" name="password"  value="">
+                        </div>
                     </div>
-
-                    <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Password</label>
-                                     <input type="password" class="form-control" name="password"  value="">
-                            </div>
-                    </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Permanent Address</label>
-                            <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control" ><%= owner ? owner.permanent_address : '' %></textarea>
-                    </div>
-                </div>
                     
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Present Address</label>
-                            <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control" ><%= owner ? owner.present_address : '' %></textarea>
-                            <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"<p> Present Address is same as Permanent Address </p>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Present Address</label>
+                                <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control" ><%= owner ? owner.present_address : '' %></textarea>
+                               
+                        </div>
                     </div>
-                </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Permanent Address</label>
+                                <textarea rows="6" cols="6" type="text" id="permanent_address" name="permanent_address"   class="form-control" ><%= owner ? owner.permanent_address : '' %></textarea>
+                                <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"<p> Permanent Address is same as Present Address </p>
+                        </div>
+                    </div>
+                    
+                
                     
                     
                 
@@ -114,6 +117,7 @@
     </div>
 </div>
     <%- include ../partials/footer.html %>
+    <%- include ../formvalidator/formvalidator.html %>
 
 <script type="text/javascript">
     function validatePassword()
@@ -154,7 +158,7 @@
 <script>
 function filladdress(f) {
   if(f.checkadd.checked == true) {
-    f.present_address.value = f.permanent_address.value;
+    f.permanent_address.value = f.present_address.value;
    
   }
 }

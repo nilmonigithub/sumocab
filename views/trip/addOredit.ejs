@@ -84,9 +84,9 @@
                     </div>
 
                     <div class=" col-md-6 ">
-                        <div class="form-group">
-                            <label>Trip Type</label>          
-                            <select name="trip_type"  class="form-control"> 
+                        <div class="form-group field">
+                            <label>Trip Type*</label>          
+                            <select name="trip_type"  class="form-control" required="required"> 
                 
                                 <option value="" selected disabled>--Select Type--</option>
                                 <option value="One" <% if(trip.trip_type=='One'){%> selected="selected" <%}  %> >One</option>
@@ -97,21 +97,21 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
-                                <label>Customer Pickup Time</label>
-                                <input type="time" class="form-control" name="customer_pickup_time"   value="<%= trip ? trip.customer_pickup_time : '' %>">                        
+                        <div class="form-group field ">
+                                <label>Customer Pickup Time*</label>
+                                <input type="time" class="form-control" name="customer_pickup_time"   value="<%= trip ? trip.customer_pickup_time : '' %>" required="required">                        
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
-                                <label>Customer Drop Time</label>
-                                <input type="time" class="form-control" name="customer_drop_time"   value="<%= trip ? trip.customer_drop_time : '' %>">                        
+                        <div class="form-group field ">
+                                <label>Customer Drop Time*</label>
+                                <input type="time" class="form-control" name="customer_drop_time"   value="<%= trip ? trip.customer_drop_time : '' %>" required="required">                        
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="form-group field ">
                                 <label>Actual Pickup Time</label>
                                 <input type="time" class="form-control" name="actual_pickup_time"   value="<%= trip ? trip.actual_pickup_time : '' %>">                        
                         </div>
@@ -120,17 +120,17 @@
                   
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="form-group field ">
                                 <label>Actual Drop Time</label>
                                 <input type="time" class="form-control" name="actual_drop_time"    value="<%= trip ? trip.actual_drop_time : '' %>">                      
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Vehicle Id</label>
+                            <div class="form-group field ">
+                                    <label>Vehicle Name*</label>
                                     <!-- <input type="text" class="form-control" name="vehicle_id"   value="<%= trip ? trip.vehicle_id : '' %>">                       -->
-                                    <select name="vehicle_id" class="form-control">
+                                    <select name="vehicle_id" class="form-control" required="required">
                                         <option value="" selected disabled>-- Select --</option>
                                         <% vehicle_list.forEach(function(vlist){%>
                                         <option <% if(trip.vehicle_id==vlist._id){ %>selected="selected" <% }%> value="<%=vlist._id%>"><%=vlist.model_name%></option>
@@ -140,10 +140,10 @@
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Driver Id</label>
+                            <div class="form-group field ">
+                                    <label>Driver Name*</label>
                                     <!-- <input type="text" class="form-control" name="driver_id"   value="<%= trip ? trip.driver_id : '' %>">                      -->
-                                    <select name="driver_id" class="form-control">
+                                    <select name="driver_id" class="form-control" required="required">
                                         <option value="" selected disabled>-- Select --</option>
                                         <% driver_list.forEach(function(dlist){%>
                                         <option <% if(trip.driver_id==dlist._id){ %>selected="selected" <% }%> value="<%=dlist._id%>"><%=dlist.username%></option>
@@ -153,14 +153,14 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="form-group field ">
                                 <label>Estimated Distance</label>
                                 <input type="text" class="form-control" name="estimated_distance"   value="<%= trip ? trip.estimated_distance : '' %>">                    
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="form-group field ">
                                 <label>Actual Distance</label>
                                 <input type="text" class="form-control" name="actual_distance"   value="<%= trip ? trip.actual_distance : '' %>">                   
                         </div>
@@ -168,30 +168,30 @@
 
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="form-group field ">
                                 <label>Estimated Time</label>
                                 <input type="time" class="form-control" name="estimated_time"   value="<%= trip ? trip.estimated_time : '' %>">                   
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="form-group field ">
                                 <label>Actual Time</label>
                                 <input type="time" class="form-control" name="actual_time"   value="<%= trip ? trip.actual_time : '' %>">                  
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
+                        <div class="form-group field ">
                                 <label>Estimated Price</label>
                                 <input type="text" class="form-control" name="estimated_price"  value="<%= trip ? trip.estimated_price : '' %>">                  
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
-                                <label>Actual Price</label>
-                                <input type="text" class="form-control" name="actual_price"  value="<%= trip ? trip.actual_price : '' %>">                  
+                        <div class="form-group field ">
+                                <label>Actual Price*</label>
+                                <input type="text" class="form-control" name="actual_price"  value="<%= trip ? trip.actual_price : '' %>" required="required">                  
                         </div>
                     </div>
                     

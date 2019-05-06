@@ -7,7 +7,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="well well-sm">
 
-        <form  action="/customer/addcustomer" method="POST" enctype="multipart/form-data" autocomplete="off">
+        <form  action="/customer/addcustomer" method="POST" novalidate enctype="multipart/form-data" autocomplete="off">
             <input type="hidden" name="_id" value="<%= customer._id %>" >
             <a style="float:right; margin-top: 20px;" class="btn btn-secondary" href="/customer/list"><i class="fa fa-list-alt"></i> View All</a>
             <h2><b><%= viewTitle %></h2><br><hr style="color:cornflowerblue; border:solid">
@@ -15,30 +15,37 @@
             
                 <div   class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" name="fullName" value="<%= customer ? customer.fullName : '' %>">
+                        <div class="form-group field">
+                            <label>Name*</label>
+                            <input type="text" class="form-control" name="fullName" value="<%= customer ? customer.fullName : '' %>" required="required">
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Mobile</label>
-                                <input type="text" class="form-control" name="user_mobile"  value="<%= customer ? customer.user_mobile : '' %>"> 
+                        <div class="form-group field">
+                            <label>Username*</label>
+                            <input type="text" class="form-control" name="username" required="required" value="<%= customer ? customer.username : '' %>">                         
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group field">
+                            <label>Mobile*</label>
+                            <input type="text" class="form-control" name="user_mobile"  value="<%= customer ? customer.user_mobile : '' %>" required="required" data-validate-length-range="10,10" maxlength="10" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"> 
                         </div>
                     </div>
                         
                     <div class="col-md-6">
-                        <div class="form-group ">
-                                <label>Email</label>
-                                <input type="text" class="form-control" name="email" value="<%= customer ? customer.email : '' %>">                       
+                        <div class="form-group field">
+                            <label>Email*</label>
+                            <input type="email" class="form-control" name="email" value="<%= customer ? customer.email : '' %>" required="required" onkeyup="this.value=this.value.replace(/[ ]/g,'');">                       
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
-                            <label>Image</label>
-                            <input type="file" class="form-control" name="user_image" id="user_image" value="<%= customer ? customer.user_image : '' %>" onchange="PreviewImage();">
+                        <div class="form-group field ">
+                            <label>Image*</label>
+                            <input type="file" class="form-control" name="user_image" id="user_image" value="<%= customer ? customer.user_image : '' %>" onchange="PreviewImage();" <% if(customer && customer.user_image && customer.user_image!=''){  }else {%> required="required"<% }%>>
                         </div>
                         <div class=" col-md-4">
                             <img id="imagePreview" <% if(customer){ if(customer.user_image==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= customer.user_image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 150px; height: 150px;" />
@@ -47,31 +54,26 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
-                                <label>Date of Birth</label>
-                                <input type="date" class="form-control" name="dob"   value="<%= customer ? customer.dob : '' %>">                          
+                        <div class="form-group field">
+                            <label>Date of Birth</label>
+                            <input type="date" class="form-control" name="dob"   value="<%= customer ? customer.dob : '' %>">                          
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>City</label>
-                                    <input type="text" class="form-control" name="city"   value="<%= customer ? customer.city : '' %>">                        
-                            </div>
+                        <div class="form-group field">
+                            <label>City</label>
+                            <input type="text" class="form-control" name="city"   value="<%= customer ? customer.city : '' %>">                        
+                        </div>
                     </div>
 
-                    <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Username</label>
-                                    <input type="text" class="form-control" name="username"   value="<%= customer ? customer.username : '' %>">                         
-                            </div>
-                    </div>
+                    
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" name="password"  value="">                         
-                            </div>
+                        <div class="form-group field">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password"  value="">                         
+                        </div>
                     </div>
                     
                     
@@ -90,6 +92,7 @@
     </div>
 </div>
     <%- include ../partials/footer.html %>
+    <%- include ../formvalidator/formvalidator.html %>
 
 <script type="text/javascript">
     function validatePassword()

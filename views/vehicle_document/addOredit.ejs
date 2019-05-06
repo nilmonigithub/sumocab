@@ -98,11 +98,12 @@
   }
     </script>
 
-<script>
-        function loadFile()  {
-          var fileInput = document.getElementById('image');
-          var filePath = fileInput.value;
-          var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+<script type="text/javascript">
+    function PreviewImage() {
+  
+      var fileInput = document.getElementById('image');
+        var filePath = fileInput.value;
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
         if(!allowedExtensions.exec(filePath)){
             alert('Please upload file having extensions .jpeg/.jpg/.png  only.');
             fileInput.value = '';
@@ -110,14 +111,19 @@
         }else{
             //Image preview
             if (fileInput.files && fileInput.files[0]) {
-              var reader = new FileReader();             
-                reader.onload = function(){
-                  var output = document.getElementById('output');
-                  output.src = reader.result;
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
                 };
-                reader.readAsDataURL(event.target.files[0]);
-              
-              };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
         }
-        }
-            </script>
+  
+  
+    var oFReader = new FileReader(); oFReader.readAsDataURL(document.getElementById("image").files[0]);
+    oFReader.onload = function (oFREvent) {
+    document.getElementById("imagePreview").src = oFREvent.target.result;
+    };
+  };
+
+  </script>
