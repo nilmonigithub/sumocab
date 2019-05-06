@@ -47,9 +47,10 @@ function insertRecord(req, res) {
        
 
         vehicle.save((err, doc) => {
-        if (!err)
+        if (!err){
+        req.flash('info','Successfully Created');
             res.redirect('vehicle/list');
-        else {
+        }else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("vehicle/addOredit", {
@@ -65,8 +66,10 @@ function insertRecord(req, res) {
 
 function updateRecord(req, res) {
     Vehicle.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('vehicle/list'); }
-        else {
+        if (!err){
+            req.flash('info','Successfully Updated');
+              res.redirect('vehicle/list'); 
+        }else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("vehicle/addOredit", {
@@ -92,7 +95,8 @@ router.get('/list',(req,res)=>{
         if(!err){
             res.render("vehicle/list",{
                 list: docs,
-                owner_list: docs1
+                owner_list: docs1,
+                message: req.flash('info') 
             });
        
         }else{
@@ -140,6 +144,7 @@ router.get('/:id', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     Vehicle.findByIdAndRemove(req.params.id, (err, doc) => {
         if (!err) {
+            req.flash('info','Successfully Deleted');
             res.redirect('/vehicle/list');
         }
         else { console.log('Error in vehicle delete :' + err); }

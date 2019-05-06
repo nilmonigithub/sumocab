@@ -21,7 +21,8 @@ router.get('/list',(req,res)=>{
                         res.render("payment/list",{
                             list: docs,
                             cuponList:doc,
-                            tripList:doc2
+                            tripList:doc2,
+                            message: req.flash('info') 
                         });
                 
                     }else{
@@ -104,6 +105,7 @@ function insertRecord(req, res) {
         payment.save((err, doc) => {
         if (err){console.log(err)}
     else {
+        req.flash('info','Successfully Created');
       res.redirect('list');
     }
     });
@@ -113,6 +115,7 @@ function updateRecord(req, res) {
     Payment.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
         if (err){console.log(err)}
         else {
+            req.flash('info','Successfully Updated');
           res.redirect('list');
         }
     });
@@ -121,6 +124,7 @@ function updateRecord(req, res) {
 router.get('/delete/:id', (req, res) => {
     Payment.findByIdAndRemove(req.params.id, (err, doc) => {
         if (!err) {
+            req.flash('info','Successfully Updated');
             res.redirect('/Payment/list');
         }
         else { console.log('Error in Payment delete :' + err); }

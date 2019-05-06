@@ -90,12 +90,14 @@ router.get('/list',(req,res)=>{
         if(!err){
             res.render("driver/list",{
                 list: docs,
+                message: req.flash('info') 
             });
         }else{
             console.log('Error in user list:'+err);
         }
     });
 }else{
+
     return res.redirect('/');
 }
 });
@@ -165,6 +167,7 @@ function insertRecord(req, res) {
         user.save((err, doc) => {
         if (err){console.log(err)}
     else {
+      req.flash('info','Successfully Created');
       res.redirect('list');
     }
     });
@@ -174,6 +177,7 @@ function updateRecord(req, res) {
     User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
         if (err){console.log(err)}
         else {
+          req.flash('info','Successfully Updated');
           res.redirect('list');
         }
     });
@@ -188,6 +192,7 @@ function updateRecord(req, res) {
 router.get('/delete/:id', (req, res) => {
     User.findByIdAndRemove(req.params.id, (err, doc) => {
         if (!err) {
+            req.flash('info','Successfully Deleted'); 
             res.redirect('/driver/list');
         }
         else { console.log('Error in customer delete :' + err); }

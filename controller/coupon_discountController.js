@@ -46,9 +46,10 @@ function insertRecord(req, res) {
        
 
         couponDis.save((err, doc) => {
-        if (!err)
+        if (!err){
+            req.flash('info','Successfully Created');
             res.redirect('coupon_discount/list');
-        else {
+        }else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("coupon_discount/addOredit", {
@@ -64,8 +65,10 @@ function insertRecord(req, res) {
 
 function updateRecord(req, res) {
     CouponDis.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('coupon_discount/list'); }
-        else {
+        if (!err) {
+            req.flash('info','Successfully Updated');
+             res.redirect('coupon_discount/list');
+        } else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("coupon_discount/addOredit", {
@@ -91,7 +94,7 @@ router.get('/list',(req,res)=>{
         if(!err){
             res.render("coupon_discount/list",{
                 list: docs,
-               
+                message: req.flash('info') 
             });
        
         }else{
@@ -137,6 +140,7 @@ router.get('/:id', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     CouponDis.findByIdAndRemove(req.params.id, (err, doc) => {
         if (!err) {
+            req.flash('info','Successfully Deleted');
             res.redirect('/coupon_discount/list');
         }
         else { console.log('Error in vehicle delete :' + err); }

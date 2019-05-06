@@ -69,7 +69,8 @@ router.get('/list',(req,res)=>{
                 if(!err){
                     res.render("vehicle_document/list",{
                         list: doc,
-                        vehicle: docs
+                        vehicle: docs,
+                        message: req.flash('info') 
                     });
                 }else{
                     console.log('Error in user list:'+err);
@@ -128,6 +129,7 @@ function insertRecord(req, res) {
     vehicledoc.save((err, doc) => {
         if (err){console.log(err)}
     else {
+        req.flash('info','Successfully Created');
       res.redirect('list');
     }
     });
@@ -137,6 +139,7 @@ function updateRecord(req, res) {
     VehicleDoc.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
         if (err){console.log(err)}
         else {
+            req.flash('info','Successfully Updated');
           res.redirect('list');
         }
     });
@@ -151,6 +154,7 @@ function updateRecord(req, res) {
 router.get('/delete/:id', (req, res) => {
     VehicleDoc.findByIdAndRemove(req.params.id, (err, doc) => {
         if (!err) {
+            req.flash('info','Successfully Deleted');
             res.redirect('/vehicle_document/list');
         }
         else { console.log('Error in vehicle document delete :' + err); }

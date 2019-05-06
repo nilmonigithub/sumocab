@@ -76,9 +76,10 @@ function insertRecord(req, res) {
        
 
         trip.save((err, doc) => {
-        if (!err)
+        if (!err){
+            req.flash('info','Successfully Created');
             res.redirect('trip/list');
-        else {
+         } else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("trip/addOredit", {
@@ -94,8 +95,10 @@ function insertRecord(req, res) {
 
 function updateRecord(req, res) {
     Trip.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('trip/list'); }
-        else {
+        if (!err) { 
+            req.flash('info','Successfully Updated');
+            res.redirect('trip/list'); 
+        }else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("trip/addOredit", {
@@ -124,7 +127,8 @@ router.get('/list',(req,res)=>{
                             list: docs,
                             driver_list: docs1,
                             customer_list: docs2,
-                            vehicle_list: docs3
+                            vehicle_list: docs3,
+                            message: req.flash('info') 
                         });
                     }else{
                         console.log('Error in user list:'+err);
@@ -168,6 +172,7 @@ router.get('/:id', (req, res) => {
                             driver_list: docs1,
                             customer_list: docs2,
                             vehicle_list: docs3,
+                            
                         });
                     }
                 });
@@ -179,6 +184,7 @@ router.get('/:id', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     Trip.findByIdAndRemove(req.params.id, (err, doc) => {
         if (!err) {
+            req.flash('info','Successfully Deleted');
             res.redirect('/trip/list');
         }
         else { console.log('Error in trip delete :' + err); }

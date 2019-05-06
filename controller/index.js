@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 var cookieParser = require('cookie-parser');
 var router = express.Router();
+var Bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = mongoose.model('user');
@@ -70,12 +71,13 @@ router.post('/login', function (req, res, next) {
 	console.log(req.body);
 	User.findOne({username:req.body.username,user_type:"admin"},function(err,user){
 		if(user){
-	
-			if(user.password==req.body.hash){
+			user.comparePassword(req.body.password, function(err, isMatch) {
+				if (err) throw err;
+				console.log(req.body.password+':', isMatch); // -> Password123: true
+						
+			if(isMatch) {
 				console.log("Done Login");
-				//req.session= data;
-				// req.sessions.user = data;
-				//req.session=data;
+				
 				req.session.user = user;
 				console.log(req.session);
                 res.redirect('/dashboard');
@@ -83,9 +85,11 @@ router.post('/login', function (req, res, next) {
 			}else{
 				res.send({"Error":"Wrong password!"});
 			}
+		});
 		}else{
 			res.send({"Error":"This Username Is not regestered!"});
 		}
+	  
 	});
 });
 

@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 var favicon 			= require('static-favicon');
 var multer=require('multer');
+var flash = require('connect-flash');
 var ejs = require('ejs')
 var partials 			= require('express-partial');
 const bodyparser = require('body-parser');
@@ -106,7 +107,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
 });
-
+app.use(flash());
 app.use(session({
     secret: 'botnyuserdetails',
     resave: true,

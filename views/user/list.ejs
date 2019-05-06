@@ -1,17 +1,5 @@
 <%- include ../partials/header.html %>
 
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
-
-
-<!------ Include the above in your HEAD tag ---------->
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-
 <div class="container">
     <div class="row">
     
@@ -24,6 +12,8 @@
                   <div class="col col-xs-6">
                     <h3 class="panel-title">User List</h3>
                   </div>
+                 
+                  <div id="flashmessage" ><h4 style="color:cornflowerblue;"><%= message %></h4> </div>
                   <div class="col col-xs-6 text-right">
                   
                     <button><a class="btn btn-sm btn-primary btn-create"  href="/user"></i> Create New</a></button>   
@@ -70,18 +60,7 @@
 
 <%- include ../partials/footer.html %>
 
-<script>
-  $(document).ready(function () {
-  $('#pagination-demo').twbsPagination({
-    totalPages: 10,
-    visiblePages: 5,
-    href: true,
-    onPageClick: function (event, page) {
-      $('#page-content').text('Page ' + page);
-    } 
- });
-});
-  </script>
+
 
 <style>
 

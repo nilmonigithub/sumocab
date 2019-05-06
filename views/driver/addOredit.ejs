@@ -17,22 +17,22 @@
                 <div   class="row">
                     <div class="col-md-6">
                         <div class="form-group field">
-                            <label>Full Name*</label>
-                            <input type="text" class="form-control" name="fullName" value="<%= driver ? driver.fullName : '' %>" required="required">
+                            <label>Full Name <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" name="fullName" onkeypress="return blockother(event)" value="<%= driver ? driver.fullName : '' %>" required="required">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group field">
-                            <label>Mobile*</label>
-                            <input type="text" class="form-control" name="user_mobile"  value="<%= driver ? driver.user_mobile : '' %>" required="required">
+                            <label>Mobile <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control" name="user_mobile"  value="<%= driver ? driver.user_mobile : '' %>" maxlength="10" minlength="10" pattern="^[6-9]\d{9}$" onkeypress="return blockChar(event)" required="required">
                         </div>
                     </div>
                         
                     <div class="col-md-6">
-                        <div class="form-group ">
-                            <label>Email</label>
-                            <input type="text" class="form-control" name="email"  value="<%= driver ? driver.email : '' %>">                       
+                        <div class="form-group field">
+                            <label>Email <span style="color:red;">*</span></label>
+                            <input type="text" class="form-control"  name="email" onblur="ValidateEmail()"  onkeyup="this.value=this.value.replace(/[ ]/g,'');" value="<%= driver ? driver.email : '' %>" required="required">                       
                         </div>
                     </div>
 
@@ -69,9 +69,9 @@
 
                         
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                <label>Adhaar Card</label>
-                                <input type="text" class="form-control" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= driver ? driver.adhaar_card : '' %>">                   
+                            <div class="form-group  field">
+                                <label>Adhaar Card <span style="color:red;">*</span></label>
+                                <input type="text" class="form-control" required="required" maxlength="12" minlength="12"  onkeyup="this.value = this.value.replace (/\D/g, '')" name="adhaar_card" id="adhaar_card" onblur="AadharValidate();" value="<%= driver ? driver.adhaar_card : '' %>">                   
                             </div>
                         </div>
 
@@ -92,25 +92,26 @@
 
                     <div class="col-md-6">
                             <div class="form-group  ">
-                                <label>Present Address</label>
-                               
+                                <label>Present Address</label>                               
                                 <textarea rows="6" cols="6" type="text" id="present_address" name="present_address"  class="form-control"  ><%= driver ? driver.present_address : '' %></textarea>
-                                <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"><p><h6>Same as Permanent Address</h6></p>
+                                <input type="checkbox" name="checkadd" onclick="filladdress(this.form)"><h6 style="display: inline-block; margin-left: 5px; margin-top: 0;" >Same as Permanent Address</h6>
                             </div>
                                    
                         </div>
 
                     <div class="col-md-12">
-                            <div class="form-group ">              
+                            <div class="form-group field">              
                                         <div  class="file-tab">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control" id="user_image" name="user_image" accept="image/*" onchange="loadFile()"  required="required" value="<%= driver ? driver.user_image : '' %>" >                    
+                                        <label>Image <span style="color:red;">*</span></label>
+                                        <input type="file" class="form-control" id="user_image" name="user_image" accept="image/*" onchange="loadFile()"  <% if(driver && driver.user_image && driver.user_image!=''){  }else {%> required="required"<% }%> >                    
                                         <img id="output"<% if(driver){ if(driver.user_image==null)
                                             {%> src="<%= baseurl %>/myimages/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= driver.user_image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg" <% } %> style=" max-width: 100px; max-height: 100px;/>
                                     
                                         </div>
                                 </div>
-                    </div>                        
+                    </div>  
+                    
+                   
                                     
                    
 
@@ -134,7 +135,7 @@
     <%- include ../formvalidator/formvalidator.html %>
 
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         function AadharValidate() {
             var aadhar = document.getElementById("adhaar_card").value;
             var adharcardTwelveDigit = /^\d{12}$/;
@@ -153,13 +154,8 @@
             }
         }
 
-         
-        function blockChar(e){
-        var k;
-        document.all ? k = e.keyCode : k = e.which;
-        return (k >= 48 && k <= 57);
-        }
-        </script>
+      
+        </script> -->
     
     <script>
     function filladdress(f) {
@@ -192,6 +188,36 @@
       }
       }
           </script>
+
+<script type="text/javascript">
+    function  blockother(e){
+        var k;
+        document.all ? k = e.keyCode : k = e.which;
+        return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 32);
+        }
+    </script>
+     <script type="text/javascript">
+        function blockChar(e){
+            var k;
+            document.all ? k = e.keyCode : k = e.which;
+            return (k >= 48 && k <= 57);
+            }
+        </script> 
+
+<script>
+    
+function ValidateEmail() 
+{
+    var $email = $('form input[name="email'); //change form to id or containment selector
+var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+if ($email.val() == '' || !re.test($email.val()))
+{
+    alert('Please enter a valid email address.');
+    return false;
+}
+}
+</script>
+
 
         
     

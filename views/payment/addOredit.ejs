@@ -8,7 +8,7 @@
             <div class="well well-sm">
 
         
-            <form action="/payment/addpayment" method="POST"  autocomplete="off">
+            <form action="/payment/addpayment" novalidate method="POST"  autocomplete="off">
                 <input type="hidden" name="_id" value="<%= payment._id %>" >
                 <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/payment/list"><i class="fa fa-list-alt"></i> View All</a>
                 <h2><b><%= viewTitle %></h2><hr style="color:cornflowerblue; border:solid">
@@ -17,9 +17,9 @@
                 <div   class="row">
                     
                     <div class="col-md-6 ">
-                            <div class="form-group ">
-                            <label>Trip Id</label>
-                            <select name="trip_id" class="form-control" >
+                            <div class="form-group field">
+                            <label>Trip Id <span style="color:red">*</span></label>
+                            <select name="trip_id" class="form-control" required="required" >
                                 <option value="" selected disabled>-- Select --</option>
                                 <% trip.forEach(function(trp){%>
                                 <option <% if(payment.trip_id==trp._id){ %>selected="selected" <% }%> value="<%=trp._id%>"><%=trp.to_name%></option>
@@ -29,18 +29,18 @@
                         </div>
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                                <label>Payment Amount</label>
-                                <input type="text" class="form-control" name="payment_amount"  value="<%= payment ? payment.payment_amount : '' %>">
+                        <div class="form-group field">
+                                <label>Payment Amount <span style="color:red">*</span></label>
+                                <input type="text" class="form-control" name="payment_amount"  value="<%= payment ? payment.payment_amount : '' %>" required="required" >
                         </div>
                     </div>
                         
                   
 
                     <div class="col-md-6 ">
-                            <div class="form-group ">
-                            <label>Coupon Code Id</label>
-                            <select name="coupon_code_id" class="form-control" >
+                            <div class="form-group field">
+                            <label>Coupon Code Id <span style="color:red">*</span></label>
+                            <select name="coupon_code_id" class="form-control" required="required" >
                                 <option value="" selected disabled>-- Select --</option>
                                 <% cupon.forEach(function(cup){%>
                                 <option <% if(payment.coupon_code_id==cup._id){ %>selected="selected" <% }%> value="<%=cup._id%>"><%=cup.coupon_code%></option>
@@ -57,9 +57,9 @@
                         </div>
 
                     <div class="col-md-6">
-                        <div class="form-group  ">
-                                <label>Total Payment</label>
-                                <input type="text" class="form-control" name="total_payment"  value="<%= payment ? payment.total_payment : '' %>">
+                        <div class="form-group  field">
+                                <label>Total Payment <span style="color:red">*</span></label>
+                                <input type="text" class="form-control" name="total_payment"  value="<%= payment ? payment.total_payment : '' %>" required="required">
                         </div>
                     </div>
 
@@ -86,9 +86,9 @@
                         </div>
 
                     <div class="col-md-6">
-                            <div class="form-group  ">
-                                    <label>Transaction Id</label>
-                                    <input type="text" class="form-control" name="transaction_id"  value="<%= payment ? payment.transaction_id : '' %>">
+                            <div class="form-group field ">
+                                    <label>Transaction Id <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" name="transaction_id"  value="<%= payment ? payment.transaction_id : '' %>" required="required">
                    
                             </div>
                         </div>
@@ -120,9 +120,6 @@
     <div class="clearfix"></div>
     </div>
    
-    
-
-
-   
-
+    <%- include ../formvalidator/formvalidator.html %>
     <%- include ../partials/footer.html %>
+    

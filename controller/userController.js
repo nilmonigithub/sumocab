@@ -7,6 +7,7 @@ var SALT_WORK_FACTOR = 10;
 const User = mongoose.model('user');
 var mongoosePaginate = require('mongoose-paginate');
 
+
 router.get('/',(req,res)=>{
     console.log('jjjjjjjjjj');
     if(req.session && req.session.user){  
@@ -24,10 +25,13 @@ router.get('/',(req,res)=>{
 });
 
 router.post('/',(req,res)=>{
-    if (req.body._id == '')
+    if (req.body._id == ''){
         insertRecord(req, res);
-        else
+       
+    }else{
         updateRecord(req, res);
+      
+    }
    
 });
 
@@ -47,9 +51,13 @@ function insertRecord(req, res) {
         user.user_type= req.body.user_type;
 
     user.save((err, doc) => {
-        if (!err)
+        if (!err){
+        console.log("ggggggggggggggggggggggggg")
+            req.flash('info','Successfully Created');
             res.redirect('user/list');
-        else {
+           
+            
+    }else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("user/addOredit", {
@@ -65,8 +73,14 @@ function insertRecord(req, res) {
 
 function updateRecord(req, res) {
     User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
-        if (!err) { res.redirect('user/list'); }
-        else {
+       
+        if (!err){
+            req.flash('info','Successfully Updated'); 
+            res.redirect('user/list');
+        
+     
+       
+    }else {
             if (err.name == 'ValidationError') {
                 handleValidationError(err, req.body);
                 res.render("user/addOredit", {
@@ -82,7 +96,7 @@ function updateRecord(req, res) {
 
 
 
-router.get('/list',(req,res,next)=>{
+router.get('/list',(req,res)=>{
     // console.log('hhhhhh');
     // console.log(req.session);
     if(req.session && req.session.user){
@@ -90,7 +104,9 @@ router.get('/list',(req,res,next)=>{
         User.find((err,doc)=>{
             if(!err){
                 res.render("user/list",{
-                    list: doc
+                    
+                    list: doc,
+                    message: req.flash('info') 
                 });
             }else{
                 console.log('Error in user list:'+err);
@@ -146,6 +162,7 @@ router.get('/:id', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     User.findByIdAndRemove(req.params.id, (err, doc) => {
         if (!err) {
+            req.flash('info','Successfully Deleted'); 
             res.redirect('/user/list');
         }
         else { console.log('Error in user delete :' + err); }
