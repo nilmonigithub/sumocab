@@ -30,6 +30,9 @@ var userSchema = new mongoose.Schema({
 	  user_image:{
          type:String,
      },
+     dl_pic:{
+        type:String,
+    },
 	 dl_no: { 
         type: String
     },

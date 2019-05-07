@@ -14,9 +14,9 @@ var driverSchema = new mongoose.Schema({
          data: Buffer,
          type: String,        
          },
-	// dl_pic: { 
-    //     type: String
-    // },
+	dl_pic: { 
+        type: String
+    },
     dl_no: { 
         type: String
     },

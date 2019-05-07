@@ -100,14 +100,29 @@
                                    
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="form-group field">              
+                                        <div  class="file-tab">
+                                        <label>Driver Image <span style="color:red;">*</span></label>
+                                        <input type="file" class="form-control" id="dl_pic" name="dl_pic" accept="image/*" onchange="preView()"   <% if(driver && driver.dl_pic && driver.dl_pic!=''){  }else {%> required="required"<% }%> > 
+                                        <input type="hidden" name="update_dl_pic" value="<%= driver ? driver.dl_pic : '' %>">                   
+                                        <img id="preview"<% if(driver){ if(driver.dl_pic==null)
+                                            {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= driver.dl_pic %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg" <% } %> style=" max-width: 100px; max-height: 100px;/>
+                                         
+                                        </div>
+                                </div>
+                        </div>
+
+
                     <div class="col-md-12">
                             <div class="form-group field">              
                                         <div  class="file-tab">
                                         <label>Image <span style="color:red;">*</span></label>
                                         <input type="file" class="form-control" id="user_image" name="user_image" accept="image/*" onchange="loadFile()"  <% if(driver && driver.user_image && driver.user_image!=''){  }else {%> required="required"<% }%> >                    
+                                        <input type="hidden" name="update_user_image" value="<%= driver ? driver.user_image : '' %>">
                                         <img id="output"<% if(driver){ if(driver.user_image==null)
-                                            {%> src="<%= baseurl %>/myimages/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= driver.user_image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg" <% } %> style=" max-width: 100px; max-height: 100px;/>
-                                    
+                                            {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= driver.user_image %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg" <% } %> style=" max-width: 100px; max-height: 100px;/>
+                                           
                                         </div>
                                 </div>
                     </div>  
@@ -189,6 +204,29 @@
       }
       }
           </script>
+          <script>
+            function preView()  {
+              var fileInput = document.getElementById('dl_pic');
+              var filePath = fileInput.value;
+              var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            if(!allowedExtensions.exec(filePath)){
+                alert('Please upload file having extensions .jpeg/.jpg/.png  only.');
+                fileInput.value = '';
+                return false;
+            }else{
+                //Image preview
+                if (fileInput.files && fileInput.files[0]) {
+                  var reader = new FileReader();             
+                    reader.onload = function(){
+                      var output = document.getElementById('preview');
+                      output.src = reader.result;
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                  
+                  };
+            }
+            }
+                </script>
 
 <script type="text/javascript">
     function  blockother(e){

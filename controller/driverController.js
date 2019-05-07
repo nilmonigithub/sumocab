@@ -6,31 +6,27 @@ const User = mongoose.model('user');
 var app         =   express();
 var fs=require('fs');
 var multer=require('multer');
+var formidable = require('formidable');
+var multiparty = require('multiparty');
 
 const bcrypt = require('bcryptjs');
 
-//router.post('/adddriver', add_driver);
-// var storage = multer.diskStorage({
-//     destination: 'public/uploads/',
-//     filename: function (req, file, cb) {
-//       cb(null, file.fieldname + '-' + Date.now()+ '.jpg')
-//     }
-//   })
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-     cb(null, './public/uploads/');
-        },
-     filename: function (req, file, cb) {
-        var originalname = file.originalname;
-        var extension = originalname.split(".");
-        filename = Date.now() + '.' + extension[extension.length-1];
+
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//      cb(null, './public/uploads/');
+//         },
+//      filename: function (req, file, cb) {
+//         var originalname = file.originalname;
+//         var extension = originalname.split(".");
+//         filename = Date.now() + '.' + extension[extension.length-1];
 		
-        cb(null, filename);
-      }
-    });
+//         cb(null, filename);
+//       }
+//     });
  
- var upload = multer({ storage : storage}).single('user_image');   
+//  var upload = multer({ storage : storage}).single('user_image');   
  
 
  
@@ -50,24 +46,7 @@ router.get('/add',(req,res)=>{
  
 
  
-//  router.get('/editdriver/:id', (req, res) => {
-// 	//res.write(req.params.id);
-// 	//console.log(req.params.id);
-	
-// 	User.findOne(req.params.id,(err,docs)=>{
-// 		console.log(docs);
-//         if(!err){
-//             res.render("driver/addOredit",{
-//                 driver: docs,
-// 				viewTitle: "Update Driver"
-//             });
-//         }else{
-//             console.log('Error in user list:'+err);
-//         }
-//     });
-	
 
-// });
 
 router.get('/editdriver/:id', (req, res) => {
     User.findById(req.params.id, (err, doc) => {
@@ -109,68 +88,121 @@ function add_driver(req, res, next) {
 
 
 router.post('/adddriver',function(req,res){
-	
-	
-    upload(req,res,function(err) {
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-		//return res.send(req.body);
-       // res.end("File is uploaded"+req.file.filename);
-	   
-	 // var  uploaded_filename = '';
-	  if(req.file){
-	 var uploaded_filename = req.file.filename;
-	 req.body.user_image = uploaded_filename;
-	 // return res.send(req.body.user_image);
-	  }
-	  //req.body.user_image = uploaded_filename;
-	 // var ne_req = req.body;
-		 if (req.body._id == '')
-        insertRecord(req, res);
-        else
-        updateRecord(req, res);
-		
-    });
+    console.log (req.body)
+    if (!req.body._id )
+    insertRecord(req, res);
+    else
+    updateRecord(req, res);
+
 });
+	
+
 
 
 function insertRecord(req, res) {
 	
-	
+	var form = new multiparty.Form(); 
+	var d = new Date();
+    var n = d.getTime();
+    
+    form.parse(req, function(err, fields, files) {
+        req.body=fields;
+        
+        //return res.send(fields);
 
-	var userParam =req.body;
-	
-	
-	const user = new User;
-	//user._id = Date.now();
-	if (userParam.password) {
-        user.hash = bcrypt.hashSync(userParam.password, 10);
-    }
+        if(files.user_image[0].originalFilename!=''){	
+            console.log(64545454)
+            console.log(req.app.locals.baseurl+'/uploads/'+n+files.user_image[0].originalFilename);
+            var user_image=req.app.locals.baseurl+'/uploads/'+n+files.user_image[0].originalFilename;
+        }else{
+            var user_image= fields.update_user_image ? fields.update_user_image[0]: '';
+        }
+
+        if(files.dl_pic[0].originalFilename!=''){	
+            console.log(64545454)
+            console.log(req.app.locals.baseurl+'/uploads/'+n+files.dl_pic[0].originalFilename);
+            var dl_pic=req.app.locals.baseurl+'/uploads/'+n+files.dl_pic[0].originalFilename;
+        }else{
+            var dl_pic=fields.update_dl_pic ? fields.update_dl_pic[0]:'';
+        }
+        
+       // return res.send(files);
        
-        user.fullName = req.body.fullName;
-        user.user_mobile = req.body.user_mobile;  
-        user.email = req.body.email;  
-        user.user_image= req.body.user_image;
-      
-        user.user_type = 'driver';     
-        user.dl_no = req.body.dl_no;
-        user.dl_expiry= req.body.dl_expiry;
-        user.dob= req.body.dob;
-        user.doj= req.body.doj;
-        user.adhaar_card= req.body.adhaar_card;
-        user.username= req.body.username;
-        user.permanent_address= req.body.permanent_address;
-        user.present_address= req.body.present_address;
+        if(fields._id && fields._id[0]!=''){           
+
+            User.findOne({_id: fields._id[0]}, function(err, usr){
+                usr.fullName = fields.fullName[0];
+                usr.user_mobile = fields.user_mobile[0];  
+                usr.email = fields.email[0];  
+                usr.user_image= user_image;
+                usr.dl_pic= dl_pic;
+                usr.user_type = 'driver';     
+                usr.dl_no = fields.dl_no[0];
+                usr.dl_expiry= fields.dl_expiry[0];
+                usr.dob= fields.dob[0];
+                usr.doj= fields.doj[0];
+                usr.adhaar_card= fields.adhaar_card[0];
+                usr.username= fields.username[0];
+                usr.permanent_address= fields.permanent_address[0];
+                usr.present_address= fields.present_address[0];
+
+                usr.save((err, doc) => {
+                    if (err){console.log(err)}
+                    else {
+                      req.flash('info','Successfully Updated');
+                      res.redirect('list');
+                    }
+                });
+            });
+        }else{
+            const user = new User;
+            user.fullName = fields.fullName[0];
+            user.user_mobile = fields.user_mobile[0];  
+            user.email = fields.email[0];  
+            user.user_image= user_image;
+            user.dl_pic= dl_pic;
+            user.user_type = 'driver';     
+            user.dl_no = fields.dl_no[0];
+            user.dl_expiry= fields.dl_expiry[0];
+            user.dob= fields.dob[0];
+            user.doj= fields.doj[0];
+            user.adhaar_card= fields.adhaar_card[0];
+            user.username= fields.username[0];
+            user.permanent_address= fields.permanent_address[0];
+            user.present_address= fields.present_address[0];
+    
+            user.save((err, doc) => {
+                if (err){console.log(err)}
+                else {
+                    req.flash('info','Successfully Created');
+                    res.redirect('list');
+                }
+            });            
+        }       
+
+    })
+
+    var formnew = new formidable.IncomingForm();
+    formnew.parse(req);	
         
 
-        user.save((err, doc) => {
-        if (err){console.log(err)}
-    else {
-      req.flash('info','Successfully Created');
-      res.redirect('list');
-    }
-    });
+	formnew.on('fileBegin', function(field, file) {        
+	console.log("picture  is Here");
+	console.log(file);	
+	//return res.send(file);
+	//Checking File type 	
+		if(file.name!=''){
+			if(file.type=='image/jpeg' || file.type=='image/png'){
+                console.log(__dirname);
+                file.path = __dirname + '/../public/uploads/'+n+ file.name;
+                	
+			}else{
+				req.flash('errors','Please upload a supported file.');
+				return res.redirect('back');
+			}	
+		}
+	});
+
 }
 
 function updateRecord(req, res) {
@@ -182,11 +214,6 @@ function updateRecord(req, res) {
         }
     });
 }
-
-
-
-
-
 
 
 router.get('/delete/:id', (req, res) => {
