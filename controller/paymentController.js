@@ -30,7 +30,7 @@ router.get('/list',(req,res)=>{
                     }
                 });
             });
-        });
+        }).sort( { $natural: -1 } );
 }else{
     return res.redirect('/');
 }

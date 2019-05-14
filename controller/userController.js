@@ -111,7 +111,7 @@ router.get('/list',(req,res)=>{
             }else{
                 console.log('Error in user list:'+err);
             }
-        })
+        }).sort( { $natural: -1 } );
    
 }else{
     return res.redirect('/');

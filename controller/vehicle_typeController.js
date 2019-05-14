@@ -64,7 +64,7 @@ router.get('/list',(req,res)=>{
             }else{
                 console.log('Error in Vehicle Type list:'+err);
             }
-        });
+        }).sort({$natural:-1});
     }else{
         return res.redirect('/');
     }

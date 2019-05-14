@@ -56,11 +56,11 @@ var storage = multer.diskStorage({
 })
 
 
-app.listen(3000,()=>{
-  console.log('Express server started at port :3000');
+app.listen(5000,()=>{
+  console.log('Express server started at port :5000');
   });
 
-app.locals.baseurl='http://localhost:3000';
+app.locals.baseurl='http://localhost:5000';
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
@@ -102,7 +102,7 @@ app.use(express.static(path.join(__dirname , "/" , "public")));
  
 
 
-  // mongoose.connect('mongodb://localhost/sumocabapp', { useMongoClient: true });
+//mongoose.connect('mongodb://27.0.0.1/sumocabapp', { useMongoClient: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
