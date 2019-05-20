@@ -7,7 +7,7 @@
         <div class="col-md-8 col-md-offset-2 ">
             <div class="well well-sm">
 
-            <form action="/vehicle_type/addvehicle_type" novalidate method="POST" enctype="multipart/form-data" autocomplete="off">
+            <form  action="/vehicle_type/addvehicle_type" novalidate method="POST" enctype="multipart/form-data" autocomplete="off">
                 <input type="hidden" name="_id" value="<%= vehicle_type ? vehicle_type._id : '' %>">
                 <a style="float:right; margin-top: 10px;" class="btn btn-secondary" href="/vehicle_type/list"><i class="fa fa-list-alt"></i> View All</a>
                 <h2 style="display: inline-block;"><b><%= viewTitle %></h2> <hr  style="color:cornflowerblue; border:solid" >
@@ -42,16 +42,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group field">
-                            <label>Icon*</label>
-                            <input type="file" class="form-control" name="icon" id="icon" value="<%= vehicle_type ? vehicle_type.icon : '' %>" onchange="PreviewImage();" <% if(vehicle_type && vehicle_type.icon && vehicle_type.icon!=''){  }else {%> required="required"<% }%>>
-                        </div>
                     
-                        <div class=" col-md-4">
-                            <img id="imagePreview" <% if(vehicle_type){ if(vehicle_type.icon==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= vehicle_type.icon %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 100px; height: 100px;" />
-                        </div>  
-                    </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -73,6 +64,18 @@
                             <input type="text" class="form-control" name="fare_per_km"  value="<%= vehicle_type ? vehicle_type.fare_per_km : '' %>" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                         </div>
                     </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group field">
+                            <label>Icon*</label>
+                            <input type="file" class="form-control" name="icon" id="icon" value="<%= vehicle_type ? vehicle_type.icon : '' %>" onchange="PreviewImage();" <% if(vehicle_type && vehicle_type.icon && vehicle_type.icon!=''){  }else {%> required="required"<% }%>>
+                        </div>                    
+                        <div class=" col-md-4">
+                            <img id="imagePreview" <% if(vehicle_type){ if(vehicle_type.icon==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= baseurl %>/uploads/<%= vehicle_type.icon %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 100px; height: 100px;" />
+                        </div>  
+                    </div>
+                    
+              
                     
                     
                     <div class="col-md-12">

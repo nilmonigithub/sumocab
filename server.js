@@ -17,12 +17,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 var app = express();
-var mongoosePaginate = require('mongoose-paginate');
- 
-mongoosePaginate.paginate.options = { 
-    lean:  true,
-    limit: 20
-};
+
 
 
 
@@ -100,9 +95,24 @@ app.use(express.static(path.join(__dirname , "/" , "public")));
     res.send(err.message);
   });
  
+//   var MongoClient = require('mongodb').MongoClient
+//   , Server = require('mongodb').Server;
 
+// var mongoClient = new MongoClient(new Server('localhost', 27017));
+// mongoClient.open(function(err, mongoClient) {
+//   var db1 = mongoClient.db("sumocabapp");
 
-//mongoose.connect('mongodb://27.0.0.1/sumocabapp', { useMongoClient: true });
+//   mongoClient.close();
+// });
+//   //const MongoClient = require('mongodb').MongoClient;
+//   const uri = "mongodb+srv://nilmonimongodb:#Archana123@cluster0-zuijj.mongodb.net/test?retryWrites=true";
+//   const client = new MongoClient(uri, { useNewUrlParser: true });
+//   client.connect(err => {
+//     const collection = client.db("sumocabapp").collection("users");
+//     // perform actions on the collection object
+//     client.close();
+//   });
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {

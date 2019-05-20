@@ -106,15 +106,10 @@
                                         <label>Driver Image <span style="color:red;">*</span></label>
                                         <input type="file" class="form-control" id="dl_pic" name="dl_pic" accept="image/*" onchange="preView()"   <% if(driver && driver.dl_pic && driver.dl_pic!=''){  }else {%> required="required"<% }%> > 
                                         <input type="hidden" name="update_dl_pic" value="<%= driver ? driver.dl_pic : '' %>">                   
-                                        <img id="preview"
-                                        <% if(driver){if(driver.dl_pic==null)
-                                            {%> src="<%= baseurl %>/images/no_image.jpg"<% 
-                                        }else{ 
-                                            %> src="<%= driver.dl_pic %>"<% } 
-                                        }else{ 
-                                            %> src="<%= baseurl %>/images/no_image.jpg" <% } %> style=" max-width: 100px; max-height: 100px;/>
-                                         
                                         </div>
+                                        <div>
+                                            <img id="preview" <% if(driver){ if(driver.dl_pic==null) {%> src="<%= baseurl %>/images/no_image.jpg"<% }else{ %> src="<%= driver.dl_pic %>"<% } }else{ %> src="<%= baseurl %>/images/no_image.jpg"<% } %> style="width: 100px; height: 100px;" />
+                                           </div>
                                 </div>
                         </div>
 
