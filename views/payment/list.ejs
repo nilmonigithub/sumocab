@@ -66,8 +66,8 @@
                         
             
                         <td>
-                            <a href="/payment/editpayment/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                            <a href="/payment/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                            <a href="/payment/editpayment/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true" title="edit"></i></a>
+                            <a href="/payment/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" style="color:red" title="delete" aria-hidden="true"></i></a>
                         </td>
                        
                     </tr>

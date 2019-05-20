@@ -63,8 +63,8 @@
                         
             
                         <td>
-                            <a href="/driver/editdriver/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                            <a href="/driver/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                            <a href="/driver/editdriver/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true" title="edit"></i></a>
+                            <a href="/driver/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true" title="delete" style="color:red"></i></a>
                         </td>
                        
                     </tr>

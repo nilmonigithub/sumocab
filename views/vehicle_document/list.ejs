@@ -52,8 +52,8 @@
                             <td><%= val.registration_date %></td>
                             <td><%= val.expiry_date %></td>
                             <td>
-                                <a href="/vehicle_document/editvehicledoc/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                                <a href="/vehicle_document/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                <a href="/vehicle_document/editvehicledoc/<%= val._id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true" title="edit"></i></a>
+                                <a href="/vehicle_document/delete/<%= val._id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" style="color:red" title="delete" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         <% i++; }) %>
