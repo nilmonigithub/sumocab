@@ -19,6 +19,22 @@ const mongoose = require('mongoose');
 var app = express();
 
 
+//api susanta start//
+require('rootpath')();
+const cors = require('cors');
+const jwt = require('_helpers/jwt');
+const errorHandler = require('_helpers/error-handler');
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
+// use JWT auth to secure the api
+app.use(jwt());
+
+app.use(errorHandler);
+//api susanta end//
+
 
 
 
@@ -51,11 +67,16 @@ var storage = multer.diskStorage({
 })
 
 
-app.listen(5000,()=>{
-  console.log('Express server started at port :5000');
-  });
+// app.listen(5000,()=>{
+//   console.log('Express server started at port :5000');
+//   });
 
-app.locals.baseurl='http://localhost:5000';
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 3000;
+const server = app.listen(port, function () {
+    console.log('Server listening on port ' + port);
+});
+
+app.locals.baseurl='http://localhost:3000';
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
@@ -157,3 +178,17 @@ app.use('/vehicle_document',vehicle_documentController);
 app.use('/coupon_discount',coupon_discountController);
 app.use('/payment',paymentController);
 app.use('/vehicle_type',vehicle_typeController);
+
+
+// api start
+
+app.use('/api/users', require('./api/users/users.controller'));
+app.use('/api/vehicles', require('./api/vehicles/vehicles.controller'));
+app.use('/api/trips', require('./api/trips/trips.controller'));
+
+app.use('/api/customer', require('./api/customer/customer.controller'));
+app.use('/api/owner', require('./api/owner/owner.controller'));
+app.use('/api/driver', require('./api/driver/driver.controller'));
+app.use('/api/vehicle_type', require('./api/vehicle_type/vehicle_type.controller'));
+
+// api end

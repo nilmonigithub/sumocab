@@ -64,6 +64,7 @@ var userSchema = new mongoose.Schema({
 });
 
 
+
 //password bcrypt
 userSchema.pre('save', function(next) {
     var user = this;
