@@ -2,7 +2,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../../_helpers/db');
-var flash = require('connect-flash');
 const User = db.User;
 
 module.exports = {
@@ -18,43 +17,13 @@ async function authenticate({ username, password }) {
     const user = await User.findOne({ username });
     if (user && bcrypt.compareSync(password, user.hash)) {
         const { hash, ...userWithoutHash } = user.toObject();
-        const token = jwt.sign({ sub: user._id }, config.secret);
+        const token = jwt.sign({ sub: user.id }, config.secret);
         return {
             ...userWithoutHash,
             token
         };
     }
 }
-
-
-  
-
-// async function authenticate({username, req, res, next }) {
-//     const user = await User.findOne({ username });
-//     if (user!=null) {
-//         user = user.toJSON();
-//         if(!bcrypt.compareSync(req.body.hash, user.hash)){						
-//             res.status(200).send({ message: "password wrong" });
-//         } else {					
-//             if (req.body.username == user.username) {						
-//                 req.session.user=user;    
-//                 var token = jwt.sign({sub: user._id }, config.secret, { expiresIn: 18000 });
-//                 req.session.token=token;
-//             }else{							
-//                 res.status(200).send({ message: "No user found" });						
-//             }
-//         } 	
-//         // const { hash, ...userWithoutHash } = user.toObject();
-//         // const token = jwt.sign({ sub: user._id }, config.secret);
-//         // return {
-//         //     ...userWithoutHash,
-//         //     token
-//         }else{				
-//             res.status(200).send({ message: "No user found" });
-//     }
-// }
-
-
 
 async function getAll() {
 

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-var bcrypt = require('bcryptjs');
-var SALT_WORK_FACTOR = 10;
 
 const schema = new Schema({
     username: { type: String, unique: true, required: true },
     hash: { type: String, required: true },
     fullName: { type: String, required: true },
+    //lastName: { type: String, required: true },
 	user_mobile: { type: String, required: true },
 	user_type: { type: String, required: false },
 	user_image: { type: String, required: false },
@@ -21,12 +20,5 @@ const schema = new Schema({
 });
 
 schema.set('toJSON', { virtuals: true });
-
-
-// // hash user password before saving into database
-// schema.pre('save', function(next){
-// 	this.hash = bcrypt.hashSync(this.hash, saltRounds);
-// 	next();
-// 	});
 
 module.exports = mongoose.model('User', schema);
