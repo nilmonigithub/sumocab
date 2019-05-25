@@ -1,7 +1,7 @@
 ﻿const config = require('../../config.json');
 const jwt = require('jsonwebtoken');
 const db = require('../../_helpers/db');
-const Coupon_discount = db.Vehicle_type;
+const Coupon_discount = db.Coupon_discount;
 
 module.exports = {
 	//addcoupon_discount,

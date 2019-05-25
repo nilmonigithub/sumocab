@@ -10,4 +10,5 @@ module.exports = {
 	////Userotp: require('../api/userotps/userotp.model')
 	// Customer: require('../api/customer/customer.model'),
 	Vehicle_type: require('../api/vehicle_type/vehicle_type.model'),
+	Coupon_discount: require('../api/coupon_discount/coupon_discount.model'),
 };

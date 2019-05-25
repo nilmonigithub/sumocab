@@ -190,5 +190,5 @@ app.use('/api/customer', require('./api/customer/customer.controller'));
 app.use('/api/owner', require('./api/owner/owner.controller'));
 app.use('/api/driver', require('./api/driver/driver.controller'));
 app.use('/api/vehicle_type', require('./api/vehicle_type/vehicle_type.controller'));
-
+app.use('/api/coupon_discount', require('./api/coupon_discount/coupon_discount.controller'));
 // api end

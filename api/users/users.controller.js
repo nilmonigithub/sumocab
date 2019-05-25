@@ -2,6 +2,7 @@
 const router = express.Router();
 const userService = require('./user.service');
 const jwt = require('jsonwebtoken');
+const config = require('../../config.json');
 var SECRET = 'nodescratch';
 
 // routes
@@ -36,20 +37,48 @@ function getAllUsers(req, res, next) {
         .catch(err => next(err));
 }
 
+// function getAll(req, res, next) {
+
+//     var token=req.headers['token'];    
+//     jwt.verify(token, SECRET, function(err, decoded) {
+//         if (err) {
+//           res.json('Invalid Token');
+//         }else{ 
+
+//             userService.getAll()
+//             .then(users => res.json(users))
+//             .catch(err => next(err));
+
+//         }
+//     });
+// }
+
 function getAll(req, res, next) {
 
-    var token=req.headers['token'];    
-    jwt.verify(token, SECRET, function(err, decoded) {
-        if (err) {
-          res.json('Invalid Token');
-        }else{ 
-
-            userService.getAll()
+    // check header or url parameters or post parameters for token
+    var token =  req.headers['token'];
+  // decode token
+  if (token) {   
+    jwt.verify(token, config.secret, function(err, decoded) {      
+      if (err) {
+        return res.json(err);    
+      } else {
+        // return res.json(decoded); 
+         userService.getAll()
             .then(users => res.json(users))
             .catch(err => next(err));
-
-        }
+      }
     });
+  } else {
+
+    // if there is no token
+    // return an error
+    return res.status(403).send({ 
+        success: false, 
+        message: 'No token provided.' 
+    });
+    
+  }
 }
 
 function getCurrent(req, res, next) {
